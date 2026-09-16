@@ -18,11 +18,8 @@
     background:radial-gradient(60vw 80vh at 88% 60%, #3a2b4d 0%, transparent 60%),
                linear-gradient(180deg,#12233b 0%, var(--navy) 45%, #101f36 100%);}
   .scene{position:relative; width:100%; height:100vh; min-height:620px; display:flex; flex-direction:column;}
-
-  /* ---------- coast backdrop ---------- */
   .coast{position:absolute; right:0; bottom:0; width:min(46vw,760px); height:78vh; z-index:0; opacity:.95; pointer-events:none;}
 
-  /* ---------- header ---------- */
   header{position:relative; z-index:6; display:flex; align-items:center; gap:22px; padding:20px 30px 12px;}
   .brand{margin:0; font-family:"Playfair Display",serif; font-weight:900; letter-spacing:-.015em;
     font-size:clamp(34px,5.4vw,74px); line-height:1; color:var(--cream);}
@@ -36,7 +33,6 @@
     cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;}
   .burger span{display:block; width:20px; height:2px; background:var(--cream); border-radius:2px;}
 
-  /* ---------- board / deck ---------- */
   .board{position:relative; z-index:5; flex:1; min-height:0; display:flex; align-items:stretch; gap:14px; padding:6px 26px 10px;}
   .edge{flex:0 0 56px; align-self:center; width:56px; height:56px; border-radius:50%; border:0; cursor:pointer;
     background:var(--cream); color:var(--navy-2); font-size:26px; font-weight:700; line-height:1;
@@ -50,7 +46,6 @@
   .kbd-hint{position:absolute; right:14px; bottom:12px; z-index:8; display:flex; align-items:center; gap:8px;
     background:rgba(15,30,51,.55); border-radius:8px; padding:6px 10px; font-size:12px; color:#dfe8f5;}
 
-  /* left panel */
   .s-left{position:relative; display:flex; flex-direction:column; padding:30px 36px 26px; color:var(--navy-2); overflow:hidden;}
   .count{display:flex; align-items:center; gap:10px; font-size:13px; letter-spacing:.22em; color:var(--mute); font-weight:600;}
   .ek{margin-left:auto; font-size:10.5px; letter-spacing:.14em; border:1px dashed #b9b2a2; border-radius:6px; padding:3px 8px; color:#7c8698;}
@@ -70,7 +65,6 @@
   .timer.zero .t-display{color:#ffb1b1; animation:pulse 1s infinite;}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 
-  /* right panel */
   .s-right{position:relative; display:flex; flex-direction:column; background:linear-gradient(165deg,var(--v1),var(--v2));}
   .vignette{position:relative; height:32%; min-height:118px; overflow:hidden;}
   .vignette svg{position:absolute; inset:0; width:100%; height:100%;}
@@ -92,18 +86,6 @@
   .stepbox b{display:block; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--acc,var(--coral));}
   .stepbox i{display:block; margin:3px 0; color:var(--navy-2);}
   .stepbox span{font-size:11.5px; color:#4a5568;}
-  .mf-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin:10px 0;}
-  .mf{perspective:900px; height:132px; border:0; padding:0; background:none; cursor:pointer; font-family:inherit;}
-  .mf-in{position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .6s cubic-bezier(.35,.1,.25,1);}
-  .mf.flipped .mf-in{transform:rotateY(180deg);}
-  .mf-f,.mf-b{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:12px;
-    padding:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; text-align:center;}
-  .mf-f{background:#fff; border:1px solid #ddd6c6;}
-  .mf-b{transform:rotateY(180deg); background:var(--navy-2); border:1px solid var(--acc,var(--coral)); color:var(--cream);}
-  .mf-f .em{font-size:24px;} .mf-f .nm{font-weight:700; font-size:11.5px; color:var(--navy-2); line-height:1.25;}
-  .mf-f .hint{font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:#98a1b3;}
-  .mf-b h4{margin:0; font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--acc,var(--coral));}
-  .mf-b ul{margin:0; padding:0; list-style:none; font-size:10.5px; line-height:1.45;}
   .olist{margin:6px 0 0; padding:0; list-style:none; counter-reset:st;}
   .olist li{counter-increment:st; position:relative; padding:7px 10px 7px 32px; margin-bottom:6px;
     background:#fff; border:1px solid #e6dfcd; border-radius:8px; font-size:12px;}
@@ -121,7 +103,63 @@
   .nav-btn:hover{transform:translateY(-1px); filter:brightness(1.15);}
   .nav-btn.primary{background:var(--coral); color:#fff;}
 
-  /* ---------- rail ---------- */
+  /* ---------- DIGITAL BOOK (Bölüm 2) ---------- */
+  .s-right.bookmode{padding:16px; gap:12px; overflow-y:auto; scrollbar-width:thin;}
+  .s-right.bookmode::-webkit-scrollbar{width:5px} .s-right.bookmode::-webkit-scrollbar-thumb{background:rgba(242,236,225,.4); border-radius:3px}
+  .book{position:relative; flex:1 1 auto; min-height:380px; display:grid; grid-template-columns:46% 54%;
+    background:var(--navy-2); border-radius:18px; padding:13px;
+    box-shadow:0 34px 70px -22px rgba(6,12,26,.75), inset 0 2px 0 rgba(255,255,255,.14);}
+  .book::before{content:""; position:absolute; left:50%; top:13px; bottom:13px; width:26px; transform:translateX(-50%);
+    background:linear-gradient(90deg, transparent, rgba(10,20,40,.35) 45% 55%, transparent); z-index:3; pointer-events:none;}
+  .page{background:var(--paper); position:relative; padding:18px 20px; color:var(--ink);}
+  .page.left{border-radius:10px 0 0 10px; box-shadow:inset -16px 0 26px -20px rgba(29,51,80,.55);}
+  .page.right{border-radius:0 10px 10px 0; box-shadow:inset 16px 0 26px -20px rgba(29,51,80,.55);
+    display:flex; flex-direction:column; overflow:hidden;}
+  .page.right::after{content:""; position:absolute; right:0; bottom:0; width:46px; height:46px;
+    background:linear-gradient(315deg, var(--navy-2) 0 44%, #cfc7b4 47% 53%, #fdfaf2 56% 100%);
+    box-shadow:-6px -6px 10px -4px rgba(29,51,80,.28); border-top-left-radius:10px;}
+  .lp-head{font-size:10.5px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; color:#7c8698; margin:0 0 10px;}
+  .btabs{display:flex; flex-direction:column; gap:9px;}
+  .btab{display:grid; grid-template-columns:34px 1fr; align-items:center; gap:9px; border:0; background:none;
+    padding:0; cursor:pointer; font-family:inherit; text-align:left;}
+  .btab .num{height:36px; border-radius:9px; background:#ece5d6; color:var(--c); font-weight:800; font-size:12px;
+    display:flex; align-items:center; justify-content:center; transition:background .2s, color .2s;}
+  .btab .row{height:40px; border-radius:10px; background:var(--c); display:flex; align-items:center; gap:10px;
+    padding:0 13px; color:#fff; font-weight:700; font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+    box-shadow:0 7px 14px -7px rgba(8,16,32,.45); transition:transform .2s, box-shadow .2s;}
+  .btab .ic{width:26px; height:26px; flex:0 0 auto; border-radius:8px; background:rgba(255,255,255,.24);
+    display:flex; align-items:center; justify-content:center; font-size:14px;}
+  .btab:hover .row{transform:translateX(4px);}
+  .btab.active .num{background:var(--c); color:#fff;}
+  .btab.active .row{transform:translateX(6px); box-shadow:0 0 0 3px var(--paper), 0 0 0 5px var(--c), 0 10px 18px -8px rgba(8,16,32,.5);}
+  .bp-head{display:flex; align-items:center; gap:12px; color:#7c8698; font-size:12px; letter-spacing:.18em; font-weight:600;}
+  .bp-head .rule{flex:1; height:2px; background:#d8d1c0;}
+  .bpages{flex:1; min-height:0; position:relative; margin-top:4px;}
+  .bpage{display:none; height:100%; flex-direction:column;}
+  .bpage.active{display:flex; animation:pagein .35s ease;}
+  @keyframes pagein{from{opacity:0; transform:translateX(12px)}to{opacity:1; transform:none}}
+  .bpage h3{margin:8px 0 2px; font-family:"Playfair Display",serif; font-weight:800; color:var(--navy);
+    font-size:clamp(24px,2.6vw,40px); letter-spacing:-.01em; line-height:1.05;}
+  .bpage .sub{margin:0 0 12px; font-size:10.5px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; color:#98a1b3;}
+  .bubbles{display:flex; flex-wrap:wrap; gap:12px 10px; padding:4px 0 14px; align-content:flex-start;}
+  .bub{position:relative; padding:10px 16px; border-radius:16px; background:var(--bc); color:var(--bt,#fff);
+    font-weight:700; font-size:12.5px; letter-spacing:.05em; box-shadow:0 9px 16px -9px rgba(8,16,32,.5);}
+  .bub::after{content:""; position:absolute; bottom:-9px; left:22px; width:0; height:0;
+    border:9px solid transparent; border-top-color:var(--bc); border-bottom:0;}
+  .bub:nth-child(2n){border-radius:18px 8px 16px 10px;}
+  .bub:nth-child(3n){border-radius:10px 18px 8px 16px;}
+  .sticky{margin-top:auto; width:max-content; max-width:70%; background:#f7e8a4; padding:9px 13px;
+    font-family:"Caveat",cursive; font-size:17px; line-height:1.2; color:#5b4a10; transform:rotate(-2deg);
+    box-shadow:0 8px 16px -8px rgba(8,16,32,.45);}
+  .bp-foot{display:flex; justify-content:flex-end; padding:10px 40px 8px 0;}
+  .bnext{border:0; background:none; cursor:pointer; font-family:inherit; font-weight:800; font-size:12px;
+    letter-spacing:.16em; color:var(--navy-2); display:flex; align-items:center; gap:8px; transition:transform .2s;}
+  .bnext:hover{transform:translateX(3px);}
+  .blk-dark{background:rgba(246,240,230,.97); border-radius:12px; padding:12px 14px; color:var(--ink);
+    font-size:12.5px; line-height:1.55; box-shadow:0 14px 30px -14px rgba(6,12,26,.6);}
+  .blk-dark h3{margin:0 0 5px; font-size:13.5px; color:var(--navy-2);}
+  .bookmode .sheet-foot{margin-top:0;}
+
   .rail{position:relative; z-index:6; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; padding:12px 26px 20px;
     transition:opacity .3s, max-height .3s; max-height:140px; overflow:hidden;}
   body.rail-hidden .rail{max-height:0; opacity:0; padding-top:0; padding-bottom:0;}
@@ -138,27 +176,26 @@
     .slide{grid-template-columns:1fr; grid-template-rows:auto 1fr;}
     .s-left{padding:20px 22px;} .big{font-size:clamp(30px,9vw,52px);} .script{display:none;} .hills{display:none;}
     .vignette{height:110px; min-height:110px;} .sheet{margin:0 12px 12px;} .vbanner{width:64px;}
-    .mf-grid{grid-template-columns:1fr 1fr;} .rail{grid-template-columns:repeat(2,1fr);}
-    .motto{display:none;} .steps{grid-template-columns:1fr;}
+    .rail{grid-template-columns:repeat(2,1fr);} .motto{display:none;} .steps{grid-template-columns:1fr;}
+    .book{grid-template-columns:1fr; min-height:0;}
+    .page.left{border-radius:10px 10px 0 0;} .page.right{border-radius:0 0 10px 10px; min-height:340px;}
+    .book::before{display:none;}
   }
-  @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important;}}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important; animation-duration:.01ms !important;}}
 </style>
 </head>
 <body>
 <div class="scene">
   <svg class="coast" viewBox="0 0 760 700" preserveAspectRatio="xMaxYMax slice" aria-hidden="true">
-    <circle cx="600" cy="250" r="120" fill="#f0a06a" opacity=".9"/>
-    <circle cx="600" cy="250" r="160" fill="#f0a06a" opacity=".25"/>
+    <circle cx="600" cy="250" r="120" fill="#f0a06a" opacity=".9"/><circle cx="600" cy="250" r="160" fill="#f0a06a" opacity=".25"/>
     <path d="M760 330c-70 10-120 34-160 70l-40 40c-30 30-40 70-40 110v150h240Z" fill="#2a2140"/>
     <path d="M760 420v280H300c40-60 110-96 190-110l90-16c70-12 130-60 180-154Z" fill="#1b1633"/>
     <path d="M0 560h760v140H0Z" fill="#132b47"/>
     <path d="M0 560c90-14 180-14 270 0s180 14 270 0 180-14 220 0v20H0Z" fill="#1d3f63" opacity=".8"/>
     <g><rect x="596" y="180" width="26" height="70" rx="4" fill="#f2ece1"/>
       <path d="M596 186h26M596 200h26M596 214h26M596 228h26" stroke="#e8836a" stroke-width="6"/>
-      <rect x="600" y="160" width="18" height="20" rx="3" fill="#16283f"/>
-      <circle cx="609" cy="168" r="6" fill="#ffe9b0"/>
-      <path d="M609 168L500 140l0 56Z" fill="#ffe9b0" opacity=".35"/>
-      <path d="M609 168L720 140l0 56Z" fill="#ffe9b0" opacity=".25"/></g>
+      <rect x="600" y="160" width="18" height="20" rx="3" fill="#16283f"/><circle cx="609" cy="168" r="6" fill="#ffe9b0"/>
+      <path d="M609 168L500 140l0 56Z" fill="#ffe9b0" opacity=".35"/><path d="M609 168L720 140l0 56Z" fill="#ffe9b0" opacity=".25"/></g>
   </svg>
 
   <header>
@@ -177,35 +214,30 @@
         <section class="slide" style="--acc:#e8836a; --v1:#d98868; --v2:#8c4a3c;">
           <div class="s-left">
             <div class="count"><span>1 / 4</span><span class="ek">Ek 1.1.1</span></div>
-            <h2 class="big">KEŞFETME</h2>
-            <div class="bar"></div>
+            <h2 class="big">KEŞFETME</h2><div class="bar"></div>
             <p class="script">sen kimsin?<br>otuz saniyede<br>kendini anlat</p>
             <svg class="hills" viewBox="0 0 600 200" preserveAspectRatio="none" aria-hidden="true">
               <path d="M0 200V120l90-46 70 40 90-58 110 66 90-40 150 74v44Z" fill="#b9c6da" opacity=".55"/>
               <path d="M0 200v-52l110-40 90 44 120-52 130 60 150-36v76Z" fill="#93a6c2" opacity=".6"/>
-              <path d="M0 200v-26l140-30 120 34 140-26 200 40v12Z" fill="#6d84a6" opacity=".65"/>
-            </svg>
+              <path d="M0 200v-26l140-30 120 34 140-26 200 40v12Z" fill="#6d84a6" opacity=".65"/></svg>
             <div class="timer" data-seconds="600">
               <span class="t-label">Kalan Süre</span><span class="t-display">10:00</span>
               <button class="t-adj up" type="button" aria-label="Süreyi artır">▲</button>
               <button class="t-adj down" type="button" aria-label="Süreyi azalt">▼</button>
-              <button class="t-toggle" type="button">Başlat</button>
-            </div>
+              <button class="t-toggle" type="button">Başlat</button></div>
           </div>
           <div class="s-right">
             <div class="vignette">
               <svg viewBox="0 0 640 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
                 <rect width="640" height="200" fill="#e9b489"/>
                 <rect x="40" y="20" width="250" height="180" rx="10" fill="#f6e7d2"/>
-                <rect x="56" y="36" width="102" height="150" fill="#bcd6e6"/>
-                <rect x="172" y="36" width="102" height="150" fill="#cfe0ec"/>
+                <rect x="56" y="36" width="102" height="150" fill="#bcd6e6"/><rect x="172" y="36" width="102" height="150" fill="#cfe0ec"/>
                 <path d="M56 150h102v36H56Z M172 150h102v36H172Z" fill="#9fb9cd"/>
                 <path d="M70 96l14-22 12 16 10-12 16 24Z M190 92l16-24 14 18 12-14 14 24Z" fill="#7d94ad" opacity=".8"/>
                 <rect x="36" y="186" width="260" height="14" rx="6" fill="#8c5a3a"/>
                 <g fill="#3f7d5c"><path d="M320 200c-4-40-10-60-30-80 22 6 32 30 34 56Z"/><path d="M324 200c2-44 8-66 30-84-16 26-22 50-24 84Z"/></g>
-                <g><path d="M420 60c-26 0-46 16-46 36 0 12 7 22 18 28l-4 16 20-10c4 1 8 1 12 1 26 0 46-16 46-35s-20-36-46-36Z" fill="#f2ece1"/>
-                <path d="M540 96c-20 0-36 13-36 28 0 10 6 18 14 23l-3 13 16-8c3 1 6 1 9 1 20 0 36-13 36-29s-16-28-36-28Z" fill="#f6c667"/></g>
-              </svg>
+                <path d="M420 60c-26 0-46 16-46 36 0 12 7 22 18 28l-4 16 20-10c4 1 8 1 12 1 26 0 46-16 46-35s-20-36-46-36Z" fill="#f2ece1"/>
+                <path d="M540 96c-20 0-36 13-36 28 0 10 6 18 14 23l-3 13 16-8c3 1 6 1 9 1 20 0 36-13 36-29s-16-28-36-28Z" fill="#f6c667"/></svg>
               <div class="vbanner">Ek 1.1.1<i></i>Her isim bir hikâye</div>
             </div>
             <div class="sheet">
@@ -215,8 +247,7 @@
                 <p style="margin:0">Sınıfı ikili gruplara ayırın. Her eş sırayla 30 saniye boyunca "Sen Kimsin?" sorusuna aklına gelen her özellikle (Örn: Erkek evlat, balıkçı, sporcu, dışa dönük, sanatçı...) cevap versin.</p></div>
               <div class="steps">
                 <div class="stepbox"><b>1. Eşin Sırası</b><i>"Ben..."</i><span>Aralıksız 30 saniye boyunca kim olduğunu anlat.</span></div>
-                <div class="stepbox"><b>2. Eşin Sırası</b><i>"Ben..."</i><span>Şimdi sıra diğer kişide. O da kendini anlatsın.</span></div>
-              </div>
+                <div class="stepbox"><b>2. Eşin Sırası</b><i>"Ben..."</i><span>Şimdi sıra diğer kişide. O da kendini anlatsın.</span></div></div>
               <div class="blk"><h3><span class="em">📢</span>Sınıfça Paylaşım:</h3>
                 <p style="margin:0">Süre bitince, herkes eşini sınıfa tanıtsın! Bakalım eşinizin söylediği özelliklerden kaç tanesini hatırlayabileceksiniz?</p></div>
               <div class="sheet-foot"><button class="nav-btn primary" type="button" data-goto="1">Sonraki Adım: 5 Temel Yetkinlik →</button></div>
@@ -224,68 +255,99 @@
           </div>
         </section>
 
-        <!-- SLAYT 2 -->
+        <!-- SLAYT 2 : DİJİTAL KİTAP -->
         <section class="slide" style="--acc:#8f6ed0; --v1:#7a5fb8; --v2:#372a63;">
           <div class="s-left">
             <div class="count"><span>2 / 4</span><span class="ek">Ek 1.1.2</span></div>
-            <h2 class="big">İLİŞKİLENDİRME</h2>
-            <div class="bar"></div>
+            <h2 class="big">İLİŞKİLENDİRME</h2><div class="bar"></div>
             <p class="script">beş yetkinlik,<br>tek bir güvenli<br>topluluk</p>
             <svg class="hills" viewBox="0 0 600 200" preserveAspectRatio="none" aria-hidden="true">
               <path d="M0 200V120l90-46 70 40 90-58 110 66 90-40 150 74v44Z" fill="#c3b6e4" opacity=".5"/>
               <path d="M0 200v-52l110-40 90 44 120-52 130 60 150-36v76Z" fill="#9d8cc9" opacity=".55"/>
-              <path d="M0 200v-26l140-30 120 34 140-26 200 40v12Z" fill="#7a68a8" opacity=".6"/>
-            </svg>
+              <path d="M0 200v-26l140-30 120 34 140-26 200 40v12Z" fill="#7a68a8" opacity=".6"/></svg>
             <div class="timer" data-seconds="600">
               <span class="t-label">Kalan Süre</span><span class="t-display">10:00</span>
               <button class="t-adj up" type="button" aria-label="Süreyi artır">▲</button>
               <button class="t-adj down" type="button" aria-label="Süreyi azalt">▼</button>
-              <button class="t-toggle" type="button">Başlat</button>
-            </div>
+              <button class="t-toggle" type="button">Başlat</button></div>
           </div>
-          <div class="s-right">
-            <div class="vignette">
-              <svg viewBox="0 0 640 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-                <rect width="640" height="200" fill="#5d4a9e"/>
-                <rect x="60" y="150" width="330" height="34" rx="6" fill="#2aa7a0"/>
-                <rect x="76" y="118" width="300" height="32" rx="6" fill="#e8836a"/>
-                <rect x="66" y="86" width="318" height="32" rx="6" fill="#3f6fb5"/>
-                <rect x="84" y="54" width="286" height="32" rx="6" fill="#1d3350"/>
-                <g font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#f2ece1" letter-spacing="2">
-                  <text x="110" y="75">ÖZ FARKINDALIK</text><text x="96" y="107">ÖZ YÖNETİM</text>
-                  <text x="106" y="139">SOSYAL FARKINDALIK</text><text x="90" y="171">İLİŞKİ BECERİLERİ</text></g>
-                <rect x="470" y="96" width="96" height="86" rx="12" fill="#f2ece1"/>
-                <path d="M566 116c26 0 26 44 0 44" fill="none" stroke="#f2ece1" stroke-width="12"/>
-                <g font-family="Caveat, cursive" font-size="22" fill="#5d4a9e"><text x="486" y="132">Sen</text><text x="486" y="158">Kimsin?</text></g>
-              </svg>
-              <div class="vbanner">Ek 1.1.2<i></i>Kartları çevir</div>
+
+          <div class="s-right bookmode">
+            <div class="book" id="book2">
+              <!-- SOL SAYFA: SEKMELER -->
+              <div class="page left">
+                <p class="lp-head">SDÖ Temel Yetkinlik Alanları</p>
+                <div class="btabs" role="tablist" aria-label="5 Temel Yetkinlik sekmeleri">
+                  <button class="btab active" type="button" role="tab" aria-selected="true" data-tab="0" style="--c:#e8836a;">
+                    <span class="num">01</span><span class="row"><span class="ic">🔍</span>Öz Farkındalık</span></button>
+                  <button class="btab" type="button" role="tab" aria-selected="false" data-tab="1" style="--c:#f0a06a;">
+                    <span class="num">02</span><span class="row"><span class="ic">🧘</span>Öz Yönetim</span></button>
+                  <button class="btab" type="button" role="tab" aria-selected="false" data-tab="2" style="--c:#e8c36a;">
+                    <span class="num">03</span><span class="row"><span class="ic">🌍</span>Sosyal Farkındalık</span></button>
+                  <button class="btab" type="button" role="tab" aria-selected="false" data-tab="3" style="--c:#5fb8a0;">
+                    <span class="num">04</span><span class="row"><span class="ic">🤝</span>İlişki Becerileri</span></button>
+                  <button class="btab" type="button" role="tab" aria-selected="false" data-tab="4" style="--c:#8f6ed0;">
+                    <span class="num">05</span><span class="row"><span class="ic">🧠</span>Karar Verme</span></button>
+                </div>
+                <p style="margin:14px 0 0; font-size:11.5px; line-height:1.5; color:#4a5568;">Bu program boyunca geliştireceğiniz 5 temel sosyal duygusal yetkinlik aşağıdadır. İçeriklerini görmek için kartların üzerine tıklayın.</p>
+              </div>
+              <!-- SAĞ SAYFA: İÇERİK -->
+              <div class="page right">
+                <div class="bp-head"><span class="bp-num">01</span><span class="rule"></span><span>•••</span></div>
+                <div class="bpages">
+                  <div class="bpage active" role="tabpanel">
+                    <h3>Öz Farkındalık</h3><p class="sub">Beceriler</p>
+                    <div class="bubbles">
+                      <span class="bub" style="--bc:#5fb8a0;">Duyguları Tanıma</span>
+                      <span class="bub" style="--bc:#6aa5e8;">Doğru Öz Algı</span>
+                      <span class="bub" style="--bc:#e8836a;">Güçlü Yönleri Bilme</span>
+                      <span class="bub" style="--bc:#33507a;">Öz Güven</span></div>
+                    <div class="sticky">🔍 Kendini tanıyan,<br>sesini duyar.</div>
+                  </div>
+                  <div class="bpage" role="tabpanel">
+                    <h3>Öz Yönetim</h3><p class="sub">Beceriler</p>
+                    <div class="bubbles">
+                      <span class="bub" style="--bc:#5fb8a0;">Dürtü Kontrolü</span>
+                      <span class="bub" style="--bc:#6aa5e8;">Stres Yönetimi</span>
+                      <span class="bub" style="--bc:#e8836a;">Öz Disiplin</span>
+                      <span class="bub" style="--bc:#33507a;">Hedef Koyma</span></div>
+                    <div class="sticky">🧘 Yönünü seçen,<br>rotasını çizer.</div>
+                  </div>
+                  <div class="bpage" role="tabpanel">
+                    <h3>Sosyal Farkındalık</h3><p class="sub">Beceriler</p>
+                    <div class="bubbles">
+                      <span class="bub" style="--bc:#5fb8a0;">Bakış Açısı Edinme</span>
+                      <span class="bub" style="--bc:#6aa5e8;">Empati</span>
+                      <span class="bub" style="--bc:#e8836a;">Farklılıklara Saygı</span></div>
+                    <div class="sticky">🌍 Başkasının penceresi<br>de gerçek gösterir.</div>
+                  </div>
+                  <div class="bpage" role="tabpanel">
+                    <h3>İlişki Becerileri</h3><p class="sub">Beceriler</p>
+                    <div class="bubbles">
+                      <span class="bub" style="--bc:#5fb8a0;">İletişim</span>
+                      <span class="bub" style="--bc:#6aa5e8;">Sosyal Sorumluluk</span>
+                      <span class="bub" style="--bc:#e8836a;">Çatışma Çözme</span>
+                      <span class="bub" style="--bc:#33507a;">Takım Çalışması</span></div>
+                    <div class="sticky">🤝 Birlikte konuşan,<br>birlikte büyür.</div>
+                  </div>
+                  <div class="bpage" role="tabpanel">
+                    <h3>Sorumluluk Alarak Karar Verme</h3><p class="sub">Beceriler</p>
+                    <div class="bubbles">
+                      <span class="bub" style="--bc:#5fb8a0;">Problem Tanımlama</span>
+                      <span class="bub" style="--bc:#6aa5e8;">Durum Analizi</span>
+                      <span class="bub" style="--bc:#e8836a;">Değerlendirme</span></div>
+                    <div class="sticky">🧠 Kararının arkasında<br>durabilmektir olgunluk.</div>
+                  </div>
+                </div>
+                <div class="bp-foot"><button class="bnext" type="button">SONRAKİ →</button></div>
+              </div>
             </div>
-            <div class="sheet">
-              <h3 style="margin:0 0 6px; font-size:15px; color:var(--navy-2);">SDÖ Temel Yetkinlik Alanları</h3>
-              <p>Bu program boyunca geliştireceğiniz 5 temel sosyal duygusal yetkinlik aşağıdadır. İçeriklerini görmek için kartların üzerine tıklayın.</p>
-              <div class="mf-grid">
-                <button class="mf" type="button" aria-label="Öz Farkındalık kartını çevir"><span class="mf-in">
-                  <span class="mf-f"><span class="em">🔍</span><span class="nm">Öz Farkındalık</span><span class="hint">Tıkla ve Çevir</span></span>
-                  <span class="mf-b"><h4>Beceriler</h4><ul><li>Duyguları Tanıma</li><li>Doğru Öz Algı</li><li>Güçlü Yönleri Bilme</li><li>Öz Güven</li></ul></span></span></button>
-                <button class="mf" type="button" aria-label="Öz Yönetim kartını çevir"><span class="mf-in">
-                  <span class="mf-f"><span class="em">🧘</span><span class="nm">Öz Yönetim</span><span class="hint">Tıkla ve Çevir</span></span>
-                  <span class="mf-b"><h4>Beceriler</h4><ul><li>Dürtü Kontrolü</li><li>Stres Yönetimi</li><li>Öz Disiplin</li><li>Hedef Koyma</li></ul></span></span></button>
-                <button class="mf" type="button" aria-label="Sosyal Farkındalık kartını çevir"><span class="mf-in">
-                  <span class="mf-f"><span class="em">🌍</span><span class="nm">Sosyal Farkındalık</span><span class="hint">Tıkla ve Çevir</span></span>
-                  <span class="mf-b"><h4>Beceriler</h4><ul><li>Bakış Açısı Edinme</li><li>Empati</li><li>Farklılıklara Saygı</li></ul></span></span></button>
-                <button class="mf" type="button" aria-label="İlişki Becerileri kartını çevir"><span class="mf-in">
-                  <span class="mf-f"><span class="em">🤝</span><span class="nm">İlişki Becerileri</span><span class="hint">Tıkla ve Çevir</span></span>
-                  <span class="mf-b"><h4>Beceriler</h4><ul><li>İletişim</li><li>Sosyal Sorumluluk</li><li>Çatışma Çözme</li><li>Takım Çalışması</li></ul></span></span></button>
-                <button class="mf" type="button" aria-label="Sorumluluk Alarak Karar Verme kartını çevir"><span class="mf-in">
-                  <span class="mf-f"><span class="em">🧠</span><span class="nm">Sorumluluk Alarak Karar Verme</span><span class="hint">Tıkla ve Çevir</span></span>
-                  <span class="mf-b"><h4>Beceriler</h4><ul><li>Problem Tanımlama</li><li>Durum Analizi</li><li>Değerlendirme</li></ul></span></span></button>
-              </div>
-              <div class="blk"><h3><span class="em">🏫</span>İlişki Temelli Öğrenim Topluluğu</h3>
-                <p style="margin:0">Bu yetkinlikler sadece sizin özgüveninizi artırmakla kalmaz; aynı zamanda herkesin sesinin duyulduğu, eşit haklara sahip olduğu güvenli bir sınıf ortamı (Topluluk) oluşturmanızı sağlar. Sınıfça Tartışalım: Bu 5 yetkinlik alanını sınıfımızın huzuru için günlük hayatta nasıl kullanabiliriz? (Örn: Sınıf kurallarını belirlerken nasıl karar almalıyız?)</p></div>
-              <div class="sheet-foot">
-                <button class="nav-btn" type="button" data-goto="0">← Keşfetme'ye Dön</button>
-                <button class="nav-btn primary" type="button" data-goto="2">Alıştırmaya Geç →</button>
-              </div>
+
+            <div class="blk-dark"><h3><span class="em">🏫</span>İlişki Temelli Öğrenim Topluluğu</h3>
+              <p style="margin:0">Bu yetkinlikler sadece sizin özgüveninizi artırmakla kalmaz; aynı zamanda herkesin sesinin duyulduğu, eşit haklara sahip olduğu güvenli bir sınıf ortamı (Topluluk) oluşturmanızı sağlar. Sınıfça Tartışalım: Bu 5 yetkinlik alanını sınıfımızın huzuru için günlük hayatta nasıl kullanabiliriz? (Örn: Sınıf kurallarını belirlerken nasıl karar almalıyız?)</p></div>
+            <div class="sheet-foot">
+              <button class="nav-btn" type="button" data-goto="0">← Keşfetme'ye Dön</button>
+              <button class="nav-btn primary" type="button" data-goto="2">Alıştırmaya Geç →</button>
             </div>
           </div>
         </section>
@@ -294,20 +356,17 @@
         <section class="slide" style="--acc:#2aa7a0; --v1:#2f9d97; --v2:#12494e;">
           <div class="s-left">
             <div class="count"><span>3 / 4</span><span class="ek">Ek 1.1.3</span></div>
-            <h2 class="big">ALIŞTIRMA</h2>
-            <div class="bar"></div>
+            <h2 class="big">ALIŞTIRMA</h2><div class="bar"></div>
             <p class="script">dinle, hatırla,<br>geri anlat —<br>etkin dinleme</p>
             <svg class="hills" viewBox="0 0 600 200" preserveAspectRatio="none" aria-hidden="true">
               <path d="M0 200V120l90-46 70 40 90-58 110 66 90-40 150 74v44Z" fill="#a8d5d0" opacity=".5"/>
               <path d="M0 200v-52l110-40 90 44 120-52 130 60 150-36v76Z" fill="#7ab5ae" opacity=".55"/>
-              <path d="M0 200v-26l140-30 120 34 140-26 200 40v12Z" fill="#549089" opacity=".6"/>
-            </svg>
+              <path d="M0 200v-26l140-30 120 34 140-26 200 40v12Z" fill="#549089" opacity=".6"/></svg>
             <div class="timer" data-seconds="900">
               <span class="t-label">Kalan Süre</span><span class="t-display">15:00</span>
               <button class="t-adj up" type="button" aria-label="Süreyi artır">▲</button>
               <button class="t-adj down" type="button" aria-label="Süreyi azalt">▼</button>
-              <button class="t-toggle" type="button">Başlat</button>
-            </div>
+              <button class="t-toggle" type="button">Başlat</button></div>
           </div>
           <div class="s-right">
             <div class="vignette">
@@ -320,8 +379,7 @@
                   <path d="M240 60a60 60 0 0 1 0 60"/><path d="M268 44a92 92 0 0 1 0 92"/><path d="M104 60a60 60 0 0 0 0 60"/><path d="M76 44a92 92 0 0 0 0 92"/></g>
                 <path d="M380 96a52 52 0 0 1 104 0" fill="none" stroke="#f2ece1" stroke-width="10"/>
                 <rect x="368" y="92" width="24" height="40" rx="10" fill="#f2ece1"/><rect x="492" y="92" width="24" height="40" rx="10" fill="#f2ece1"/>
-                <g fill="#f6c667"><circle cx="560" cy="60" r="5"/><circle cx="590" cy="90" r="4"/><circle cx="566" cy="124" r="6"/><circle cx="606" cy="140" r="4"/></g>
-              </svg>
+                <g fill="#f6c667"><circle cx="560" cy="60" r="5"/><circle cx="590" cy="90" r="4"/><circle cx="566" cy="124" r="6"/><circle cx="606" cy="140" r="4"/></g></svg>
               <div class="vbanner">Ek 1.1.3<i></i>Röportaj zamanı</div>
             </div>
             <div class="sheet">
@@ -346,20 +404,17 @@
         <section class="slide" style="--acc:#e8a13c; --v1:#d99a3e; --v2:#7a4a12;">
           <div class="s-left">
             <div class="count"><span>4 / 4</span><span class="ek">Ek 1.1.4 · Değerlendirme</span></div>
-            <h2 class="big">YANSIMA</h2>
-            <div class="bar"></div>
+            <h2 class="big">YANSIMA</h2><div class="bar"></div>
             <p class="script">ne? ne oldu?<br>şimdi ne<br>olacak?</p>
             <svg class="hills" viewBox="0 0 600 200" preserveAspectRatio="none" aria-hidden="true">
               <path d="M0 200V120l90-46 70 40 90-58 110 66 90-40 150 74v44Z" fill="#ecd0a0" opacity=".5"/>
               <path d="M0 200v-52l110-40 90 44 120-52 130 60 150-36v76Z" fill="#d3ab6c" opacity=".55"/>
-              <path d="M0 200v-26l140-30 120 34 140-26 200 40v12Z" fill="#b0874a" opacity=".6"/>
-            </svg>
+              <path d="M0 200v-26l140-30 120 34 140-26 200 40v12Z" fill="#b0874a" opacity=".6"/></svg>
             <div class="timer" data-seconds="300">
               <span class="t-label">Kalan Süre</span><span class="t-display">05:00</span>
               <button class="t-adj up" type="button" aria-label="Süreyi artır">▲</button>
               <button class="t-adj down" type="button" aria-label="Süreyi azalt">▼</button>
-              <button class="t-toggle" type="button">Başlat</button>
-            </div>
+              <button class="t-toggle" type="button">Başlat</button></div>
           </div>
           <div class="s-right">
             <div class="vignette">
@@ -373,9 +428,7 @@
                 <rect x="420" y="52" width="52" height="52" rx="6" fill="#f6c667" transform="rotate(-6 446 78)"/>
                 <rect x="452" y="96" width="52" height="52" rx="6" fill="#e8836a" transform="rotate(5 478 122)"/>
                 <rect x="520" y="60" width="52" height="52" rx="6" fill="#2aa7a0" transform="rotate(-3 546 86)"/>
-                <rect x="392" y="150" width="150" height="10" rx="5" fill="#5c3a12"/>
-                <path d="M540 150l26-6-6 12Z" fill="#f2ece1"/>
-              </svg>
+                <rect x="392" y="150" width="150" height="10" rx="5" fill="#5c3a12"/><path d="M540 150l26-6-6 12Z" fill="#f2ece1"/></svg>
               <div class="vbanner">Ek 1.1.4<i></i>Çıkış kartı</div>
             </div>
             <div class="sheet">
@@ -427,18 +480,36 @@
   tiles.forEach(t => t.addEventListener("click", () => go(parseInt(t.dataset.goto, 10))));
   document.querySelectorAll(".nav-btn[data-goto]").forEach(b =>
     b.addEventListener("click", () => go(parseInt(b.dataset.goto, 10))));
-
   document.getElementById("burger").addEventListener("click", function(){
     const hidden = document.body.classList.toggle("rail-hidden");
     this.setAttribute("aria-expanded", String(!hidden));
   });
   document.getElementById("home-pill").addEventListener("click", e => { e.preventDefault(); go(0); });
 
-  /* flip cards */
-  document.querySelectorAll(".mf").forEach(mf => mf.addEventListener("click", () => {
-    const f = mf.classList.toggle("flipped");
-    mf.setAttribute("aria-pressed", String(f));
-  }));
+  /* ===== DİJİTAL KİTAP SEKMELERİ (Bölüm 2) ===== */
+  (function initBook(){
+    const book = document.getElementById("book2");
+    if (!book) return;
+    const tabs = Array.from(book.querySelectorAll(".btab"));
+    const pages = Array.from(book.querySelectorAll(".bpage"));
+    const numEl = book.querySelector(".bp-num");
+    let t = 0;
+    function setTab(i){
+      t = ((i % pages.length) + pages.length) % pages.length;
+      tabs.forEach((b, k) => {
+        b.classList.toggle("active", k === t);
+        b.setAttribute("aria-selected", String(k === t));
+      });
+      pages.forEach((p, k) => p.classList.toggle("active", k === t));
+      if (numEl) numEl.textContent = String(t + 1).padStart(2, "0");
+    }
+    book.addEventListener("click", (e) => {
+      const tab = e.target.closest(".btab");
+      if (tab) { setTab(parseInt(tab.dataset.tab, 10)); return; }
+      if (e.target.closest(".bnext")) { setTab(t + 1); }
+    });
+    setTab(0);
+  })();
 
   /* timers */
   document.querySelectorAll(".timer").forEach(root => {
