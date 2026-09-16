@@ -4,598 +4,476 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sen Kimsin? — Olumlu Öğrenme Ortamı</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Work+Sans:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Work+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --plum-1:#1b1030; --plum-2:#2b1a4a; --plum-3:#120a20;
-    --marigold:#f5b352; --rose:#ef7d6d; --lilac:#b79ced; --cream:#f6ecd9;
-    --mute:#a88fd0; --top-zone:96px; --bottom-zone:158px;
-    --cw: clamp(280px, 34vw, 400px);
+    --navy:#16283f; --navy-2:#1d3350; --navy-3:#0f1e33;
+    --cream:#f2ece1; --paper:#f6f0e6; --ink:#2d3748;
+    --coral:#e8836a; --lilac:#8f6ed0; --teal:#2aa7a0; --marigold:#e8a13c;
+    --mute:#8a94a6;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
-  body{margin:0; font-family:"Work Sans",sans-serif; color:var(--cream);
-    background:linear-gradient(180deg,var(--plum-3),var(--plum-1) 45%,var(--plum-2) 100%); overflow:hidden;}
-  .scene{position:relative; width:100%; height:100vh; min-height:660px; overflow:hidden;}
+  body{margin:0; font-family:"Work Sans",sans-serif; color:var(--cream); overflow:hidden;
+    background:radial-gradient(60vw 80vh at 88% 60%, #3a2b4d 0%, transparent 60%),
+               linear-gradient(180deg,#12233b 0%, var(--navy) 45%, #101f36 100%);}
+  .scene{position:relative; width:100%; height:100vh; min-height:620px; display:flex; flex-direction:column;}
 
-  /* ---------- TWILIGHT CLASSROOM BACKDROP ---------- */
-  .dusk{position:absolute; inset:0; z-index:0;
-    background:linear-gradient(180deg,#120a20 0%,#241540 34%,#4a2a5e 56%,#c96b52 74%,#f5b352 83%,#241540 83.4%,#160c28 100%);}
-  .dusk-glow{position:absolute; z-index:0; left:50%; top:76%; width:420px; height:300px; transform:translate(-50%,-50%);
-    background:radial-gradient(circle, rgba(255,224,170,.85), rgba(245,179,82,.35) 45%, transparent 72%); filter:blur(8px);}
-  .lights{position:absolute; z-index:1; left:0; top:0; width:100%; height:240px;}
-  .lights circle{filter:drop-shadow(0 0 9px rgba(255,205,130,.95)); animation:flick 3.6s ease-in-out infinite;}
-  .lights circle:nth-child(2n){animation-delay:1.1s} .lights circle:nth-child(3n){animation-delay:2.2s}
-  @keyframes flick{0%,100%{opacity:1}50%{opacity:.5}}
-  .school{position:absolute; z-index:1; left:0; right:0; bottom:106px; width:100%; height:160px; opacity:.95;}
-  .fb{position:absolute; z-index:1; color:rgba(183,156,237,.15); animation:floaty 13s ease-in-out infinite alternate;}
-  .fb.f1{left:6%; top:24%; width:120px;} .fb.f2{right:8%; top:38%; width:90px; animation-delay:3s;} .fb.f3{left:22%; top:56%; width:70px; animation-delay:6s;}
-  @keyframes floaty{from{transform:translateY(-14px) rotate(-3deg)}to{transform:translateY(16px) rotate(4deg)}}
+  /* ---------- coast backdrop ---------- */
+  .coast{position:absolute; right:0; bottom:0; width:min(46vw,760px); height:78vh; z-index:0; opacity:.95; pointer-events:none;}
 
-  /* ---------- chrome ---------- */
-  .home-pill{position:absolute; z-index:45; top:26px; left:28px; display:inline-flex; align-items:center; gap:8px;
-    padding:10px 20px; border-radius:999px; background:rgba(28,16,48,.85); border:1px solid #4a3572;
-    color:var(--cream); font-weight:600; font-size:14px; text-decoration:none;
-    box-shadow:0 8px 22px rgba(10,4,20,.5); transition:transform .2s ease, background .2s ease;}
-  .home-pill:hover{transform:translateY(-1px); background:rgba(42,26,70,.9);}
-  .script-tr{position:absolute; z-index:6; right:60px; top:32px; transform:rotate(-5deg);
-    font-family:"Caveat",cursive; font-size:27px; line-height:1.05; color:#e6d7f7;}
-  .note-left{position:absolute; z-index:6; left:3vw; top:33%; color:var(--mute);
-    font-weight:700; font-size:16px; line-height:1.45; letter-spacing:.14em;}
-  .note-left::after{content:""; display:block; width:44px; height:3px; background:var(--mute); margin-top:12px; border-radius:2px;}
-  .banner-right{position:absolute; z-index:5; right:3vw; top:30%; transform:rotate(3deg);
-    background:var(--cream); color:#5b2a4a; border-radius:4px; padding:18px 16px;
-    font-weight:700; font-size:14px; letter-spacing:.08em; line-height:1.45;
-    box-shadow:0 16px 34px rgba(10,4,20,.55);}
-  .banner-right::before{content:""; position:absolute; top:-46px; left:50%; width:3px; height:46px; background:#5b2a4a;}
-  .t-accent{position:relative; display:inline-block; padding:0 .06em .12em;
-    background:linear-gradient(95deg,var(--marigold),var(--rose) 80%);
-    -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .swoosh{position:absolute; left:2%; right:-4%; bottom:-.06em; width:100%; height:auto; color:var(--rose);}
+  /* ---------- header ---------- */
+  header{position:relative; z-index:6; display:flex; align-items:center; gap:22px; padding:20px 30px 12px;}
+  .brand{margin:0; font-family:"Playfair Display",serif; font-weight:900; letter-spacing:-.015em;
+    font-size:clamp(34px,5.4vw,74px); line-height:1; color:var(--cream);}
+  .brand em{font-style:normal; color:var(--coral);}
+  .home-pill{margin-left:auto; display:inline-flex; align-items:center; gap:8px; padding:10px 22px; border-radius:999px;
+    background:rgba(242,236,225,.1); border:1px solid rgba(242,236,225,.35); color:var(--cream);
+    font-weight:600; font-size:14px; text-decoration:none; transition:background .2s, transform .2s;}
+  .home-pill:hover{background:rgba(242,236,225,.2); transform:translateY(-1px);}
+  .motto{font-size:11px; font-weight:700; letter-spacing:.28em; line-height:1.9; color:#9fb4cd; text-transform:uppercase;}
+  .burger{width:42px; height:42px; border-radius:10px; border:1px solid rgba(242,236,225,.3); background:transparent;
+    cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;}
+  .burger span{display:block; width:20px; height:2px; background:var(--cream); border-radius:2px;}
 
-  /* ---------- cover ---------- */
-  .cover-layer{position:absolute; inset:0; z-index:40; display:flex; flex-direction:column; align-items:center;
-    justify-content:center; gap:18px; text-align:center; padding:70px 6vw 130px;
-    transition:opacity .55s ease, transform .55s ease;}
-  body.entered .cover-layer{opacity:0; transform:translateY(-28px) scale(.985); pointer-events:none;}
-  .cover-badge{display:inline-flex; align-items:center; gap:8px; padding:8px 18px; border-radius:999px;
-    background:rgba(28,16,48,.85); border:1px solid #4a3572; color:#d9c6f2;
-    font-weight:600; font-size:13px; letter-spacing:.08em; text-transform:uppercase;}
-  .cover-title{margin:0; font-family:"Playfair Display",serif; font-weight:800; letter-spacing:-.02em;
-    font-size:clamp(46px,9vw,120px); line-height:1.03; text-shadow:0 12px 44px rgba(10,4,20,.8);}
-  .cover-tag{margin:0; max-width:640px; color:#e6d7f7; font-size:clamp(14px,1.5vw,18px); line-height:1.65;}
-  .cover-chips{display:flex; flex-wrap:wrap; gap:8px; justify-content:center;}
-  .cchip{background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.28); border-radius:999px;
-    padding:5px 14px; font-size:12.5px; font-weight:600;}
-  .cta{display:inline-flex; align-items:center; gap:10px; margin-top:4px; padding:15px 34px; border:0; border-radius:999px;
-    background:linear-gradient(95deg,var(--marigold),var(--rose)); color:#2a1209; cursor:pointer;
-    font-family:inherit; font-weight:800; font-size:16px;
-    box-shadow:0 16px 40px -8px rgba(239,125,109,.55); transition:transform .2s ease, box-shadow .2s ease;}
-  .cta:hover{transform:translateY(-2px); box-shadow:0 22px 48px -8px rgba(239,125,109,.7);}
-  .cover-hint{margin:0; color:var(--mute); font-size:12.5px;}
-  .cover-hint kbd{background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); border-radius:5px; padding:1px 7px; font-family:inherit;}
-  .mini-title{position:absolute; z-index:6; top:16px; left:50%; transform:translateX(-50%);
-    margin:0; width:min(900px,90vw); text-align:center; pointer-events:none;
-    font-family:"Playfair Display",serif; font-weight:800; letter-spacing:-.01em;
-    font-size:clamp(19px,2.4vw,32px); opacity:0; transition:opacity .5s ease .3s;}
-  body.entered .mini-title{opacity:1;}
-  .jump{position:absolute; z-index:6; top:56px; left:50%; transform:translateX(-50%); display:flex; gap:8px;
-    opacity:0; transition:opacity .5s ease .35s; flex-wrap:wrap; justify-content:center;}
-  body.entered .jump{opacity:1;}
-  .jump button{font-family:inherit; font-size:11px; font-weight:600; padding:5px 13px; border-radius:999px;
-    border:1px solid rgba(255,255,255,.25); background:rgba(24,13,42,.6); color:#e8dcf5; cursor:pointer; transition:background .2s;}
-  .jump button.active{background:linear-gradient(95deg,var(--marigold),var(--rose)); color:#2a1209; border-color:transparent; font-weight:800;}
+  /* ---------- board / deck ---------- */
+  .board{position:relative; z-index:5; flex:1; min-height:0; display:flex; align-items:stretch; gap:14px; padding:6px 26px 10px;}
+  .edge{flex:0 0 56px; align-self:center; width:56px; height:56px; border-radius:50%; border:0; cursor:pointer;
+    background:var(--cream); color:var(--navy-2); font-size:26px; font-weight:700; line-height:1;
+    box-shadow:0 12px 28px rgba(5,12,26,.45); transition:transform .2s, background .2s;}
+  .edge:hover:not(:disabled){transform:scale(1.07);}
+  .edge:disabled{opacity:.35; cursor:not-allowed;}
+  .viewport{position:relative; flex:1; min-width:0; overflow:hidden; border-radius:22px;
+    box-shadow:0 40px 90px -30px rgba(4,10,24,.8);}
+  .deck{display:flex; height:100%; transition:transform .55s cubic-bezier(.25,.9,.3,1);}
+  .slide{min-width:100%; display:grid; grid-template-columns:44% 56%; background:var(--cream);}
+  .kbd-hint{position:absolute; right:14px; bottom:12px; z-index:8; display:flex; align-items:center; gap:8px;
+    background:rgba(15,30,51,.55); border-radius:8px; padding:6px 10px; font-size:12px; color:#dfe8f5;}
 
-  /* ---------- tour / coverflow ---------- */
-  .tour{position:absolute; inset:0; transition:opacity .6s ease .12s, transform .6s ease .12s;}
-  body:not(.entered) .tour{opacity:0; transform:translateY(36px) scale(.985); pointer-events:none;}
-  .stage{position:absolute; left:0; right:0; top:var(--top-zone); bottom:var(--bottom-zone); perspective:1500px; touch-action:pan-y;}
-  .track{position:absolute; inset:0; transform-style:preserve-3d;}
-  .card{position:absolute; left:50%; top:50%; width:var(--cw); height:min(100%, 520px);
-    margin-left:calc(var(--cw)/-2); cursor:pointer;
-    transition:transform .55s cubic-bezier(.22,.9,.3,1), opacity .45s ease, filter .45s ease;}
-  .card:not(.active){filter:brightness(.8) saturate(.9);}
-  .face{position:absolute; inset:0; border-radius:22px; overflow:hidden; display:flex; flex-direction:column;
-    background:linear-gradient(200deg,var(--g1),var(--g2));
-    box-shadow:0 34px 70px -22px rgba(8,3,18,.85), inset 0 1px 0 rgba(255,255,255,.25);}
-  .face-top{display:flex; justify-content:space-between; align-items:center; gap:8px; padding:14px 16px 0;}
-  .badge{display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:999px;
-    background:rgba(12,6,24,.42); border:1px solid rgba(255,255,255,.32);
-    font-size:10.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:#fff;}
-  .ek{font-size:10px; font-weight:700; letter-spacing:.08em; color:rgba(255,255,255,.75);
-    border:1px dashed rgba(255,255,255,.4); border-radius:6px; padding:3px 8px;}
-  .word{margin:10px 18px 0; font-family:"Playfair Display",serif; font-weight:800; color:#fff;
-    font-size:clamp(21px,2.1vw,28px); line-height:1.15; text-shadow:0 4px 18px rgba(0,0,0,.5);}
-  .face-scroll{flex:1; overflow-y:auto; padding:8px 18px 10px; color:rgba(255,255,255,.96);
-    font-size:12.5px; line-height:1.55; scrollbar-width:thin; scrollbar-color:rgba(255,255,255,.35) transparent;}
-  .face-scroll::-webkit-scrollbar{width:5px}
-  .face-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.3); border-radius:3px}
-  .face-scroll p{margin:0 0 8px;}
-  .blk{background:rgba(12,6,24,.32); border:1px solid rgba(255,255,255,.18); border-radius:12px; padding:10px 12px; margin:0 0 10px;}
-  .blk h3{margin:0 0 6px; font-size:13px; color:#ffe3b0;}
-  .blk .em{font-size:18px; margin-right:6px;}
-  .steps{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:8px 0;}
-  .stepbox{background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); border-radius:10px; padding:9px 10px;}
-  .stepbox b{display:block; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:#ffd9a0;}
-  .stepbox i{display:block; font-size:12px; margin:3px 0;}
-  .stepbox span{font-size:11px; color:rgba(255,255,255,.85);}
-  .olist{margin:0; padding:0; list-style:none; counter-reset:st;}
-  .olist li{counter-increment:st; position:relative; padding:7px 10px 7px 34px; margin-bottom:6px;
-    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.2); border-radius:8px; font-size:12px;}
-  .olist li::before{content:counter(st); position:absolute; left:8px; top:8px; width:18px; height:18px; border-radius:50%;
-    background:var(--marigold); color:#2a1209; font-weight:800; font-size:11px; display:flex; align-items:center; justify-content:center;}
-  .qcard{display:flex; gap:10px; align-items:flex-start; background:rgba(12,6,24,.32); border-left:3px solid var(--marigold);
-    border-radius:10px; padding:9px 12px; margin-bottom:8px;}
-  .qcard .n{font-family:"Playfair Display",serif; font-weight:800; font-size:20px; color:var(--marigold); line-height:1;}
-  .qcard b{display:block; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#ffd9a0; margin-bottom:3px;}
-  /* mini flip cards */
-  .mf-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:10px 0;}
-  .mf-grid .mf:last-child{grid-column:1 / -1;}
-  .mf{perspective:900px; height:148px; cursor:pointer; border:0; padding:0; background:none; font-family:inherit;}
+  /* left panel */
+  .s-left{position:relative; display:flex; flex-direction:column; padding:30px 36px 26px; color:var(--navy-2); overflow:hidden;}
+  .count{display:flex; align-items:center; gap:10px; font-size:13px; letter-spacing:.22em; color:var(--mute); font-weight:600;}
+  .ek{margin-left:auto; font-size:10.5px; letter-spacing:.14em; border:1px dashed #b9b2a2; border-radius:6px; padding:3px 8px; color:#7c8698;}
+  .big{margin:12px 0 8px; font-family:"Playfair Display",serif; font-weight:800; color:var(--navy);
+    font-size:clamp(38px,5.6vw,86px); line-height:.98; letter-spacing:-.015em;}
+  .bar{width:112px; height:6px; border-radius:3px; background:var(--coral);}
+  .script{margin:20px 0 0; font-family:"Caveat",cursive; font-size:23px; line-height:1.3; color:#7d8fb0; transform:rotate(-4deg); width:max-content;}
+  .hills{position:absolute; left:0; right:0; bottom:0; width:100%; height:36%; pointer-events:none;}
+  .timer{position:relative; z-index:2; margin-top:auto; display:flex; align-items:center; gap:8px; width:max-content;
+    background:var(--navy-2); border-radius:999px; padding:7px 12px; color:var(--cream); box-shadow:0 10px 22px rgba(15,30,51,.35);}
+  .t-label{font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; opacity:.8;}
+  .t-display{font-weight:800; font-size:16px; font-variant-numeric:tabular-nums; min-width:50px; text-align:center;}
+  .t-adj{width:21px; height:21px; border-radius:50%; border:1px solid rgba(242,236,225,.4); background:rgba(242,236,225,.12);
+    color:var(--cream); font-size:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;}
+  .t-toggle{border:0; border-radius:999px; padding:5px 14px; font-family:inherit; font-weight:800; font-size:11px;
+    background:var(--coral); color:#fff; cursor:pointer;}
+  .timer.zero .t-display{color:#ffb1b1; animation:pulse 1s infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+  /* right panel */
+  .s-right{position:relative; display:flex; flex-direction:column; background:linear-gradient(165deg,var(--v1),var(--v2));}
+  .vignette{position:relative; height:32%; min-height:118px; overflow:hidden;}
+  .vignette svg{position:absolute; inset:0; width:100%; height:100%;}
+  .vbanner{position:absolute; right:0; top:0; bottom:0; width:88px; background:rgba(242,236,225,.92);
+    padding:14px 10px; font-size:10.5px; font-weight:700; letter-spacing:.18em; line-height:1.8;
+    color:var(--navy-2); text-transform:uppercase;}
+  .vbanner i{display:block; width:34px; height:3px; background:var(--coral); margin:10px 0; font-style:normal;}
+  .sheet{flex:1; min-height:0; margin:0 104px 16px 16px; background:rgba(246,240,230,.97); border-radius:16px;
+    padding:14px 16px; overflow-y:auto; color:var(--ink); box-shadow:0 18px 40px -18px rgba(8,16,32,.55);
+    font-size:13px; line-height:1.55; scrollbar-width:thin;}
+  .sheet::-webkit-scrollbar{width:5px} .sheet::-webkit-scrollbar-thumb{background:#c9c2b2; border-radius:3px}
+  .sheet p{margin:0 0 8px;}
+  .blk{background:#fff; border:1px solid #e6dfcd; border-left:4px solid var(--acc,var(--coral)); border-radius:10px;
+    padding:10px 12px; margin:0 0 10px;}
+  .blk h3{margin:0 0 5px; font-size:13.5px; color:var(--navy-2);}
+  .blk .em{margin-right:6px;}
+  .steps{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:8px 0 10px;}
+  .stepbox{background:#fff; border:1px solid #e6dfcd; border-radius:10px; padding:9px 10px;}
+  .stepbox b{display:block; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--acc,var(--coral));}
+  .stepbox i{display:block; margin:3px 0; color:var(--navy-2);}
+  .stepbox span{font-size:11.5px; color:#4a5568;}
+  .mf-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin:10px 0;}
+  .mf{perspective:900px; height:132px; border:0; padding:0; background:none; cursor:pointer; font-family:inherit;}
   .mf-in{position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .6s cubic-bezier(.35,.1,.25,1);}
   .mf.flipped .mf-in{transform:rotateY(180deg);}
-  .mf-f,.mf-b{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:14px;
-    padding:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; text-align:center;}
-  .mf-f{background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.3);}
-  .mf-b{transform:rotateY(180deg); background:rgba(18,9,32,.72); border:1px solid rgba(245,179,82,.55);}
-  .mf-f .em{font-size:26px;} .mf-f .nm{font-weight:700; font-size:12px; color:#fff; line-height:1.25;}
-  .mf-f .hint{font-size:9.5px; opacity:.8; letter-spacing:.1em; text-transform:uppercase;}
-  .mf-b h4{margin:0; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--marigold);}
-  .mf-b ul{margin:0; padding:0; list-style:none; font-size:11px; line-height:1.5; color:rgba(255,255,255,.92);}
-  /* timer */
-  .timer{display:flex; align-items:center; gap:7px; background:rgba(12,6,24,.5); border:1px solid rgba(255,255,255,.25);
-    border-radius:999px; padding:5px 10px;}
-  .t-label{font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.75);}
-  .t-display{font-weight:800; font-size:16px; font-variant-numeric:tabular-nums; min-width:50px; text-align:center;}
-  .t-adj{width:21px; height:21px; border-radius:50%; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.12);
-    color:#fff; font-size:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;}
-  .t-adj:hover{background:rgba(255,255,255,.25);}
-  .t-toggle{border:0; border-radius:999px; padding:5px 13px; font-family:inherit; font-weight:800; font-size:11px;
-    background:linear-gradient(95deg,var(--marigold),var(--rose)); color:#2a1209; cursor:pointer;}
-  .timer.zero .t-display{color:#ff9b9b; animation:pulse 1s infinite;}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-  .face-foot{padding:10px 16px 14px; display:flex; gap:8px; flex-wrap:wrap;}
-  .nav-btn{flex:1; display:inline-flex; align-items:center; justify-content:center; gap:7px;
-    padding:10px 12px; border-radius:10px; cursor:pointer; font-family:inherit; font-weight:700; font-size:12px;
-    background:rgba(12,6,24,.45); border:1px solid rgba(255,255,255,.35); color:#fff; transition:background .2s, transform .2s;}
-  .nav-btn:hover{background:rgba(12,6,24,.65); transform:translateY(-1px);}
-  .nav-btn.primary{background:linear-gradient(95deg,var(--marigold),var(--rose)); border-color:transparent; color:#2a1209;}
-  .credit{margin:6px 0 2px; font-size:10.5px; opacity:.7; text-align:center;}
+  .mf-f,.mf-b{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:12px;
+    padding:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; text-align:center;}
+  .mf-f{background:#fff; border:1px solid #ddd6c6;}
+  .mf-b{transform:rotateY(180deg); background:var(--navy-2); border:1px solid var(--acc,var(--coral)); color:var(--cream);}
+  .mf-f .em{font-size:24px;} .mf-f .nm{font-weight:700; font-size:11.5px; color:var(--navy-2); line-height:1.25;}
+  .mf-f .hint{font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:#98a1b3;}
+  .mf-b h4{margin:0; font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--acc,var(--coral));}
+  .mf-b ul{margin:0; padding:0; list-style:none; font-size:10.5px; line-height:1.45;}
+  .olist{margin:6px 0 0; padding:0; list-style:none; counter-reset:st;}
+  .olist li{counter-increment:st; position:relative; padding:7px 10px 7px 32px; margin-bottom:6px;
+    background:#fff; border:1px solid #e6dfcd; border-radius:8px; font-size:12px;}
+  .olist li::before{content:counter(st); position:absolute; left:8px; top:8px; width:17px; height:17px; border-radius:50%;
+    background:var(--acc,var(--coral)); color:#fff; font-weight:800; font-size:10.5px; display:flex; align-items:center; justify-content:center;}
+  .qcard{display:flex; gap:10px; background:#fff; border:1px solid #e6dfcd; border-left:4px solid var(--acc,var(--coral));
+    border-radius:10px; padding:9px 12px; margin-bottom:8px;}
+  .qcard .n{font-family:"Playfair Display",serif; font-weight:800; font-size:20px; color:var(--acc,var(--coral)); line-height:1;}
+  .qcard b{display:block; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:#7c8698; margin-bottom:2px;}
+  .credit{margin:8px 0 0; font-size:10.5px; color:#8b93a3; text-align:center;}
+  .sheet-foot{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;}
+  .nav-btn{flex:1; display:inline-flex; align-items:center; justify-content:center; gap:7px; padding:10px 12px;
+    border-radius:10px; border:0; cursor:pointer; font-family:inherit; font-weight:700; font-size:12px;
+    background:var(--navy-2); color:var(--cream); transition:transform .2s, filter .2s;}
+  .nav-btn:hover{transform:translateY(-1px); filter:brightness(1.15);}
+  .nav-btn.primary{background:var(--coral); color:#fff;}
 
-  .arrow{position:absolute; z-index:30; top:calc(50% - 30px); margin-top:-32px; width:64px; height:64px; border-radius:50%;
-    border:1px solid rgba(255,255,255,.16); background:rgba(24,13,42,.85); color:#fff; cursor:pointer;
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 14px 30px rgba(8,3,18,.6); transition:transform .2s ease, background .2s ease, opacity .3s ease;}
-  .arrow:hover:not(:disabled){transform:scale(1.06); background:rgba(42,26,70,.92);}
-  .arrow:disabled{opacity:.35; cursor:not-allowed;}
-  .arrow.left{left:26px;} .arrow.right{right:26px;}
-  .dots{position:absolute; z-index:30; left:50%; transform:translateX(-50%); bottom:126px; display:flex; gap:10px;}
-  .dot{width:11px; height:11px; padding:0; border:0; border-radius:50%; background:#6b5490; cursor:pointer; transition:transform .25s, background .25s;}
-  .dot:hover{transform:scale(1.25);}
-  .dot.active{background:var(--rose); transform:scale(1.2);}
-  .counter{position:absolute; z-index:30; left:50%; transform:translateX(-50%); bottom:106px; margin:0;
-    font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--mute); font-weight:600;}
+  /* ---------- rail ---------- */
+  .rail{position:relative; z-index:6; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; padding:12px 26px 20px;
+    transition:opacity .3s, max-height .3s; max-height:140px; overflow:hidden;}
+  body.rail-hidden .rail{max-height:0; opacity:0; padding-top:0; padding-bottom:0;}
+  .tile{border:0; border-radius:14px; padding:13px 10px; display:flex; flex-direction:column; align-items:center; gap:8px;
+    background:#152a44; color:#dfe8f5; cursor:pointer; font-family:inherit; font-weight:700; font-size:11.5px;
+    letter-spacing:.14em; text-transform:uppercase; transition:background .25s, color .25s, transform .2s;}
+  .tile:hover{transform:translateY(-2px);}
+  .tile .ic{width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+    background:var(--tc); font-size:21px;}
+  .tile.active{background:var(--cream); color:var(--navy); box-shadow:0 12px 28px rgba(4,10,24,.45);}
 
-  /* ---------- desk & props ---------- */
-  .desk{position:absolute; z-index:18; left:0; right:0; bottom:0; height:110px;
-    background:linear-gradient(180deg,#7a4a2c 0%,#5d3620 34%,#3d2212 100%);}
-  .desk::before{content:""; position:absolute; inset:0;
-    background:repeating-linear-gradient(98deg, rgba(255,255,255,.05) 0 3px, transparent 3px 26px),
-               linear-gradient(180deg, rgba(255,214,160,.3), transparent 22%);}
-  .prop{position:absolute; z-index:19; filter:drop-shadow(0 8px 16px rgba(0,0,0,.45));}
-  .notebook{left:300px; bottom:88px; width:170px;}
-  .pencils{left:520px; bottom:92px; width:64px;}
-  .plane{right:420px; bottom:118px; width:90px; transform:rotate(-12deg);}
-  .mug{position:absolute; z-index:19; right:64px; bottom:56px; width:126px; height:98px;
-    background:#241540; border-radius:14px 14px 20px 20px; box-shadow:0 12px 26px rgba(0,0,0,.5);}
-  .mug::after{content:""; position:absolute; right:-32px; top:24px; width:42px; height:46px; border:11px solid #241540; border-radius:50%;}
-  .mug span{position:absolute; inset:0; padding:34px 12px; font-family:"Caveat",cursive; font-size:20px; text-align:center; color:#f0d9b8;}
-  .plant{position:absolute; z-index:22; filter:drop-shadow(0 6px 10px rgba(0,0,0,.4)); pointer-events:none;}
-  .plant.pl-left{left:-16px; bottom:60px; width:150px;}
-  .plant.pl-right{right:-10px; bottom:96px; width:130px; transform:scaleX(-1) rotate(6deg);}
-
-  .sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
-  button:focus-visible,a:focus-visible{outline:3px solid var(--marigold); outline-offset:3px;}
-
-  @media (max-width:860px){
-    .note-left,.banner-right,.school,.pencils,.plane{display:none;}
-    .script-tr{right:20px; top:20px; font-size:22px;}
-    .arrow{width:50px;height:50px;} .arrow.left{left:10px;} .arrow.right{right:10px;}
-    .notebook{left:24px; width:130px;}
-    .mug{right:24px; width:104px; height:84px;}
-    :root{--cw:clamp(250px,68vw,340px); --top-zone:88px; --bottom-zone:150px;}
-    .cover-layer{padding:60px 7vw 120px;}
-    .steps{grid-template-columns:1fr;}
+  button:focus-visible,a:focus-visible{outline:3px solid var(--coral); outline-offset:3px;}
+  @media (max-width:900px){
+    .slide{grid-template-columns:1fr; grid-template-rows:auto 1fr;}
+    .s-left{padding:20px 22px;} .big{font-size:clamp(30px,9vw,52px);} .script{display:none;} .hills{display:none;}
+    .vignette{height:110px; min-height:110px;} .sheet{margin:0 12px 12px;} .vbanner{width:64px;}
+    .mf-grid{grid-template-columns:1fr 1fr;} .rail{grid-template-columns:repeat(2,1fr);}
+    .motto{display:none;} .steps{grid-template-columns:1fr;}
   }
-  @media (max-height:720px){
-    :root{--top-zone:84px; --bottom-zone:146px;}
-    .mini-title{top:8px;} .jump{top:44px;}
-    .cover-title{font-size:clamp(36px,7vw,72px);}
-  }
-  @media (prefers-reduced-motion:reduce){
-    *,*::before,*::after{transition-duration:.01ms !important; animation-duration:.01ms !important;}
-  }
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important;}}
 </style>
 </head>
 <body>
 <div class="scene">
-  <div class="dusk" aria-hidden="true"></div>
-  <div class="dusk-glow" aria-hidden="true"></div>
-  <svg class="lights" viewBox="0 0 1440 240" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 30 Q360 150 720 70 T1440 44" fill="none" stroke="rgba(246,236,217,.22)" stroke-width="2"/>
-    <g fill="#ffd9a0">
-      <circle cx="60" cy="52" r="6"/><circle cx="180" cy="86" r="6"/><circle cx="300" cy="108" r="6"/><circle cx="420" cy="112" r="6"/>
-      <circle cx="540" cy="98" r="6"/><circle cx="660" cy="78" r="6"/><circle cx="780" cy="66" r="6"/><circle cx="900" cy="62" r="6"/>
-      <circle cx="1020" cy="64" r="6"/><circle cx="1140" cy="62" r="6"/><circle cx="1260" cy="54" r="6"/><circle cx="1380" cy="46" r="6"/>
-    </g>
+  <svg class="coast" viewBox="0 0 760 700" preserveAspectRatio="xMaxYMax slice" aria-hidden="true">
+    <circle cx="600" cy="250" r="120" fill="#f0a06a" opacity=".9"/>
+    <circle cx="600" cy="250" r="160" fill="#f0a06a" opacity=".25"/>
+    <path d="M760 330c-70 10-120 34-160 70l-40 40c-30 30-40 70-40 110v150h240Z" fill="#2a2140"/>
+    <path d="M760 420v280H300c40-60 110-96 190-110l90-16c70-12 130-60 180-154Z" fill="#1b1633"/>
+    <path d="M0 560h760v140H0Z" fill="#132b47"/>
+    <path d="M0 560c90-14 180-14 270 0s180 14 270 0 180-14 220 0v20H0Z" fill="#1d3f63" opacity=".8"/>
+    <g><rect x="596" y="180" width="26" height="70" rx="4" fill="#f2ece1"/>
+      <path d="M596 186h26M596 200h26M596 214h26M596 228h26" stroke="#e8836a" stroke-width="6"/>
+      <rect x="600" y="160" width="18" height="20" rx="3" fill="#16283f"/>
+      <circle cx="609" cy="168" r="6" fill="#ffe9b0"/>
+      <path d="M609 168L500 140l0 56Z" fill="#ffe9b0" opacity=".35"/>
+      <path d="M609 168L720 140l0 56Z" fill="#ffe9b0" opacity=".25"/></g>
   </svg>
-  <svg class="school" viewBox="0 0 1200 160" preserveAspectRatio="none" aria-hidden="true">
-    <g fill="#150a24">
-      <path d="M0 160V96h70V72h26v24h44V160Z M180 160V84h36V60h18v24h34V160Z M320 160V70h14V46h10V34h12v12h10v24h14v90Z"/>
-      <path d="M420 160V92h60V70h20v22h40V160Z M580 160V80h44V58h16v22h36V160Z M720 160V96h54V76h18v20h30V160Z"/>
-      <path d="M860 160V86h34V62h14v24h30V160Z M980 160V94h56V74h16v20h34V160Z M1120 160V88h28V64h14v24h22V160Z"/>
-      <path d="M150 160c0-16 9-27 21-27s21 11 21 27Z M560 160c0-13 8-22 18-22s18 9 18 22Z M940 160c0-15 9-25 20-25s20 10 20 25Z"/>
-    </g>
-    <circle cx="352" cy="52" r="7" fill="#f6ecd9" opacity=".9"/>
-    <g fill="#ffcf8a" opacity=".8">
-      <rect x="86" y="104" width="10" height="12"/><rect x="104" y="104" width="10" height="12"/>
-      <rect x="196" y="96" width="9" height="11"/><rect x="214" y="96" width="9" height="11"/><rect x="232" y="112" width="9" height="11"/>
-      <rect x="436" y="104" width="10" height="12"/><rect x="456" y="104" width="10" height="12"/><rect x="476" y="120" width="10" height="12"/>
-      <rect x="596" y="92" width="9" height="11"/><rect x="614" y="92" width="9" height="11"/><rect x="632" y="110" width="9" height="11"/>
-      <rect x="736" y="106" width="10" height="12"/><rect x="756" y="106" width="10" height="12"/>
-      <rect x="874" y="96" width="9" height="11"/><rect x="892" y="96" width="9" height="11"/>
-      <rect x="996" y="104" width="10" height="12"/><rect x="1016" y="104" width="10" height="12"/><rect x="1132" y="98" width="9" height="11"/>
-    </g>
-  </svg>
-  <svg class="fb f1" viewBox="0 0 100 90" aria-hidden="true"><path fill="currentColor" d="M50 6C25 6 6 22 6 42c0 12 7 22 18 29l-4 15 18-9c4 1 8 1 12 1 25 0 44-16 44-36S75 6 50 6Z"/></svg>
-  <svg class="fb f2" viewBox="0 0 100 90" aria-hidden="true"><path fill="currentColor" d="M50 6C25 6 6 22 6 42c0 12 7 22 18 29l-4 15 18-9c4 1 8 1 12 1 25 0 44-16 44-36S75 6 50 6Z"/></svg>
-  <svg class="fb f3" viewBox="0 0 100 90" aria-hidden="true"><path fill="currentColor" d="M50 6C25 6 6 22 6 42c0 12 7 22 18 29l-4 15 18-9c4 1 8 1 12 1 25 0 44-16 44-36S75 6 50 6Z"/></svg>
 
-  <a class="home-pill" href="#" id="home-pill">⌂ Home</a>
-  <div class="script-tr" aria-hidden="true">sen kimsin?<br>ben buradayım</div>
-  <div class="note-left" aria-hidden="true">HER SES<br>DUYULUR<br>HER İSİM<br>ÖNEMLİ</div>
-  <div class="banner-right" aria-hidden="true">GÜVENLİ SINIF<br>GÜÇLÜ<br>TOPLULUK</div>
+  <header>
+    <h1 class="brand">SEN <em>KIMSIN?</em></h1>
+    <a class="home-pill" href="#" id="home-pill">⌂ Home</a>
+    <div class="motto">Olumlu<br>Öğrenme<br>Ortamı</div>
+    <button class="burger" id="burger" type="button" aria-label="Bölüm rayını aç/kapat" aria-expanded="true"><span></span><span></span><span></span></button>
+  </header>
 
-  <h1 class="mini-title">SEN <span class="t-accent">KIMSIN?
-    <svg class="swoosh" viewBox="0 0 320 26" fill="none" aria-hidden="true"><path d="M6 16C90 6 230 5 314 12" stroke="currentColor" stroke-width="9" stroke-linecap="round"/></svg>
-  </span> <span style="font-size:.6em; color:var(--mute);">· Olumlu Öğrenme Ortamı</span></h1>
-  <div class="jump" id="jump" role="tablist" aria-label="Bölümler">
-    <button type="button" data-goto="0">1. Keşfetme</button>
-    <button type="button" data-goto="1">2. 5 Temel Yetkinlik</button>
-    <button type="button" data-goto="2">3. İlgi Alanları</button>
-    <button type="button" data-goto="3">4. Çıkış Kartı</button>
-  </div>
+  <main class="board">
+    <button class="edge" id="prev" type="button" aria-label="Önceki bölüm">‹</button>
+    <div class="viewport" id="viewport">
+      <div class="deck" id="deck">
 
-  <!-- COVER -->
-  <div class="cover-layer" id="cover">
-    <span class="cover-badge"> Yaşam Becerileri Ders Modülü · Olumlu Öğrenme Ortamı</span>
-    <h1 class="cover-title">SEN <span class="t-accent">KIMSIN?
-      <svg class="swoosh" viewBox="0 0 320 26" fill="none" aria-hidden="true"><path d="M6 16C90 6 230 5 314 12" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg>
-    </span></h1>
-    <p class="cover-tag">Sosyal, duygusal ve liderlik becerilerine ilk adım: kendini tanımak, birbirini duymak ve güvenli bir sınıf topluluğu kurmak.</p>
-    <div class="cover-chips">
-      <span class="cchip">1. Keşfetme</span><span class="cchip">2. 5 Temel Yetkinlik</span>
-      <span class="cchip">3. İlgi Alanları</span><span class="cchip">4. Çıkış Kartı</span>
-    </div>
-    <button class="cta" id="start-tour" type="button">Derse Başla →</button>
-    <p class="cover-hint">veya <kbd>→</kbd> / <kbd>Enter</kbd> · kartlar arasında kaydır, yetkinlik kartlarını tıkla ve çevir</p>
-  </div>
-
-  <!-- TOUR -->
-  <div class="tour" id="tour">
-    <div class="stage" id="stage" aria-roledescription="carousel" aria-label="Sen Kimsin ders bölümleri">
-      <div class="track" id="track">
-
-        <!-- BÖLÜM 1 -->
-        <article class="card" data-tilt="-1.4" style="--g1:#ef7d6d;--g2:#7a2740" tabindex="0" aria-label="Bölüm 1: Keşfetme">
-          <div class="face">
-            <div class="face-top"><span class="badge">Bölüm 1: Keşfetme</span><span class="ek">Ek 1.1.1</span></div>
-            <div class="face-top" style="padding-top:8px;">
-              <div class="timer" data-seconds="600">
-                <span class="t-label">Kalan Süre</span><span class="t-display">10:00</span>
-                <button class="t-adj up" type="button" aria-label="Süreyi artır">▲</button>
-                <button class="t-adj down" type="button" aria-label="Süreyi azalt">▼</button>
-                <button class="t-toggle" type="button">Başlat</button>
-              </div>
+        <!-- SLAYT 1 -->
+        <section class="slide" style="--acc:#e8836a; --v1:#d98868; --v2:#8c4a3c;">
+          <div class="s-left">
+            <div class="count"><span>1 / 4</span><span class="ek">Ek 1.1.1</span></div>
+            <h2 class="big">KEŞFETME</h2>
+            <div class="bar"></div>
+            <p class="script">sen kimsin?<br>otuz saniyede<br>kendini anlat</p>
+            <svg class="hills" viewBox="0 0 600 200" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M0 200V120l90-46 70 40 90-58 110 66 90-40 150 74v44Z" fill="#b9c6da" opacity=".55"/>
+              <path d="M0 200v-52l110-40 90 44 120-52 130 60 150-36v76Z" fill="#93a6c2" opacity=".6"/>
+              <path d="M0 200v-26l140-30 120 34 140-26 200 40v12Z" fill="#6d84a6" opacity=".65"/>
+            </svg>
+            <div class="timer" data-seconds="600">
+              <span class="t-label">Kalan Süre</span><span class="t-display">10:00</span>
+              <button class="t-adj up" type="button" aria-label="Süreyi artır">▲</button>
+              <button class="t-adj down" type="button" aria-label="Süreyi azalt">▼</button>
+              <button class="t-toggle" type="button">Başlat</button>
             </div>
-            <h2 class="word">👋 Sınıfımıza Hoş Geldiniz!</h2>
-            <div class="face-scroll">
-              <p>Lise hayatınıza adım atarken, bu program size okulda ve özel hayatınızda ihtiyaç duyacağınız sosyal, duygusal ve liderlik becerilerini kazandırmayı hedefliyor. İlk adımımız: Sen kimsin?</p>
-              <div class="blk">
-                <h3><span class="em">⏱️</span>Hızlı Tanışma Turu (30 Saniye)</h3>
-                <p style="margin:0">Sınıfı ikili gruplara ayırın. Her eş sırayla 30 saniye boyunca "Sen Kimsin?" sorusuna aklına gelen her özellikle (Örn: Erkek evlat, balıkçı, sporcu, dışa dönük, sanatçı...) cevap versin.</p>
-              </div>
+          </div>
+          <div class="s-right">
+            <div class="vignette">
+              <svg viewBox="0 0 640 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <rect width="640" height="200" fill="#e9b489"/>
+                <rect x="40" y="20" width="250" height="180" rx="10" fill="#f6e7d2"/>
+                <rect x="56" y="36" width="102" height="150" fill="#bcd6e6"/>
+                <rect x="172" y="36" width="102" height="150" fill="#cfe0ec"/>
+                <path d="M56 150h102v36H56Z M172 150h102v36H172Z" fill="#9fb9cd"/>
+                <path d="M70 96l14-22 12 16 10-12 16 24Z M190 92l16-24 14 18 12-14 14 24Z" fill="#7d94ad" opacity=".8"/>
+                <rect x="36" y="186" width="260" height="14" rx="6" fill="#8c5a3a"/>
+                <g fill="#3f7d5c"><path d="M320 200c-4-40-10-60-30-80 22 6 32 30 34 56Z"/><path d="M324 200c2-44 8-66 30-84-16 26-22 50-24 84Z"/></g>
+                <g><path d="M420 60c-26 0-46 16-46 36 0 12 7 22 18 28l-4 16 20-10c4 1 8 1 12 1 26 0 46-16 46-35s-20-36-46-36Z" fill="#f2ece1"/>
+                <path d="M540 96c-20 0-36 13-36 28 0 10 6 18 14 23l-3 13 16-8c3 1 6 1 9 1 20 0 36-13 36-29s-16-28-36-28Z" fill="#f6c667"/></g>
+              </svg>
+              <div class="vbanner">Ek 1.1.1<i></i>Her isim bir hikâye</div>
+            </div>
+            <div class="sheet">
+              <div class="blk"><h3><span class="em">👋</span>Sınıfımıza Hoş Geldiniz!</h3>
+                <p style="margin:0">Lise hayatınıza adım atarken, bu program size okulda ve özel hayatınızda ihtiyaç duyacağınız sosyal, duygusal ve liderlik becerilerini kazandırmayı hedefliyor. İlk adımımız: Sen kimsin?</p></div>
+              <div class="blk"><h3><span class="em">⏱️</span><span class="em">🎯</span>Hızlı Tanışma Turu (30 Saniye)</h3>
+                <p style="margin:0">Sınıfı ikili gruplara ayırın. Her eş sırayla 30 saniye boyunca "Sen Kimsin?" sorusuna aklına gelen her özellikle (Örn: Erkek evlat, balıkçı, sporcu, dışa dönük, sanatçı...) cevap versin.</p></div>
               <div class="steps">
                 <div class="stepbox"><b>1. Eşin Sırası</b><i>"Ben..."</i><span>Aralıksız 30 saniye boyunca kim olduğunu anlat.</span></div>
                 <div class="stepbox"><b>2. Eşin Sırası</b><i>"Ben..."</i><span>Şimdi sıra diğer kişide. O da kendini anlatsın.</span></div>
               </div>
-              <div class="blk">
-                <h3><span class="em">📢</span>Sınıfça Paylaşım:</h3>
-                <p style="margin:0">Süre bitince, herkes eşini sınıfa tanıtsın! Bakalım eşinizin söylediği özelliklerden kaç tanesini hatırlayabileceksiniz?</p>
-              </div>
+              <div class="blk"><h3><span class="em">📢</span>Sınıfça Paylaşım:</h3>
+                <p style="margin:0">Süre bitince, herkes eşini sınıfa tanıtsın! Bakalım eşinizin söylediği özelliklerden kaç tanesini hatırlayabileceksiniz?</p></div>
+              <div class="sheet-foot"><button class="nav-btn primary" type="button" data-goto="1">Sonraki Adım: 5 Temel Yetkinlik →</button></div>
             </div>
-            <div class="face-foot"><button class="nav-btn primary" type="button" data-goto="1">Sonraki Adım: 5 Temel Yetkinlik →</button></div>
           </div>
-        </article>
+        </section>
 
-        <!-- BÖLÜM 2 -->
-        <article class="card" data-tilt="1.2" style="--g1:#8f6ed0;--g2:#3a2170" tabindex="0" aria-label="Bölüm 2: İlişkilendirme">
-          <div class="face">
-            <div class="face-top"><span class="badge">Bölüm 2: İlişkilendirme</span><span class="ek">Ek 1.1.2</span></div>
-            <div class="face-top" style="padding-top:8px;">
-              <div class="timer" data-seconds="600">
-                <span class="t-label">Kalan Süre</span><span class="t-display">10:00</span>
-                <button class="t-adj up" type="button" aria-label="Süreyi artır">▲</button>
-                <button class="t-adj down" type="button" aria-label="Süreyi azalt">▼</button>
-                <button class="t-toggle" type="button">Başlat</button>
-              </div>
+        <!-- SLAYT 2 -->
+        <section class="slide" style="--acc:#8f6ed0; --v1:#7a5fb8; --v2:#372a63;">
+          <div class="s-left">
+            <div class="count"><span>2 / 4</span><span class="ek">Ek 1.1.2</span></div>
+            <h2 class="big">İLİŞKİLENDİRME</h2>
+            <div class="bar"></div>
+            <p class="script">beş yetkinlik,<br>tek bir güvenli<br>topluluk</p>
+            <svg class="hills" viewBox="0 0 600 200" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M0 200V120l90-46 70 40 90-58 110 66 90-40 150 74v44Z" fill="#c3b6e4" opacity=".5"/>
+              <path d="M0 200v-52l110-40 90 44 120-52 130 60 150-36v76Z" fill="#9d8cc9" opacity=".55"/>
+              <path d="M0 200v-26l140-30 120 34 140-26 200 40v12Z" fill="#7a68a8" opacity=".6"/>
+            </svg>
+            <div class="timer" data-seconds="600">
+              <span class="t-label">Kalan Süre</span><span class="t-display">10:00</span>
+              <button class="t-adj up" type="button" aria-label="Süreyi artır">▲</button>
+              <button class="t-adj down" type="button" aria-label="Süreyi azalt">▼</button>
+              <button class="t-toggle" type="button">Başlat</button>
             </div>
-            <h2 class="word">SDÖ Temel Yetkinlik Alanları</h2>
-            <div class="face-scroll">
+          </div>
+          <div class="s-right">
+            <div class="vignette">
+              <svg viewBox="0 0 640 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <rect width="640" height="200" fill="#5d4a9e"/>
+                <rect x="60" y="150" width="330" height="34" rx="6" fill="#2aa7a0"/>
+                <rect x="76" y="118" width="300" height="32" rx="6" fill="#e8836a"/>
+                <rect x="66" y="86" width="318" height="32" rx="6" fill="#3f6fb5"/>
+                <rect x="84" y="54" width="286" height="32" rx="6" fill="#1d3350"/>
+                <g font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#f2ece1" letter-spacing="2">
+                  <text x="110" y="75">ÖZ FARKINDALIK</text><text x="96" y="107">ÖZ YÖNETİM</text>
+                  <text x="106" y="139">SOSYAL FARKINDALIK</text><text x="90" y="171">İLİŞKİ BECERİLERİ</text></g>
+                <rect x="470" y="96" width="96" height="86" rx="12" fill="#f2ece1"/>
+                <path d="M566 116c26 0 26 44 0 44" fill="none" stroke="#f2ece1" stroke-width="12"/>
+                <g font-family="Caveat, cursive" font-size="22" fill="#5d4a9e"><text x="486" y="132">Sen</text><text x="486" y="158">Kimsin?</text></g>
+              </svg>
+              <div class="vbanner">Ek 1.1.2<i></i>Kartları çevir</div>
+            </div>
+            <div class="sheet">
+              <h3 style="margin:0 0 6px; font-size:15px; color:var(--navy-2);">SDÖ Temel Yetkinlik Alanları</h3>
               <p>Bu program boyunca geliştireceğiniz 5 temel sosyal duygusal yetkinlik aşağıdadır. İçeriklerini görmek için kartların üzerine tıklayın.</p>
               <div class="mf-grid">
                 <button class="mf" type="button" aria-label="Öz Farkındalık kartını çevir"><span class="mf-in">
                   <span class="mf-f"><span class="em">🔍</span><span class="nm">Öz Farkındalık</span><span class="hint">Tıkla ve Çevir</span></span>
-                  <span class="mf-b"><h4>Beceriler</h4><ul><li>Duyguları Tanıma</li><li>Doğru Öz Algı</li><li>Güçlü Yönleri Bilme</li><li>Öz Güven</li></ul></span>
-                </span></button>
+                  <span class="mf-b"><h4>Beceriler</h4><ul><li>Duyguları Tanıma</li><li>Doğru Öz Algı</li><li>Güçlü Yönleri Bilme</li><li>Öz Güven</li></ul></span></span></button>
                 <button class="mf" type="button" aria-label="Öz Yönetim kartını çevir"><span class="mf-in">
                   <span class="mf-f"><span class="em">🧘</span><span class="nm">Öz Yönetim</span><span class="hint">Tıkla ve Çevir</span></span>
-                  <span class="mf-b"><h4>Beceriler</h4><ul><li>Dürtü Kontrolü</li><li>Stres Yönetimi</li><li>Öz Disiplin</li><li>Hedef Koyma</li></ul></span>
-                </span></button>
+                  <span class="mf-b"><h4>Beceriler</h4><ul><li>Dürtü Kontrolü</li><li>Stres Yönetimi</li><li>Öz Disiplin</li><li>Hedef Koyma</li></ul></span></span></button>
                 <button class="mf" type="button" aria-label="Sosyal Farkındalık kartını çevir"><span class="mf-in">
                   <span class="mf-f"><span class="em">🌍</span><span class="nm">Sosyal Farkındalık</span><span class="hint">Tıkla ve Çevir</span></span>
-                  <span class="mf-b"><h4>Beceriler</h4><ul><li>Bakış Açısı Edinme</li><li>Empati</li><li>Farklılıklara Saygı</li></ul></span>
-                </span></button>
+                  <span class="mf-b"><h4>Beceriler</h4><ul><li>Bakış Açısı Edinme</li><li>Empati</li><li>Farklılıklara Saygı</li></ul></span></span></button>
                 <button class="mf" type="button" aria-label="İlişki Becerileri kartını çevir"><span class="mf-in">
                   <span class="mf-f"><span class="em">🤝</span><span class="nm">İlişki Becerileri</span><span class="hint">Tıkla ve Çevir</span></span>
-                  <span class="mf-b"><h4>Beceriler</h4><ul><li>İletişim</li><li>Sosyal Sorumluluk</li><li>Çatışma Çözme</li><li>Takım Çalışması</li></ul></span>
-                </span></button>
+                  <span class="mf-b"><h4>Beceriler</h4><ul><li>İletişim</li><li>Sosyal Sorumluluk</li><li>Çatışma Çözme</li><li>Takım Çalışması</li></ul></span></span></button>
                 <button class="mf" type="button" aria-label="Sorumluluk Alarak Karar Verme kartını çevir"><span class="mf-in">
                   <span class="mf-f"><span class="em">🧠</span><span class="nm">Sorumluluk Alarak Karar Verme</span><span class="hint">Tıkla ve Çevir</span></span>
-                  <span class="mf-b"><h4>Beceriler</h4><ul><li>Problem Tanımlama</li><li>Durum Analizi</li><li>Değerlendirme</li></ul></span>
-                </span></button>
+                  <span class="mf-b"><h4>Beceriler</h4><ul><li>Problem Tanımlama</li><li>Durum Analizi</li><li>Değerlendirme</li></ul></span></span></button>
               </div>
-              <div class="blk">
-                <h3><span class="em">🏫</span>İlişki Temelli Öğrenim Topluluğu</h3>
-                <p style="margin:0">Bu yetkinlikler sadece sizin özgüveninizi artırmakla kalmaz; aynı zamanda herkesin sesinin duyulduğu, eşit haklara sahip olduğu güvenli bir sınıf ortamı (Topluluk) oluşturmanızı sağlar. Sınıfça Tartışalım: Bu 5 yetkinlik alanını sınıfımızın huzuru için günlük hayatta nasıl kullanabiliriz? (Örn: Sınıf kurallarını belirlerken nasıl karar almalıyız?)</p>
+              <div class="blk"><h3><span class="em">🏫</span>İlişki Temelli Öğrenim Topluluğu</h3>
+                <p style="margin:0">Bu yetkinlikler sadece sizin özgüveninizi artırmakla kalmaz; aynı zamanda herkesin sesinin duyulduğu, eşit haklara sahip olduğu güvenli bir sınıf ortamı (Topluluk) oluşturmanızı sağlar. Sınıfça Tartışalım: Bu 5 yetkinlik alanını sınıfımızın huzuru için günlük hayatta nasıl kullanabiliriz? (Örn: Sınıf kurallarını belirlerken nasıl karar almalıyız?)</p></div>
+              <div class="sheet-foot">
+                <button class="nav-btn" type="button" data-goto="0">← Keşfetme'ye Dön</button>
+                <button class="nav-btn primary" type="button" data-goto="2">Alıştırmaya Geç →</button>
               </div>
-            </div>
-            <div class="face-foot">
-              <button class="nav-btn" type="button" data-goto="0">← Keşfetme'ye Dön</button>
-              <button class="nav-btn primary" type="button" data-goto="2">Alıştırmaya Geç →</button>
             </div>
           </div>
-        </article>
+        </section>
 
-        <!-- BÖLÜM 3 -->
-        <article class="card" data-tilt="-1" style="--g1:#2aa7a0;--g2:#0d4a4f" tabindex="0" aria-label="Bölüm 3: Alıştırma">
-          <div class="face">
-            <div class="face-top"><span class="badge">Bölüm 3: Alıştırma</span><span class="ek">Ek 1.1.3</span></div>
-            <div class="face-top" style="padding-top:8px;">
-              <div class="timer" data-seconds="900">
-                <span class="t-label">Kalan Süre</span><span class="t-display">15:00</span>
-                <button class="t-adj up" type="button" aria-label="Süreyi artır">▲</button>
-                <button class="t-adj down" type="button" aria-label="Süreyi azalt">▼</button>
-                <button class="t-toggle" type="button">Başlat</button>
-              </div>
+        <!-- SLAYT 3 -->
+        <section class="slide" style="--acc:#2aa7a0; --v1:#2f9d97; --v2:#12494e;">
+          <div class="s-left">
+            <div class="count"><span>3 / 4</span><span class="ek">Ek 1.1.3</span></div>
+            <h2 class="big">ALIŞTIRMA</h2>
+            <div class="bar"></div>
+            <p class="script">dinle, hatırla,<br>geri anlat —<br>etkin dinleme</p>
+            <svg class="hills" viewBox="0 0 600 200" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M0 200V120l90-46 70 40 90-58 110 66 90-40 150 74v44Z" fill="#a8d5d0" opacity=".5"/>
+              <path d="M0 200v-52l110-40 90 44 120-52 130 60 150-36v76Z" fill="#7ab5ae" opacity=".55"/>
+              <path d="M0 200v-26l140-30 120 34 140-26 200 40v12Z" fill="#549089" opacity=".6"/>
+            </svg>
+            <div class="timer" data-seconds="900">
+              <span class="t-label">Kalan Süre</span><span class="t-display">15:00</span>
+              <button class="t-adj up" type="button" aria-label="Süreyi artır">▲</button>
+              <button class="t-adj down" type="button" aria-label="Süreyi azalt">▼</button>
+              <button class="t-toggle" type="button">Başlat</button>
             </div>
-            <h2 class="word">İlgi Alanlarınız Nedir?</h2>
-            <div class="face-scroll">
+          </div>
+          <div class="s-right">
+            <div class="vignette">
+              <svg viewBox="0 0 640 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <rect width="640" height="200" fill="#1f6f6a"/>
+                <rect x="150" y="30" width="44" height="92" rx="22" fill="#f2ece1"/>
+                <path d="M118 108a54 54 0 0 0 108 0" fill="none" stroke="#f2ece1" stroke-width="8"/>
+                <rect x="166" y="160" width="12" height="26" fill="#f2ece1"/><rect x="140" y="184" width="64" height="10" rx="5" fill="#f2ece1"/>
+                <g stroke="#f6c667" stroke-width="6" fill="none" stroke-linecap="round">
+                  <path d="M240 60a60 60 0 0 1 0 60"/><path d="M268 44a92 92 0 0 1 0 92"/><path d="M104 60a60 60 0 0 0 0 60"/><path d="M76 44a92 92 0 0 0 0 92"/></g>
+                <path d="M380 96a52 52 0 0 1 104 0" fill="none" stroke="#f2ece1" stroke-width="10"/>
+                <rect x="368" y="92" width="24" height="40" rx="10" fill="#f2ece1"/><rect x="492" y="92" width="24" height="40" rx="10" fill="#f2ece1"/>
+                <g fill="#f6c667"><circle cx="560" cy="60" r="5"/><circle cx="590" cy="90" r="4"/><circle cx="566" cy="124" r="6"/><circle cx="606" cy="140" r="4"/></g>
+              </svg>
+              <div class="vbanner">Ek 1.1.3<i></i>Röportaj zamanı</div>
+            </div>
+            <div class="sheet">
+              <h3 style="margin:0 0 6px; font-size:15px; color:var(--navy-2);">İlgi Alanlarınız Nedir?</h3>
               <p>Kendimiz hakkında sorular sormak, inançlarımızın ve kültürümüzün daha fazla farkına varmamızın en önemli yoludur.</p>
-              <div class="blk">
-                <h3><span class="em">🎤</span>Röportaj Zamanı!</h3>
-                <ol class="olist" style="margin-top:8px;">
+              <div class="blk"><h3><span class="em">🎤</span><span class="em">🎧</span>Röportaj Zamanı!</h3>
+                <ol class="olist">
                   <li>Sınıf içinde kendinize yeni bir eş bulun.</li>
                   <li>Eşinize "İlgi alanların nelerdir?" diye sorun. Eşiniz 30 saniye boyunca "Müzik dinlemeyi severim", "Kitap okumayı severim" gibi peş peşe cevaplar vermelidir.</li>
                   <li>Süre bittiğinde, eşinizin anlattıklarından hatırlayabildiğiniz kadarını ona tekrar söyleyin. (Etkin Dinleme Testi!)</li>
                   <li>Rolleri değişin ve aynı işlemi tekrarlayın.</li>
-                </ol>
+                </ol></div>
+              <div class="sheet-foot">
+                <button class="nav-btn" type="button" data-goto="1">← İlişkilendirmeye Dön</button>
+                <button class="nav-btn primary" type="button" data-goto="3">Kapanış &amp; Çıkış Kartı →</button>
               </div>
-            </div>
-            <div class="face-foot">
-              <button class="nav-btn" type="button" data-goto="1">← İlişkilendirmeye Dön</button>
-              <button class="nav-btn primary" type="button" data-goto="3">Kapanış &amp; Çıkış Kartı →</button>
             </div>
           </div>
-        </article>
+        </section>
 
-        <!-- BÖLÜM 4 -->
-        <article class="card" data-tilt="1.4" style="--g1:#e8a13c;--g2:#7a4a10" tabindex="0" aria-label="Bölüm 4: Yansıma">
-          <div class="face">
-            <div class="face-top"><span class="badge">Bölüm 4: Yansıma · Değerlendirme</span><span class="ek">Ek 1.1.4</span></div>
-            <div class="face-top" style="padding-top:8px;">
-              <div class="timer" data-seconds="300">
-                <span class="t-label">Kalan Süre</span><span class="t-display">05:00</span>
-                <button class="t-adj up" type="button" aria-label="Süreyi artır">▲</button>
-                <button class="t-adj down" type="button" aria-label="Süreyi azalt">▼</button>
-                <button class="t-toggle" type="button">Başlat</button>
-              </div>
+        <!-- SLAYT 4 -->
+        <section class="slide" style="--acc:#e8a13c; --v1:#d99a3e; --v2:#7a4a12;">
+          <div class="s-left">
+            <div class="count"><span>4 / 4</span><span class="ek">Ek 1.1.4 · Değerlendirme</span></div>
+            <h2 class="big">YANSIMA</h2>
+            <div class="bar"></div>
+            <p class="script">ne? ne oldu?<br>şimdi ne<br>olacak?</p>
+            <svg class="hills" viewBox="0 0 600 200" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M0 200V120l90-46 70 40 90-58 110 66 90-40 150 74v44Z" fill="#ecd0a0" opacity=".5"/>
+              <path d="M0 200v-52l110-40 90 44 120-52 130 60 150-36v76Z" fill="#d3ab6c" opacity=".55"/>
+              <path d="M0 200v-26l140-30 120 34 140-26 200 40v12Z" fill="#b0874a" opacity=".6"/>
+            </svg>
+            <div class="timer" data-seconds="300">
+              <span class="t-label">Kalan Süre</span><span class="t-display">05:00</span>
+              <button class="t-adj up" type="button" aria-label="Süreyi artır">▲</button>
+              <button class="t-adj down" type="button" aria-label="Süreyi azalt">▼</button>
+              <button class="t-toggle" type="button">Başlat</button>
             </div>
-            <h2 class="word">Çıkış Kartı</h2>
-            <div class="face-scroll">
+          </div>
+          <div class="s-right">
+            <div class="vignette">
+              <svg viewBox="0 0 640 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <rect width="640" height="200" fill="#a06a24"/>
+                <path d="M120 60c40-16 90-14 120 4v116c-30-18-80-20-120-4Z" fill="#f6efe1"/>
+                <path d="M240 64c40-16 90-14 120 4v116c-30-18-80-20-120-4Z" fill="#efe6d2"/>
+                <g stroke="#b3a88f" stroke-width="3" fill="none" stroke-linecap="round">
+                  <path d="M140 92c26-8 56-8 80 0M140 112c26-8 56-8 80 0M140 132c26-8 56-8 80 0M260 96c26-8 56-8 80 0M260 116c26-8 56-8 80 0"/></g>
+                <path d="M262 140c20 8 44 8 64 2" stroke="#e8836a" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <rect x="420" y="52" width="52" height="52" rx="6" fill="#f6c667" transform="rotate(-6 446 78)"/>
+                <rect x="452" y="96" width="52" height="52" rx="6" fill="#e8836a" transform="rotate(5 478 122)"/>
+                <rect x="520" y="60" width="52" height="52" rx="6" fill="#2aa7a0" transform="rotate(-3 546 86)"/>
+                <rect x="392" y="150" width="150" height="10" rx="5" fill="#5c3a12"/>
+                <path d="M540 150l26-6-6 12Z" fill="#f2ece1"/>
+              </svg>
+              <div class="vbanner">Ek 1.1.4<i></i>Çıkış kartı</div>
+            </div>
+            <div class="sheet">
+              <h3 style="margin:0 0 6px; font-size:15px; color:var(--navy-2);">Çıkış Kartı</h3>
               <p>Bugünkü dersi özetlemek için aşağıdaki soruları düşünün ve cevaplarınızı sınıfla tartışın.</p>
               <div class="qcard"><span class="n">1</span><div><b>NE?</b>Kim olduğunuzu iyi anladığınızı düşünüyor musunuz?</div></div>
               <div class="qcard"><span class="n">2</span><div><b>NE OLDU?</b>İyi tanımadığınız bir sınıf arkadaşınızın sizinle aynı şeylerden hoşlandığını fark ettiniz mi?</div></div>
               <div class="qcard"><span class="n">3</span><div><b>ŞİMDİ NE OLACAK?</b>Bu benzerlikleri, iyi tanımadığınız bu arkadaşlarınızla iletişim kurabilmek için nasıl kullanacaksınız?</div></div>
-              <div class="blk">
-                <h3><span class="em">📝</span>Ev / Uygulama Ödevi</h3>
-                <p style="margin:0">Önümüzdeki birkaç gün boyunca iyi tanımadığınız üç sınıf arkadaşınızı izleyin ve onların gösterdikleri olumlu özellikleri gözlemleyin. Bu gözlemlerinizi bir sonraki derste paylaşmak üzere defterinize not alın.</p>
-              </div>
+              <div class="blk"><h3><span class="em">📝</span>Ev / Uygulama Ödevi</h3>
+                <p style="margin:0">Önümüzdeki birkaç gün boyunca iyi tanımadığınız üç sınıf arkadaşınızı izleyin ve onların gösterdikleri olumlu özellikleri gözlemleyin. Bu gözlemlerinizi bir sonraki derste paylaşmak üzere defterinize not alın.</p></div>
               <p class="credit">© 2024 Yaşam Becerileri Ders Modülü | Olumlu Öğrenme Ortamı</p>
+              <div class="sheet-foot"><button class="nav-btn primary" type="button" data-goto="0">↺ Sunumu Başa Sar</button></div>
             </div>
-            <div class="face-foot"><button class="nav-btn primary" type="button" data-goto="0">↺ Sunumu Başa Sar</button></div>
           </div>
-        </article>
+        </section>
 
       </div>
+      <div class="kbd-hint" aria-hidden="true">⌨ ← →</div>
     </div>
+    <button class="edge" id="next" type="button" aria-label="Sonraki bölüm">›</button>
+  </main>
 
-    <button class="arrow left" id="prev" type="button" aria-label="Önceki bölüm">‹</button>
-    <button class="arrow right" id="next" type="button" aria-label="Sonraki bölüm">›</button>
-    <div class="dots" id="dots" role="tablist" aria-label="Bölüm seç"></div>
-    <p class="counter" id="counter">Bölüm 1 / 4</p>
-  </div>
-
-  <div class="desk" aria-hidden="true"></div>
-  <svg class="prop notebook" viewBox="0 0 170 90" aria-hidden="true">
-    <path d="M85 18C60 4 25 6 8 14v62c17-8 52-10 77 4 25-14 60-12 77-4V14c-17-8-52-10-77 4Z" fill="#f3e6cf"/>
-    <path d="M85 18v62" stroke="#c9b48f" stroke-width="3"/>
-    <g stroke="#8a6f4d" stroke-width="2.4" fill="none" stroke-linecap="round">
-      <path d="M22 32c14-5 34-5 48 0M22 44c14-5 34-5 48 0M22 56c14-5 34-5 48 0M100 32c14-5 34-5 48 0M100 44c14-5 34-5 48 0"/>
-    </g>
-    <path d="M100 58c8 6 20 6 30 2" stroke="#ef7d6d" stroke-width="3" fill="none" stroke-linecap="round"/>
-  </svg>
-  <svg class="prop pencils" viewBox="0 0 64 80" aria-hidden="true">
-    <rect x="10" y="34" width="44" height="44" rx="8" fill="#241540"/>
-    <rect x="18" y="6" width="7" height="34" rx="3" fill="#f5b352"/><path d="M18 6l3.5-6L25 6Z" fill="#e6d7f7"/>
-    <rect x="29" y="12" width="7" height="28" rx="3" fill="#ef7d6d"/><path d="M29 12l3.5-6L36 12Z" fill="#e6d7f7"/>
-    <rect x="40" y="2" width="7" height="38" rx="3" fill="#2aa7a0"/><path d="M40 2l3.5-6L47 2Z" fill="#e6d7f7"/>
-  </svg>
-  <svg class="prop plane" viewBox="0 0 90 60" aria-hidden="true">
-    <path d="M4 30L86 6 40 54 32 36Z" fill="#f6ecd9"/><path d="M86 6L32 36l8 18-4-20Z" fill="#d9c6f2"/>
-  </svg>
-  <div class="mug" aria-hidden="true"><span>Merhaba!</span></div>
-  <svg class="plant pl-left" viewBox="0 0 140 160" aria-hidden="true"><g fill="#1e5b41">
-    <path d="M70 160C66 110 60 84 34 58c28 8 40 38 42 70Z"/><path d="M74 160c2-56 10-84 38-108-20 32-28 64-30 108Z"/>
-    <path d="M70 150c-12-32-26-46-52-54 28-4 48 12 56 42Z"/><path d="M78 150c10-34 24-48 50-56-26-2-44 14-52 44Z"/>
-    <path d="M72 140c-2-40-2-64 2-100 6 36 4 64 4 100Z"/></g></svg>
-  <svg class="plant pl-right" viewBox="0 0 140 160" aria-hidden="true"><g fill="#256b4e">
-    <path d="M70 160C66 110 60 84 34 58c28 8 40 38 42 70Z"/><path d="M74 160c2-56 10-84 38-108-20 32-28 64-30 108Z"/>
-    <path d="M72 140c-2-40-2-64 2-100 6 36 4 64 4 100Z"/></g></svg>
+  <nav class="rail" id="rail" aria-label="Bölümler">
+    <button class="tile active" type="button" data-goto="0" style="--tc:#e8836a;"><span class="ic">👋</span>Keşfetme</button>
+    <button class="tile" type="button" data-goto="1" style="--tc:#8f6ed0;"><span class="ic">🧩</span>5 Temel Yetkinlik</button>
+    <button class="tile" type="button" data-goto="2" style="--tc:#2aa7a0;"><span class="ic">🎤</span>İlgi Alanları</button>
+    <button class="tile" type="button" data-goto="3" style="--tc:#e8a13c;"><span class="ic">📝</span>Çıkış Kartı</button>
+  </nav>
 </div>
 
 <script>
-  const cards = Array.from(document.querySelectorAll(".card"));
-  const stage = document.getElementById("stage");
+  const deck = document.getElementById("deck");
+  const slides = Array.from(deck.children);
+  const tiles = Array.from(document.querySelectorAll(".tile"));
   const prev = document.getElementById("prev");
   const next = document.getElementById("next");
-  const dotsWrap = document.getElementById("dots");
-  const counter = document.getElementById("counter");
-  const jumpBtns = Array.from(document.querySelectorAll("#jump button"));
-  const startBtn = document.getElementById("start-tour");
-  const homePill = document.getElementById("home-pill");
+  const viewport = document.getElementById("viewport");
   let cur = 0;
 
-  cards.forEach((_, i) => {
-    const d = document.createElement("button");
-    d.className = "dot"; d.type = "button"; d.setAttribute("role", "tab");
-    d.setAttribute("aria-label", "Bölüm " + (i + 1));
-    d.addEventListener("click", () => setSlide(i));
-    dotsWrap.appendChild(d);
-  });
-  const dots = Array.from(dotsWrap.children);
-
-  const entered = () => document.body.classList.contains("entered");
-  const enterTour = () => { document.body.classList.add("entered"); setTimeout(layout, 60); };
-  const exitTour = () => document.body.classList.remove("entered");
-
-  function setSlide(i){
-    cur = Math.max(0, Math.min(i, cards.length - 1));
-    layout();
-  }
-
-  function layout(){
-    const w = cards[0].offsetWidth;
-    const spacing = w * 0.66;
-    const depth = w * 0.42;
-    cards.forEach((c, i) => {
-      const o = i - cur, a = Math.abs(o), sign = Math.sign(o);
-      const angle = sign === 0 ? 0 : sign * Math.min(46, 34 + a * 6);
-      const x = o * spacing * (1 - Math.min(a, 4) * 0.06);
-      const z = -a * depth;
-      const s = 1 - Math.min(a, 4) * 0.07;
-      const tilt = parseFloat(c.dataset.tilt || 0);
-      c.style.transform = "translateY(-50%) translateX(" + x + "px) translateZ(" + z + "px) rotateY(" + angle + "deg) rotateZ(" + tilt + "deg) scale(" + s + ")";
-      c.style.zIndex = 100 - a;
-      c.style.opacity = a > 3 ? 0.4 : 1 - a * 0.08;
-      c.classList.toggle("active", o === 0);
-      c.setAttribute("aria-hidden", String(o !== 0));
-    });
-    dots.forEach((d, i) => {
-      d.classList.toggle("active", i === cur);
-      d.setAttribute("aria-selected", String(i === cur));
-    });
-    jumpBtns.forEach((b, i) => b.classList.toggle("active", i === cur));
+  function go(i){
+    cur = Math.max(0, Math.min(i, slides.length - 1));
+    deck.style.transform = "translateX(-" + (cur * 100) + "%)";
+    tiles.forEach((t, k) => t.classList.toggle("active", k === cur));
     prev.disabled = cur === 0;
-    next.disabled = cur === cards.length - 1;
-    counter.textContent = "Bölüm " + (cur + 1) + " / " + cards.length;
+    next.disabled = cur === slides.length - 1;
   }
+  prev.addEventListener("click", () => go(cur - 1));
+  next.addEventListener("click", () => go(cur + 1));
+  tiles.forEach(t => t.addEventListener("click", () => go(parseInt(t.dataset.goto, 10))));
+  document.querySelectorAll(".nav-btn[data-goto]").forEach(b =>
+    b.addEventListener("click", () => go(parseInt(b.dataset.goto, 10))));
 
-  startBtn.addEventListener("click", enterTour);
-  homePill.addEventListener("click", (e) => { e.preventDefault(); exitTour(); });
-  prev.addEventListener("click", () => setSlide(cur - 1));
-  next.addEventListener("click", () => setSlide(cur + 1));
-  jumpBtns.forEach((b, i) => b.addEventListener("click", () => setSlide(i)));
-
-  /* in-card navigation buttons */
-  document.querySelectorAll(".nav-btn[data-goto]").forEach(b => {
-    b.addEventListener("click", (e) => { e.stopPropagation(); setSlide(parseInt(b.dataset.goto, 10)); });
+  document.getElementById("burger").addEventListener("click", function(){
+    const hidden = document.body.classList.toggle("rail-hidden");
+    this.setAttribute("aria-expanded", String(!hidden));
   });
+  document.getElementById("home-pill").addEventListener("click", e => { e.preventDefault(); go(0); });
 
-  /* card click: side cards navigate */
-  cards.forEach((c, i) => {
-    c.addEventListener("click", (e) => {
-      if (e.target.closest("button, a, .mf")) return;
-      if (i !== cur) setSlide(i);
-    });
-  });
-
-  /* mini flip cards */
-  document.querySelectorAll(".mf").forEach(mf => {
-    mf.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const flipped = mf.classList.toggle("flipped");
-      mf.setAttribute("aria-pressed", String(flipped));
-    });
-  });
+  /* flip cards */
+  document.querySelectorAll(".mf").forEach(mf => mf.addEventListener("click", () => {
+    const f = mf.classList.toggle("flipped");
+    mf.setAttribute("aria-pressed", String(f));
+  }));
 
   /* timers */
   document.querySelectorAll(".timer").forEach(root => {
-    let remaining = parseInt(root.dataset.seconds, 10);
-    let id = null;
+    let remaining = parseInt(root.dataset.seconds, 10), id = null;
     const display = root.querySelector(".t-display");
     const toggle = root.querySelector(".t-toggle");
     const fmt = s => String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
     const render = () => { display.textContent = fmt(remaining); root.classList.toggle("zero", remaining === 0); };
     const stop = () => { if (id) clearInterval(id); id = null; toggle.textContent = "Başlat"; };
-    toggle.addEventListener("click", (e) => {
-      e.stopPropagation();
+    toggle.addEventListener("click", () => {
       if (id) { stop(); return; }
       if (remaining === 0) return;
       toggle.textContent = "Duraklat";
-      id = setInterval(() => {
-        remaining--; render();
-        if (remaining <= 0) stop();
-      }, 1000);
+      id = setInterval(() => { remaining--; render(); if (remaining <= 0) stop(); }, 1000);
     });
-    root.querySelector(".up").addEventListener("click", (e) => { e.stopPropagation(); remaining = Math.min(5940, remaining + 60); render(); });
-    root.querySelector(".down").addEventListener("click", (e) => { e.stopPropagation(); remaining = Math.max(0, remaining - 60); render(); if (remaining === 0) stop(); });
+    root.querySelector(".up").addEventListener("click", () => { remaining = Math.min(5940, remaining + 60); render(); });
+    root.querySelector(".down").addEventListener("click", () => { remaining = Math.max(0, remaining - 60); render(); if (!remaining) stop(); });
     render();
   });
 
-  /* keyboard */
-  document.addEventListener("keydown", (e) => {
-    if (!entered()) {
-      if (e.key === "ArrowRight" || e.key === "Enter") { e.preventDefault(); enterTour(); }
-      return;
-    }
-    if (e.key === "ArrowRight") { e.preventDefault(); setSlide(cur + 1); }
-    else if (e.key === "ArrowLeft") { e.preventDefault(); setSlide(cur - 1); }
-    else if (e.key === "Home") { e.preventDefault(); setSlide(0); }
-    else if (e.key === "End") { e.preventDefault(); setSlide(cards.length - 1); }
-    else if (e.key === "Escape") { exitTour(); }
+  /* keyboard + swipe */
+  document.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") { e.preventDefault(); go(cur + 1); }
+    else if (e.key === "ArrowLeft") { e.preventDefault(); go(cur - 1); }
+    else if (e.key === "Home") go(0);
+    else if (e.key === "End") go(slides.length - 1);
   });
-
-  /* swipe */
   let tx = 0, ty = 0;
-  stage.addEventListener("touchstart", e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
-  stage.addEventListener("touchend", e => {
+  viewport.addEventListener("touchstart", e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+  viewport.addEventListener("touchend", e => {
     const dx = tx - e.changedTouches[0].clientX, dy = ty - e.changedTouches[0].clientY;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) setSlide(dx > 0 ? cur + 1 : cur - 1);
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 60) go(dx > 0 ? cur + 1 : cur - 1);
   }, { passive: true });
 
-  window.addEventListener("resize", layout);
-  layout();
+  go(0);
 </script>
 </body>
 </html>
