@@ -3,139 +3,176 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sen Kimsin? — Olumlu Öğrenme Ortamı</title>
+<title>Sen Kimsin? — Olumlu Öğrenme Ortamı · Dijital Kitap</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Work+Sans:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"></script>
 <style>
   :root{
-    --plum-1:#1b1030; --plum-2:#2b1a4a; --plum-3:#120a20;
-    --marigold:#f5b352; --rose:#ef7d6d; --lilac:#b79ced; --cream:#f6ecd9;
-    --mute:#a88fd0; --top-zone:96px; --bottom-zone:158px;
-    --cw: clamp(280px, 34vw, 400px);
+    --wall-1:#0d1b33; --wall-2:#12264a; --wall-3:#0a1730;
+    --navy:#16324f; --navy-2:#1d3557; --ink:#33475e; --mute:#55607a;
+    --cream:#f6efe0; --paper:#fffdf6; --paper-2:#f3ead6;
+    --marigold:#e8a13c; --marigold-d:#a4551e; --rose:#ef7d6d; --rose-d:#7a2740;
+    --teal:#2aa7a0; --teal-d:#0d4a4f; --violet:#8f6ed0; --violet-d:#3a2170;
+    --desk-1:#7a4a2c; --desk-2:#3d2212;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
-  body{margin:0; font-family:"Work Sans",sans-serif; color:var(--cream);
-    background:linear-gradient(180deg,var(--plum-3),var(--plum-1) 45%,var(--plum-2) 100%); overflow:hidden;}
-  .scene{position:relative; width:100%; height:100vh; min-height:660px; overflow:hidden;}
+  body{margin:0; font-family:"Work Sans",sans-serif; color:var(--ink);
+    background:linear-gradient(180deg,var(--wall-1),var(--wall-2) 55%,var(--wall-3)); overflow:hidden;}
+  .scene{position:relative; width:100%; height:100vh; min-height:640px; overflow:hidden;}
 
-  /* ---------- TWILIGHT CLASSROOM BACKDROP ---------- */
-  .dusk{position:absolute; inset:0; z-index:0;
-    background:linear-gradient(180deg,#120a20 0%,#241540 34%,#4a2a5e 56%,#c96b52 74%,#f5b352 83%,#241540 83.4%,#160c28 100%);}
-  .dusk-glow{position:absolute; z-index:0; left:50%; top:76%; width:420px; height:300px; transform:translate(-50%,-50%);
-    background:radial-gradient(circle, rgba(255,224,170,.85), rgba(245,179,82,.35) 45%, transparent 72%); filter:blur(8px);}
-  .lights{position:absolute; z-index:1; left:0; top:0; width:100%; height:240px;}
-  .lights circle{filter:drop-shadow(0 0 9px rgba(255,205,130,.95)); animation:flick 3.6s ease-in-out infinite;}
-  .lights circle:nth-child(2n){animation-delay:1.1s} .lights circle:nth-child(3n){animation-delay:2.2s}
-  @keyframes flick{0%,100%{opacity:1}50%{opacity:.5}}
-  .school{position:absolute; z-index:1; left:0; right:0; bottom:106px; width:100%; height:160px; opacity:.95;}
-  .fb{position:absolute; z-index:1; color:rgba(183,156,237,.15); animation:floaty 13s ease-in-out infinite alternate;}
-  .fb.f1{left:6%; top:24%; width:120px;} .fb.f2{right:8%; top:38%; width:90px; animation-delay:3s;} .fb.f3{left:22%; top:56%; width:70px; animation-delay:6s;}
-  @keyframes floaty{from{transform:translateY(-14px) rotate(-3deg)}to{transform:translateY(16px) rotate(4deg)}}
-
-  /* ---------- chrome ---------- */
-  .home-pill{position:absolute; z-index:45; top:26px; left:28px; display:inline-flex; align-items:center; gap:8px;
-    padding:10px 20px; border-radius:999px; background:rgba(28,16,48,.85); border:1px solid #4a3572;
-    color:var(--cream); font-weight:600; font-size:14px; text-decoration:none;
-    box-shadow:0 8px 22px rgba(10,4,20,.5); transition:transform .2s ease, background .2s ease;}
-  .home-pill:hover{transform:translateY(-1px); background:rgba(42,26,70,.9);}
-  .script-tr{position:absolute; z-index:6; right:60px; top:32px; transform:rotate(-5deg);
-    font-family:"Caveat",cursive; font-size:27px; line-height:1.05; color:#e6d7f7;}
-  .note-left{position:absolute; z-index:6; left:3vw; top:33%; color:var(--mute);
-    font-weight:700; font-size:16px; line-height:1.45; letter-spacing:.14em;}
-  .note-left::after{content:""; display:block; width:44px; height:3px; background:var(--mute); margin-top:12px; border-radius:2px;}
-  .banner-right{position:absolute; z-index:5; right:3vw; top:30%; transform:rotate(3deg);
-    background:var(--cream); color:#5b2a4a; border-radius:4px; padding:18px 16px;
-    font-weight:700; font-size:14px; letter-spacing:.08em; line-height:1.45;
-    box-shadow:0 16px 34px rgba(10,4,20,.55);}
-  .banner-right::before{content:""; position:absolute; top:-46px; left:50%; width:3px; height:46px; background:#5b2a4a;}
-  .t-accent{position:relative; display:inline-block; padding:0 .06em .12em;
-    background:linear-gradient(95deg,var(--marigold),var(--rose) 80%);
-    -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .swoosh{position:absolute; left:2%; right:-4%; bottom:-.06em; width:100%; height:auto; color:var(--rose);}
+  /* ---------- room ---------- */
+  .lamp-glow{position:absolute; z-index:0; left:-140px; top:-160px; width:560px; height:560px;
+    background:radial-gradient(circle, rgba(255,214,150,.28), transparent 65%); filter:blur(10px);}
+  .wall-glow{position:absolute; z-index:0; right:-160px; top:20%; width:520px; height:420px;
+    background:radial-gradient(circle, rgba(90,140,220,.18), transparent 70%); filter:blur(12px);}
+  .script-tr{position:absolute; z-index:2; right:56px; top:30px; transform:rotate(-5deg);
+    font-family:"Caveat",cursive; font-size:26px; line-height:1.05; color:#cfe0f4;}
+  .note-left{position:absolute; z-index:2; left:3vw; top:26%; color:#7f9bc4;
+    font-weight:700; font-size:15px; line-height:1.45; letter-spacing:.14em;}
+  .note-left::after{content:""; display:block; width:42px; height:3px; background:#7f9bc4; margin-top:10px; border-radius:2px;}
+  .banner-right{position:absolute; z-index:2; right:3vw; top:24%; transform:rotate(3deg);
+    background:#e8eef7; color:#29497c; border-radius:4px; padding:16px 14px;
+    font-weight:700; font-size:13px; letter-spacing:.08em; line-height:1.45;
+    box-shadow:0 16px 34px rgba(3,8,20,.5);}
+  .banner-right::before{content:""; position:absolute; top:-42px; left:50%; width:3px; height:42px; background:#3d5a86;}
+  .home-pill{position:absolute; z-index:45; top:22px; left:26px; display:inline-flex; align-items:center; gap:8px;
+    padding:9px 18px; border-radius:999px; background:rgba(13,27,51,.85); border:1px solid #2c4a7c;
+    color:#eaf2ff; font-weight:600; font-size:13.5px; text-decoration:none;
+    box-shadow:0 8px 22px rgba(4,10,26,.5); transition:transform .2s, background .2s;}
+  .home-pill:hover{transform:translateY(-1px); background:rgba(26,53,96,.9);}
+  .prog-chip{position:absolute; z-index:45; top:24px; right:26px; padding:7px 16px; border-radius:999px;
+    background:rgba(13,27,51,.7); border:1px solid #2c4a7c; color:#bcd0ea; font-weight:700; font-size:12px; letter-spacing:.1em;}
 
   /* ---------- cover ---------- */
-  .cover-layer{position:absolute; inset:0; z-index:40; display:flex; flex-direction:column; align-items:center;
-    justify-content:center; gap:18px; text-align:center; padding:70px 6vw 130px;
-    transition:opacity .55s ease, transform .55s ease;}
-  body.entered .cover-layer{opacity:0; transform:translateY(-28px) scale(.985); pointer-events:none;}
+  .cover-layer{position:absolute; inset:0; z-index:60; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:18px; text-align:center; padding:60px 6vw 120px;
+    background:radial-gradient(circle at 50% 30%, rgba(43,108,176,.25), transparent 60%),
+               linear-gradient(180deg,var(--wall-1),var(--wall-2) 55%,var(--wall-3));
+    transition:opacity .6s ease, transform .6s ease;}
+  body.entered .cover-layer{opacity:0; transform:translateY(-26px) scale(.985); pointer-events:none;}
   .cover-badge{display:inline-flex; align-items:center; gap:8px; padding:8px 18px; border-radius:999px;
-    background:rgba(28,16,48,.85); border:1px solid #4a3572; color:#d9c6f2;
-    font-weight:600; font-size:13px; letter-spacing:.08em; text-transform:uppercase;}
+    background:rgba(20,41,77,.85); border:1px solid #2c4a7c; color:#bcd0ea;
+    font-weight:600; font-size:12.5px; letter-spacing:.08em; text-transform:uppercase;}
   .cover-title{margin:0; font-family:"Playfair Display",serif; font-weight:800; letter-spacing:-.02em;
-    font-size:clamp(46px,9vw,120px); line-height:1.03; text-shadow:0 12px 44px rgba(10,4,20,.8);}
-  .cover-tag{margin:0; max-width:640px; color:#e6d7f7; font-size:clamp(14px,1.5vw,18px); line-height:1.65;}
+    font-size:clamp(44px,8.6vw,112px); line-height:1.03; color:#f4f8ff; text-shadow:0 12px 44px rgba(3,8,20,.7);}
+  .t-accent{position:relative; display:inline-block; padding:0 .06em .12em;
+    background:linear-gradient(95deg,#f2a06b,#ef7d6d 70%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .swoosh{position:absolute; left:2%; right:-4%; bottom:-.06em; width:100%; height:auto; color:var(--rose);}
+  .cover-tag{margin:0; max-width:640px; color:#bcd0ea; font-size:clamp(14px,1.5vw,17px); line-height:1.65;}
   .cover-chips{display:flex; flex-wrap:wrap; gap:8px; justify-content:center;}
   .cchip{background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.28); border-radius:999px;
-    padding:5px 14px; font-size:12.5px; font-weight:600;}
-  .cta{display:inline-flex; align-items:center; gap:10px; margin-top:4px; padding:15px 34px; border:0; border-radius:999px;
-    background:linear-gradient(95deg,var(--marigold),var(--rose)); color:#2a1209; cursor:pointer;
+    padding:5px 14px; font-size:12.5px; font-weight:600; color:#eaf2ff;}
+  .cta{display:inline-flex; align-items:center; gap:10px; padding:15px 34px; border:0; border-radius:999px;
+    background:linear-gradient(95deg,#f2a06b,#ef7d6d); color:#fff; cursor:pointer;
     font-family:inherit; font-weight:800; font-size:16px;
-    box-shadow:0 16px 40px -8px rgba(239,125,109,.55); transition:transform .2s ease, box-shadow .2s ease;}
-  .cta:hover{transform:translateY(-2px); box-shadow:0 22px 48px -8px rgba(239,125,109,.7);}
-  .cover-hint{margin:0; color:var(--mute); font-size:12.5px;}
+    box-shadow:0 16px 40px -8px rgba(240,135,109,.55); transition:transform .2s, box-shadow .2s;}
+  .cta:hover{transform:translateY(-2px); box-shadow:0 22px 48px -8px rgba(240,135,109,.7);}
+  .cover-hint{margin:0; color:#7f9bc4; font-size:12.5px;}
   .cover-hint kbd{background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); border-radius:5px; padding:1px 7px; font-family:inherit;}
-  .mini-title{position:absolute; z-index:6; top:16px; left:50%; transform:translateX(-50%);
-    margin:0; width:min(900px,90vw); text-align:center; pointer-events:none;
-    font-family:"Playfair Display",serif; font-weight:800; letter-spacing:-.01em;
-    font-size:clamp(19px,2.4vw,32px); opacity:0; transition:opacity .5s ease .3s;}
-  body.entered .mini-title{opacity:1;}
-  .jump{position:absolute; z-index:6; top:56px; left:50%; transform:translateX(-50%); display:flex; gap:8px;
-    opacity:0; transition:opacity .5s ease .35s; flex-wrap:wrap; justify-content:center;}
-  body.entered .jump{opacity:1;}
-  .jump button{font-family:inherit; font-size:11px; font-weight:600; padding:5px 13px; border-radius:999px;
-    border:1px solid rgba(255,255,255,.25); background:rgba(24,13,42,.6); color:#e8dcf5; cursor:pointer; transition:background .2s;}
-  .jump button.active{background:linear-gradient(95deg,var(--marigold),var(--rose)); color:#2a1209; border-color:transparent; font-weight:800;}
 
-  /* ---------- tour / coverflow ---------- */
-  .tour{position:absolute; inset:0; transition:opacity .6s ease .12s, transform .6s ease .12s;}
-  body:not(.entered) .tour{opacity:0; transform:translateY(36px) scale(.985); pointer-events:none;}
-  .stage{position:absolute; left:0; right:0; top:var(--top-zone); bottom:var(--bottom-zone); perspective:1500px; touch-action:pan-y;}
-  .track{position:absolute; inset:0; transform-style:preserve-3d;}
-  .card{position:absolute; left:50%; top:50%; width:var(--cw); height:min(100%, 520px);
-    margin-left:calc(var(--cw)/-2); cursor:pointer;
-    transition:transform .55s cubic-bezier(.22,.9,.3,1), opacity .45s ease, filter .45s ease;}
-  .card:not(.active){filter:brightness(.8) saturate(.9);}
-  .face{position:absolute; inset:0; border-radius:22px; overflow:hidden; display:flex; flex-direction:column;
-    background:linear-gradient(200deg,var(--g1),var(--g2));
-    box-shadow:0 34px 70px -22px rgba(8,3,18,.85), inset 0 1px 0 rgba(255,255,255,.25);}
-  .face-top{display:flex; justify-content:space-between; align-items:center; gap:8px; padding:14px 16px 0;}
-  .badge{display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:999px;
-    background:rgba(12,6,24,.42); border:1px solid rgba(255,255,255,.32);
-    font-size:10.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:#fff;}
-  .ek{font-size:10px; font-weight:700; letter-spacing:.08em; color:rgba(255,255,255,.75);
-    border:1px dashed rgba(255,255,255,.4); border-radius:6px; padding:3px 8px;}
-  .word{margin:10px 18px 0; font-family:"Playfair Display",serif; font-weight:800; color:#fff;
-    font-size:clamp(21px,2.1vw,28px); line-height:1.15; text-shadow:0 4px 18px rgba(0,0,0,.5);}
-  .face-scroll{flex:1; overflow-y:auto; padding:8px 18px 10px; color:rgba(255,255,255,.96);
-    font-size:12.5px; line-height:1.55; scrollbar-width:thin; scrollbar-color:rgba(255,255,255,.35) transparent;}
-  .face-scroll::-webkit-scrollbar{width:5px}
-  .face-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.3); border-radius:3px}
-  .face-scroll p{margin:0 0 8px;}
-  .blk{background:rgba(12,6,24,.32); border:1px solid rgba(255,255,255,.18); border-radius:12px; padding:10px 12px; margin:0 0 10px;}
-  .blk h3{margin:0 0 6px; font-size:13px; color:#ffe3b0;}
-  .blk .em{font-size:18px; margin-right:6px;}
-  .steps{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:8px 0;}
-  .stepbox{background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); border-radius:10px; padding:9px 10px;}
-  .stepbox b{display:block; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:#ffd9a0;}
-  .stepbox i{display:block; font-size:12px; margin:3px 0;}
-  .stepbox span{font-size:11px; color:rgba(255,255,255,.85);}
+  /* ---------- book stage ---------- */
+  .book-stage{position:absolute; left:0; right:0; top:76px; bottom:150px; display:flex; align-items:center; justify-content:center;
+    opacity:0; transition:opacity .5s ease .25s;}
+  body.entered .book-stage{opacity:1;}
+  .book{position:relative; width:min(1180px,94vw); height:clamp(420px, calc(100vh - 290px), 640px);
+    padding:12px; border-radius:18px; perspective:2200px;
+    background:linear-gradient(160deg,#17335f,#0d1e3a 70%);
+    box-shadow:0 40px 80px -24px rgba(2,6,18,.85), inset 0 2px 0 rgba(255,255,255,.12);}
+  .spread{position:relative; height:100%; display:grid; grid-template-columns:clamp(225px,31%,330px) 1fr;
+    border-radius:10px; overflow:hidden; background:var(--cream);}
+  .spread::before,.spread::after{content:""; position:absolute; top:0; bottom:0; width:6px; z-index:6; pointer-events:none;
+    background:repeating-linear-gradient(180deg,#e6dcc6 0 2px,#c9bb9e 2px 3px);}
+  .spread::before{left:0;} .spread::after{right:0;}
+
+  /* left page */
+  .page-left{position:relative; background:
+      repeating-linear-gradient(0deg, rgba(120,90,40,.03) 0 2px, transparent 2px 7px), var(--cream);
+    box-shadow:inset -24px 0 28px -22px rgba(30,15,0,.45);
+    padding:20px 18px 14px; display:flex; flex-direction:column; gap:12px;}
+  .lp-head{font-size:11px; font-weight:800; letter-spacing:.32em; color:var(--marigold-d);
+    padding-bottom:8px; border-bottom:2px solid rgba(29,53,87,.25);}
+  .tabs{display:flex; flex-direction:column; gap:8px;}
+  .tab{display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px; cursor:pointer;
+    border:1px solid rgba(29,53,87,.16); background:var(--paper); font-family:inherit; text-align:left;
+    transition:transform .2s, box-shadow .2s, background .25s;}
+  .tab:hover{transform:translateX(3px);}
+  .tab .t-num{flex:0 0 30px; height:26px; border-radius:8px; display:flex; align-items:center; justify-content:center;
+    background:var(--c); color:#fff; font-weight:800; font-size:12px;}
+  .tab i, .tab svg{color:var(--cd); flex:0 0 auto;}
+  .tab .t-label{font-weight:700; font-size:13px; color:var(--ink); line-height:1.2;}
+  .tab.active{background:linear-gradient(95deg,var(--c),var(--cd)); border-color:transparent;
+    box-shadow:0 10px 22px -8px rgba(20,10,0,.45);}
+  .tab.active .t-num{background:rgba(255,255,255,.28);}
+  .tab.active i, .tab.active svg, .tab.active .t-label{color:#fff;}
+  .lp-timer{margin-top:auto; background:var(--paper); border:1px solid rgba(29,53,87,.2); border-radius:12px; padding:10px 12px;
+    display:flex; flex-direction:column; gap:8px;}
+  .timer-row{display:flex; align-items:center; gap:7px; flex-wrap:wrap;}
+  .t-label{font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--mute); font-weight:700;}
+  .t-display{font-weight:800; font-size:20px; font-variant-numeric:tabular-nums; color:var(--navy-2); min-width:58px; text-align:center;}
+  .t-adj{width:24px; height:24px; border-radius:50%; border:1px solid rgba(29,53,87,.3); background:rgba(29,53,87,.06);
+    color:var(--navy-2); font-size:9px; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;}
+  .t-adj:hover{background:rgba(29,53,87,.14);}
+  .t-toggle{border:0; border-radius:999px; padding:6px 16px; font-family:inherit; font-weight:800; font-size:11.5px;
+    background:linear-gradient(95deg,var(--marigold),var(--rose)); color:#241a05; cursor:pointer; margin-left:auto;}
+  .lp-timer.zero .t-display{color:#c0392b; animation:pulse 1s infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .lp-note{font-family:"Caveat",cursive; font-size:20px; color:var(--marigold-d); transform:rotate(-3deg); line-height:1.15;}
+  .lp-page{align-self:center; font-family:"Playfair Display",serif; font-size:12px; color:var(--marigold-d);}
+
+  /* right page */
+  .page-right{position:relative; transform-origin:left center;
+    background:repeating-linear-gradient(0deg, rgba(120,90,40,.03) 0 2px, transparent 2px 7px), var(--cream);
+    box-shadow:inset 24px 0 28px -22px rgba(30,15,0,.45);}
+  .page-right.turn{animation:pageTurn .5s ease;}
+  @keyframes pageTurn{0%{transform:rotateY(15deg); opacity:.35; filter:brightness(.92);}100%{transform:rotateY(0); opacity:1;}}
+  .curl{position:absolute; right:4px; bottom:4px; width:64px; height:64px; z-index:5; pointer-events:none;
+    background:linear-gradient(315deg, transparent 44%, #c9bb9e 46%, var(--paper-2) 60%, #fffef8 100%);
+    clip-path:polygon(100% 0, 100% 100%, 0 100%);
+    filter:drop-shadow(-8px -8px 10px rgba(60,40,10,.25));}
+  .page{display:none; height:100%; flex-direction:column; padding:18px 26px 12px 24px;}
+  .page.active{display:flex;}
+  .pg-head{display:flex; align-items:center; gap:12px;}
+  .pg-num{font-family:"Playfair Display",serif; font-weight:800; font-size:15px; color:var(--marigold-d);}
+  .pg-rule{flex:1; height:2px; background:rgba(29,53,87,.25); border-radius:2px;}
+  .pg-ek{font-size:10px; font-weight:800; letter-spacing:.1em; color:var(--marigold-d);
+    border:1px dashed rgba(164,85,30,.55); border-radius:6px; padding:3px 8px;}
+  .pg-title{margin:6px 0 8px; font-family:"Playfair Display",serif; font-weight:800; color:var(--navy);
+    font-size:clamp(24px,2.9vw,38px); letter-spacing:.01em; line-height:1.1;}
+  .pg-scroll{flex:1; overflow-y:auto; padding-right:8px; font-size:13px; line-height:1.6; color:var(--ink);
+    scrollbar-width:thin; scrollbar-color:rgba(29,53,87,.35) transparent;}
+  .pg-scroll::-webkit-scrollbar{width:6px}
+  .pg-scroll::-webkit-scrollbar-thumb{background:rgba(29,53,87,.3); border-radius:3px}
+  .pg-scroll p{margin:0 0 9px;}
+  .hello{font-family:"Playfair Display",serif; font-size:17px; color:var(--navy-2); margin:0 0 6px;}
+  .blk{background:var(--paper); border:1px solid rgba(29,53,87,.14); border-radius:12px; padding:10px 13px; margin:0 0 10px;
+    box-shadow:0 4px 12px -6px rgba(30,15,0,.18);}
+  .blk h3{margin:0 0 6px; font-size:13.5px; color:var(--marigold-d);}
+  .blk .em{font-size:17px; margin-right:6px;}
+  .steps{display:grid; grid-template-columns:1fr 1fr; gap:9px; margin:9px 0;}
+  .stepbox{background:#fff; border:1px solid rgba(29,53,87,.18); border-radius:10px; padding:9px 11px;}
+  .stepbox b{display:block; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--marigold-d);}
+  .stepbox i{display:block; font-size:12.5px; margin:3px 0; color:var(--navy-2);}
+  .stepbox span{font-size:11.5px; color:var(--mute);}
   .olist{margin:0; padding:0; list-style:none; counter-reset:st;}
-  .olist li{counter-increment:st; position:relative; padding:7px 10px 7px 34px; margin-bottom:6px;
-    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.2); border-radius:8px; font-size:12px;}
-  .olist li::before{content:counter(st); position:absolute; left:8px; top:8px; width:18px; height:18px; border-radius:50%;
-    background:var(--marigold); color:#2a1209; font-weight:800; font-size:11px; display:flex; align-items:center; justify-content:center;}
-  .qcard{display:flex; gap:10px; align-items:flex-start; background:rgba(12,6,24,.32); border-left:3px solid var(--marigold);
-    border-radius:10px; padding:9px 12px; margin-bottom:8px;}
-  .qcard .n{font-family:"Playfair Display",serif; font-weight:800; font-size:20px; color:var(--marigold); line-height:1;}
-  .qcard b{display:block; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#ffd9a0; margin-bottom:3px;}
+  .olist li{counter-increment:st; position:relative; padding:8px 11px 8px 36px; margin-bottom:7px;
+    background:var(--paper); border:1px solid rgba(29,53,87,.15); border-radius:9px; font-size:12.5px;}
+  .olist li::before{content:counter(st); position:absolute; left:9px; top:9px; width:19px; height:19px; border-radius:50%;
+    background:var(--marigold); color:#241a05; font-weight:800; font-size:11px; display:flex; align-items:center; justify-content:center;}
+  .qcard{display:flex; gap:11px; align-items:flex-start; background:var(--paper); border-left:3px solid var(--marigold);
+    border-radius:10px; padding:9px 13px; margin-bottom:8px; box-shadow:0 4px 12px -6px rgba(30,15,0,.15);}
+  .qcard .n{font-family:"Playfair Display",serif; font-weight:800; font-size:21px; color:var(--marigold-d); line-height:1;}
+  .qcard b{display:block; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--marigold-d); margin-bottom:3px;}
 
-  /* ---------- EK LINK + MINI PAPER PREVIEW ---------- */
+  /* ek link + paper preview */
   .ek-link{display:flex; gap:12px; align-items:center; text-decoration:none; color:inherit;
-    background:rgba(12,6,24,.38); border:1px solid rgba(245,179,82,.4); border-radius:14px;
-    padding:10px 12px; margin:0 0 10px; transition:transform .2s ease, border-color .2s ease, background .2s ease;}
-  .ek-link:hover{transform:translateY(-2px); border-color:var(--marigold); background:rgba(12,6,24,.55);}
+    background:var(--paper); border:1px solid rgba(164,85,30,.35); border-radius:14px;
+    padding:10px 12px; margin:0 0 10px; box-shadow:0 6px 16px -8px rgba(30,15,0,.3);
+    transition:transform .2s, border-color .2s, box-shadow .2s;}
+  .ek-link:hover{transform:translateY(-2px); border-color:var(--marigold-d); box-shadow:0 12px 24px -10px rgba(30,15,0,.4);}
   .ek-paper{flex:0 0 92px; background:#f8f1e4; color:#4a3524; border-radius:4px; padding:7px 8px 6px;
-    transform:rotate(-2deg); box-shadow:0 8px 18px rgba(8,3,18,.55); font-size:6.5px; line-height:1.5;
+    transform:rotate(-2deg); box-shadow:0 8px 18px rgba(30,15,0,.35); font-size:6.5px; line-height:1.5;
     display:flex; flex-direction:column; gap:3px; min-height:104px;}
   .ek-paper .ph{font-weight:800; font-size:6px; letter-spacing:.08em; color:#8a5a2c; text-transform:uppercase;}
   .ek-paper .pt{font-weight:800; font-size:8px; line-height:1.2; color:#3c2410;}
@@ -143,24 +180,23 @@
   .ek-paper .pp{display:inline-block; background:#e8dcc4; border:1px solid #c9ab7c; border-radius:3px; padding:0 3px; margin:0 2px 2px 0; font-size:5.6px;}
   .ek-paper .pf{margin-top:auto; font-size:5.6px; color:#8a5a2c; font-style:italic;}
   .ek-meta{display:flex; flex-direction:column; gap:2px; min-width:0;}
-  .ek-meta b{font-size:12.5px; color:#ffe3b0;}
-  .ek-meta i{font-size:11px; color:rgba(255,255,255,.8); font-style:normal;}
-  .ek-meta u{font-size:11px; color:var(--marigold); font-weight:700; text-decoration:none;}
+  .ek-meta b{font-size:12.5px; color:var(--marigold-d);}
+  .ek-meta i{font-size:11px; color:var(--mute); font-style:normal;}
+  .ek-meta u{font-size:11px; color:var(--marigold-d); font-weight:800; text-decoration:none;}
   .ek-link:hover .ek-meta u{text-decoration:underline;}
 
-  /* ---------- TOOLTIPS (hover açıklamaları) ---------- */
+  /* tooltips */
   [data-tip]{position:relative;}
   [data-tip]:hover::after,[data-tip]:focus-visible::after{
-    content:attr(data-tip);
-    position:absolute; left:50%; top:calc(100% + 7px); transform:translateX(-50%);
-    width:max-content; max-width:210px; background:#160c28; color:var(--cream);
-    border:1px solid rgba(245,179,82,.55); border-radius:9px; padding:7px 10px;
+    content:attr(data-tip); position:absolute; left:50%; top:calc(100% + 7px); transform:translateX(-50%);
+    width:max-content; max-width:215px; background:var(--navy); color:#f6ecd9;
+    border:1px solid rgba(232,161,60,.6); border-radius:9px; padding:7px 10px;
     font-size:10.5px; line-height:1.45; font-weight:500; letter-spacing:0; text-transform:none;
     z-index:80; pointer-events:none; text-align:left; white-space:normal;
-    box-shadow:0 12px 26px rgba(8,3,18,.65);}
+    box-shadow:0 12px 26px rgba(8,3,18,.45);}
   [data-tip]:hover::before,[data-tip]:focus-visible::before{
     content:""; position:absolute; left:50%; top:calc(100% + 1px); transform:translateX(-50%);
-    border:6px solid transparent; border-bottom-color:rgba(245,179,82,.55); z-index:80; pointer-events:none;}
+    border:6px solid transparent; border-bottom-color:rgba(232,161,60,.6); z-index:80; pointer-events:none;}
 
   /* mini flip cards */
   .mf-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:10px 0;}
@@ -170,85 +206,91 @@
   .mf.flipped .mf-in{transform:rotateY(180deg);}
   .mf-f,.mf-b{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:14px;
     padding:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; text-align:center;}
-  .mf-f{background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.3);}
-  .mf-b{transform:rotateY(180deg); background:rgba(18,9,32,.72); border:1px solid rgba(245,179,82,.55);}
-  .mf-f .em{font-size:26px;} .mf-f .nm{font-weight:700; font-size:12px; color:#fff; line-height:1.25;}
-  .mf-f .hint{font-size:9.5px; opacity:.8; letter-spacing:.1em; text-transform:uppercase;}
+  .mf-f{background:rgba(29,53,87,.07); border:1px solid rgba(29,53,87,.25);}
+  .mf-b{transform:rotateY(180deg); background:linear-gradient(160deg,#24406b,#16324f); border:1px solid rgba(232,161,60,.6);}
+  .mf-f .em{font-size:26px;} .mf-f .nm{font-weight:800; font-size:12.5px; color:var(--navy-2); line-height:1.25;}
+  .mf-f .hint{font-size:9.5px; color:rgba(29,53,87,.55); letter-spacing:.1em; text-transform:uppercase; font-weight:700;}
   .mf-b h4{margin:0; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--marigold);}
-  .mf-b ul{margin:0; padding:0; list-style:none; font-size:11px; line-height:1.5; color:rgba(255,255,255,.92);}
+  .mf-b ul{margin:0; padding:0; list-style:none; font-size:11px; line-height:1.5; color:rgba(255,255,255,.94);}
   .mf-b li{padding:2px 6px; border-radius:6px; cursor:help;}
-  .mf-b li:hover{background:rgba(245,179,82,.16);}
+  .mf-b li:hover{background:rgba(232,161,60,.2);}
 
-  /* timer */
-  .timer{display:flex; align-items:center; gap:7px; background:rgba(12,6,24,.5); border:1px solid rgba(255,255,255,.25);
-    border-radius:999px; padding:5px 10px;}
-  .t-label{font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.75);}
-  .t-display{font-weight:800; font-size:16px; font-variant-numeric:tabular-nums; min-width:50px; text-align:center;}
-  .t-adj{width:21px; height:21px; border-radius:50%; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.12);
-    color:#fff; font-size:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;}
-  .t-adj:hover{background:rgba(255,255,255,.25);}
-  .t-toggle{border:0; border-radius:999px; padding:5px 13px; font-family:inherit; font-weight:800; font-size:11px;
-    background:linear-gradient(95deg,var(--marigold),var(--rose)); color:#2a1209; cursor:pointer;}
-  .timer.zero .t-display{color:#ff9b9b; animation:pulse 1s infinite;}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-  .face-foot{padding:10px 16px 14px; display:flex; gap:8px; flex-wrap:wrap;}
+  .pg-foot{padding:10px 2px 6px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;}
   .nav-btn{flex:1; display:inline-flex; align-items:center; justify-content:center; gap:7px;
-    padding:10px 12px; border-radius:10px; cursor:pointer; font-family:inherit; font-weight:700; font-size:12px;
-    background:rgba(12,6,24,.45); border:1px solid rgba(255,255,255,.35); color:#fff; transition:background .2s, transform .2s;}
-  .nav-btn:hover{background:rgba(12,6,24,.65); transform:translateY(-1px);}
-  .nav-btn.primary{background:linear-gradient(95deg,var(--marigold),var(--rose)); border-color:transparent; color:#2a1209;}
-  .credit{margin:6px 0 2px; font-size:10.5px; opacity:.7; text-align:center;}
+    padding:10px 12px; border-radius:10px; cursor:pointer; font-family:inherit; font-weight:800; font-size:12px;
+    background:rgba(29,53,87,.06); border:1px solid rgba(29,53,87,.3); color:var(--navy-2);
+    transition:background .2s, transform .2s;}
+  .nav-btn:hover{background:rgba(29,53,87,.13); transform:translateY(-1px);}
+  .nav-btn.primary{background:linear-gradient(95deg,var(--marigold),var(--rose)); border-color:transparent; color:#241a05;}
+  .pgno{font-family:"Playfair Display",serif; font-size:11px; color:var(--marigold-d); padding:0 4px;}
+  .credit{margin:4px 0 2px; font-size:10.5px; color:var(--mute); text-align:center;}
 
-  .arrow{position:absolute; z-index:30; top:calc(50% - 30px); margin-top:-32px; width:64px; height:64px; border-radius:50%;
-    border:1px solid rgba(255,255,255,.16); background:rgba(24,13,42,.85); color:#fff; cursor:pointer;
-    display:flex; align-items:center; justify-content:center; font-size:26px;
-    box-shadow:0 14px 30px rgba(8,3,18,.6); transition:transform .2s ease, background .2s ease, opacity .3s ease;}
-  .arrow:hover:not(:disabled){transform:scale(1.06); background:rgba(42,26,70,.92);}
+  /* book cover board */
+  .board{position:absolute; inset:12px; z-index:8; transform-origin:left center; border-radius:8px 14px 14px 8px;
+    background:linear-gradient(160deg,#1b3a6b,#0e2246 65%);
+    box-shadow:inset 5px 0 14px rgba(0,0,0,.45), 0 26px 60px -18px rgba(0,0,0,.7);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; text-align:center; padding:20px;}
+  .board .b-em{width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:rgba(242,160,107,.2); color:#f2a06b; border:1px solid rgba(242,160,107,.5);}
+  .board h2{margin:0; font-family:"Playfair Display",serif; font-weight:800; color:#f4f8ff; font-size:clamp(28px,4.4vw,54px);}
+  .board p{margin:0; color:#bcd0ea; font-size:13px; letter-spacing:.14em; text-transform:uppercase; font-weight:600;}
+  body.entered .board{animation:openBoard 1.05s cubic-bezier(.6,.05,.3,1) forwards; pointer-events:none;}
+  @keyframes openBoard{0%{transform:rotateY(0); opacity:1;} 72%{opacity:1;} 100%{transform:rotateY(-160deg); opacity:0;}}
+
+  /* controls */
+  .arrow{position:absolute; z-index:30; top:50%; margin-top:-27px; width:54px; height:54px; border-radius:50%;
+    border:1px solid rgba(255,255,255,.18); background:rgba(10,20,42,.8); color:#fff; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; font-size:24px;
+    box-shadow:0 14px 30px rgba(2,6,18,.6); transition:transform .2s, background .2s, opacity .3s;}
+  .arrow:hover:not(:disabled){transform:scale(1.07); background:rgba(20,38,74,.92);}
   .arrow:disabled{opacity:.35; cursor:not-allowed;}
-  .arrow.left{left:26px;} .arrow.right{right:26px;}
-  .dots{position:absolute; z-index:30; left:50%; transform:translateX(-50%); bottom:126px; display:flex; gap:10px;}
-  .dot{width:11px; height:11px; padding:0; border:0; border-radius:50%; background:#6b5490; cursor:pointer; transition:transform .25s, background .25s;}
+  .arrow.left{left:2.4vw;} .arrow.right{right:2.4vw;}
+  .bottombar{position:absolute; z-index:30; left:50%; transform:translateX(-50%); bottom:34px;
+    display:flex; align-items:center; gap:18px;}
+  .bb-btn{border:0; background:none; color:#f6ecd9; font-family:inherit; font-weight:700; font-size:11.5px;
+    letter-spacing:.18em; cursor:pointer; display:flex; align-items:center; gap:8px; opacity:.9;}
+  .bb-btn:hover{opacity:1; text-decoration:underline;}
+  .bb-btn:disabled{opacity:.35; cursor:not-allowed; text-decoration:none;}
+  .dots{display:flex; gap:10px;}
+  .dot{width:10px; height:10px; padding:0; border:0; border-radius:50%; background:rgba(246,236,217,.35); cursor:pointer;
+    transition:transform .25s, background .25s;}
   .dot:hover{transform:scale(1.25);}
-  .dot.active{background:var(--rose); transform:scale(1.2);}
-  .counter{position:absolute; z-index:30; left:50%; transform:translateX(-50%); bottom:106px; margin:0;
-    font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--mute); font-weight:600;}
+  .dot.active{background:var(--marigold); transform:scale(1.25);}
 
-  /* ---------- desk & props ---------- */
-  .desk{position:absolute; z-index:18; left:0; right:0; bottom:0; height:110px;
-    background:linear-gradient(180deg,#7a4a2c 0%,#5d3620 34%,#3d2212 100%);}
+  /* desk & props */
+  .desk{position:absolute; z-index:10; left:0; right:0; bottom:0; height:120px;
+    background:linear-gradient(180deg,var(--desk-1) 0%,#5d3620 34%,var(--desk-2) 100%);}
   .desk::before{content:""; position:absolute; inset:0;
     background:repeating-linear-gradient(98deg, rgba(255,255,255,.05) 0 3px, transparent 3px 26px),
-               linear-gradient(180deg, rgba(255,214,160,.3), transparent 22%);}
-  .prop{position:absolute; z-index:19; filter:drop-shadow(0 8px 16px rgba(0,0,0,.45));}
-  .notebook{left:300px; bottom:88px; width:170px;}
-  .pencils{left:520px; bottom:92px; width:64px;}
-  .plane{right:420px; bottom:118px; width:90px; transform:rotate(-12deg);}
-  .mug{position:absolute; z-index:19; right:64px; bottom:56px; width:126px; height:98px;
-    background:#241540; border-radius:14px 14px 20px 20px; box-shadow:0 12px 26px rgba(0,0,0,.5);}
-  .mug::after{content:""; position:absolute; right:-32px; top:24px; width:42px; height:46px; border:11px solid #241540; border-radius:50%;}
-  .mug span{position:absolute; inset:0; padding:34px 12px; font-family:"Caveat",cursive; font-size:20px; text-align:center; color:#f0d9b8;}
-  .plant{position:absolute; z-index:22; filter:drop-shadow(0 6px 10px rgba(0,0,0,.4)); pointer-events:none;}
-  .plant.pl-left{left:-16px; bottom:60px; width:150px;}
-  .plant.pl-right{right:-10px; bottom:96px; width:130px; transform:scaleX(-1) rotate(6deg);}
+               linear-gradient(180deg, rgba(255,226,170,.3), transparent 24%);}
+  .prop{position:absolute; z-index:12; filter:drop-shadow(0 8px 16px rgba(0,0,0,.45));}
+  .bookstack{left:3vw; bottom:96px; width:150px;}
+  .pencils{left:calc(3vw + 170px); bottom:92px; width:58px;}
+  .mug{position:absolute; z-index:12; right:5vw; bottom:60px; width:118px; height:92px;
+    background:#171214; border-radius:14px 14px 20px 20px; box-shadow:0 12px 26px rgba(0,0,0,.5);}
+  .mug::after{content:""; position:absolute; right:-30px; top:22px; width:40px; height:44px; border:10px solid #171214; border-radius:50%;}
+  .mug span{position:absolute; inset:0; padding:26px 10px; font-family:"Caveat",cursive; font-size:17px; text-align:center; color:#d8cfc6;}
+  .plane{right:calc(5vw + 150px); bottom:104px; width:80px; transform:rotate(-10deg);}
+  .plant{position:absolute; z-index:14; filter:drop-shadow(0 6px 10px rgba(0,0,0,.4)); pointer-events:none;}
+  .plant.pl-left{left:-14px; bottom:64px; width:130px;}
+  .plant.pl-right{right:-8px; bottom:100px; width:110px; transform:scaleX(-1) rotate(6deg);}
 
   .sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
   button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--marigold); outline-offset:3px;}
 
-  @media (max-width:860px){
-    .note-left,.banner-right,.school,.pencils,.plane{display:none;}
-    .script-tr{right:20px; top:20px; font-size:22px;}
-    .arrow{width:50px;height:50px;} .arrow.left{left:10px;} .arrow.right{right:10px;}
-    .notebook{left:24px; width:130px;}
-    .mug{right:24px; width:104px; height:84px;}
-    :root{--cw:clamp(250px,68vw,340px); --top-zone:88px; --bottom-zone:150px;}
-    .cover-layer{padding:60px 7vw 120px;}
+  @media (max-width:900px){
+    .note-left,.banner-right,.pencils,.plane,.bookstack{display:none;}
+    .script-tr{right:16px; top:16px; font-size:20px;}
+    .spread{grid-template-columns:clamp(180px,34%,240px) 1fr;}
+    .page{padding:14px 16px 10px 14px;}
     .steps{grid-template-columns:1fr;}
-    .ek-paper{flex-basis:78px; min-height:92px;}
+    .arrow{width:44px;height:44px;} .arrow.left{left:8px;} .arrow.right{right:8px;}
+    .mug{right:16px; width:100px; height:80px;}
+    .book-stage{top:64px; bottom:140px;}
   }
-  @media (max-height:720px){
-    :root{--top-zone:84px; --bottom-zone:146px;}
-    .mini-title{top:8px;} .jump{top:44px;}
-    .cover-title{font-size:clamp(36px,7vw,72px);}
+  @media (max-height:700px){
+    .book-stage{top:60px; bottom:132px;}
+    .cover-title{font-size:clamp(34px,7vw,68px);}
   }
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{transition-duration:.01ms !important; animation-duration:.01ms !important;}
@@ -257,99 +299,72 @@
 </head>
 <body>
 <div class="scene">
-  <div class="dusk" aria-hidden="true"></div>
-  <div class="dusk-glow" aria-hidden="true"></div>
-  <svg class="lights" viewBox="0 0 1440 240" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 30 Q360 150 720 70 T1440 44" fill="none" stroke="rgba(246,236,217,.22)" stroke-width="2"/>
-    <g fill="#ffd9a0">
-      <circle cx="60" cy="52" r="6"/><circle cx="180" cy="86" r="6"/><circle cx="300" cy="108" r="6"/><circle cx="420" cy="112" r="6"/>
-      <circle cx="540" cy="98" r="6"/><circle cx="660" cy="78" r="6"/><circle cx="780" cy="66" r="6"/><circle cx="900" cy="62" r="6"/>
-      <circle cx="1020" cy="64" r="6"/><circle cx="1140" cy="62" r="6"/><circle cx="1260" cy="54" r="6"/><circle cx="1380" cy="46" r="6"/>
-    </g>
-  </svg>
-  <svg class="school" viewBox="0 0 1200 160" preserveAspectRatio="none" aria-hidden="true">
-    <g fill="#150a24">
-      <path d="M0 160V96h70V72h26v24h44V160Z M180 160V84h36V60h18v24h34V160Z M320 160V70h14V46h10V34h12v12h10v24h14v90Z"/>
-      <path d="M420 160V92h60V70h20v22h40V160Z M580 160V80h44V58h16v22h36V160Z M720 160V96h54V76h18v20h30V160Z"/>
-      <path d="M860 160V86h34V62h14v24h30V160Z M980 160V94h56V74h16v20h34V160Z M1120 160V88h28V64h14v24h22V160Z"/>
-      <path d="M150 160c0-16 9-27 21-27s21 11 21 27Z M560 160c0-13 8-22 18-22s18 9 18 22Z M940 160c0-15 9-25 20-25s20 10 20 25Z"/>
-    </g>
-    <circle cx="352" cy="52" r="7" fill="#f6ecd9" opacity=".9"/>
-    <g fill="#ffcf8a" opacity=".8">
-      <rect x="86" y="104" width="10" height="12"/><rect x="104" y="104" width="10" height="12"/>
-      <rect x="196" y="96" width="9" height="11"/><rect x="214" y="96" width="9" height="11"/><rect x="232" y="112" width="9" height="11"/>
-      <rect x="436" y="104" width="10" height="12"/><rect x="456" y="104" width="10" height="12"/><rect x="476" y="120" width="10" height="12"/>
-      <rect x="596" y="92" width="9" height="11"/><rect x="614" y="92" width="9" height="11"/><rect x="632" y="110" width="9" height="11"/>
-      <rect x="736" y="106" width="10" height="12"/><rect x="756" y="106" width="10" height="12"/>
-      <rect x="874" y="96" width="9" height="11"/><rect x="892" y="96" width="9" height="11"/>
-      <rect x="996" y="104" width="10" height="12"/><rect x="1016" y="104" width="10" height="12"/><rect x="1132" y="98" width="9" height="11"/>
-    </g>
-  </svg>
-  <svg class="fb f1" viewBox="0 0 100 90" aria-hidden="true"><path fill="currentColor" d="M50 6C25 6 6 22 6 42c0 12 7 22 18 29l-4 15 18-9c4 1 8 1 12 1 25 0 44-16 44-36S75 6 50 6Z"/></svg>
-  <svg class="fb f2" viewBox="0 0 100 90" aria-hidden="true"><path fill="currentColor" d="M50 6C25 6 6 22 6 42c0 12 7 22 18 29l-4 15 18-9c4 1 8 1 12 1 25 0 44-16 44-36S75 6 50 6Z"/></svg>
-  <svg class="fb f3" viewBox="0 0 100 90" aria-hidden="true"><path fill="currentColor" d="M50 6C25 6 6 22 6 42c0 12 7 22 18 29l-4 15 18-9c4 1 8 1 12 1 25 0 44-16 44-36S75 6 50 6Z"/></svg>
-
-  <a class="home-pill" href="#" id="home-pill">⌂ Home</a>
+  <div class="lamp-glow" aria-hidden="true"></div>
+  <div class="wall-glow" aria-hidden="true"></div>
+  <a class="home-pill" href="#" id="home-pill"><i data-lucide="home" width="15" height="15"></i> Home</a>
+  <span class="prog-chip" id="prog">BÖLÜM 1 / 4</span>
   <div class="script-tr" aria-hidden="true">sen kimsin?<br>ben buradayım</div>
   <div class="note-left" aria-hidden="true">HER SES<br>DUYULUR<br>HER İSİM<br>ÖNEMLİ</div>
   <div class="banner-right" aria-hidden="true">GÜVENLİ SINIF<br>GÜÇLÜ<br>TOPLULUK</div>
 
-  <h1 class="mini-title">SEN <span class="t-accent">KIMSIN?
-    <svg class="swoosh" viewBox="0 0 320 26" fill="none" aria-hidden="true"><path d="M6 16C90 6 230 5 314 12" stroke="currentColor" stroke-width="9" stroke-linecap="round"/></svg>
-  </span> <span style="font-size:.6em; color:var(--mute);">· Olumlu Öğrenme Ortamı</span></h1>
-  <div class="jump" id="jump" role="tablist" aria-label="Bölümler">
-    <button type="button" data-goto="0">1. Keşfetme</button>
-    <button type="button" data-goto="1">2. 5 Temel Yetkinlik</button>
-    <button type="button" data-goto="2">3. İlgi Alanları</button>
-    <button type="button" data-goto="3">4. Çıkış Kartı</button>
-  </div>
-
   <!-- COVER -->
   <div class="cover-layer" id="cover">
-    <span class="cover-badge"> Yaşam Becerileri Ders Modülü · Olumlu Öğrenme Ortamı</span>
+    <span class="cover-badge"><i data-lucide="graduation-cap" width="15" height="15"></i> Yaşam Becerileri Ders Modülü · Olumlu Öğrenme Ortamı</span>
     <h1 class="cover-title">SEN <span class="t-accent">KIMSIN?
       <svg class="swoosh" viewBox="0 0 320 26" fill="none" aria-hidden="true"><path d="M6 16C90 6 230 5 314 12" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg>
     </span></h1>
-    <p class="cover-tag">Sosyal, duygusal ve liderlik becerilerine ilk adım: kendini tanımak, birbirini duymak ve güvenli bir sınıf topluluğu kurmak. Her bölümde çalışma kağıdınızın (Ek) bağlantısı ve minik önizlemesi sizi bekliyor.</p>
+    <p class="cover-tag">Sosyal, duygusal ve liderlik becerilerine ilk adım: kendini tanımak, birbirini duymak ve güvenli bir sınıf topluluğu kurmak. Kitabı açın; soldaki içindekiler sayfasından bölümlere geçin.</p>
     <div class="cover-chips">
-      <span class="cchip">1. Keşfetme · Ek 1.1.1</span><span class="cchip">2. 5 Temel Yetkinlik · Ek 1.1.2</span>
-      <span class="cchip">3. İlgi Alanları · Ek 1.1.3</span><span class="cchip">4. Çıkış Kartı · Ek 1.1.4</span>
+      <span class="cchip">01 Keşfetme · Ek 1.1.1</span><span class="cchip">02 5 Temel Yetkinlik · Ek 1.1.2</span>
+      <span class="cchip">03 İlgi Alanları · Ek 1.1.3</span><span class="cchip">04 Çıkış Kartı · Ek 1.1.4</span>
     </div>
-    <button class="cta" id="start-tour" type="button">Derse Başla →</button>
-    <p class="cover-hint">veya <kbd>→</kbd> / <kbd>Enter</kbd> · kartlar arasında kaydır · yetkinlik kartlarını çevir · beceri adlarının üzerine gel</p>
+    <button class="cta" id="start-tour" type="button">Kitabı Aç →</button>
+    <p class="cover-hint">veya <kbd>→</kbd> / <kbd>Enter</kbd> · sayfaları oklarla çevirin · kartları çevirip becerilerin üzerine gelin</p>
   </div>
 
-  <!-- TOUR -->
-  <div class="tour" id="tour">
-    <div class="stage" id="stage" aria-roledescription="carousel" aria-label="Sen Kimsin ders bölümleri">
-      <div class="track" id="track">
+  <!-- BOOK -->
+  <div class="book-stage">
+    <div class="book">
+      <div class="spread" id="spread">
 
-        <!-- BÖLÜM 1 -->
-        <article class="card" data-tilt="-1.4" style="--g1:#ef7d6d;--g2:#7a2740" tabindex="0" aria-label="Bölüm 1: Keşfetme">
-          <div class="face">
-            <div class="face-top"><span class="badge">Bölüm 1: Keşfetme</span><span class="ek">Ek 1.1.1</span></div>
-            <div class="face-top" style="padding-top:8px;">
-              <div class="timer" data-seconds="600">
-                <span class="t-label">Kalan Süre</span><span class="t-display">10:00</span>
-                <button class="t-adj up" type="button" aria-label="Süreyi artır">▲</button>
-                <button class="t-adj down" type="button" aria-label="Süreyi azalt">▼</button>
-                <button class="t-toggle" type="button">Başlat</button>
-              </div>
+        <aside class="page-left">
+          <div class="lp-head">İÇİNDEKİLER</div>
+          <nav class="tabs" aria-label="Bölümler">
+            <button class="tab active" type="button" data-goto="0" style="--c:#ef7d6d;--cd:#7a2740"><span class="t-num">01</span><i data-lucide="compass" width="18" height="18"></i><span class="t-label">Keşfetme</span></button>
+            <button class="tab" type="button" data-goto="1" style="--c:#8f6ed0;--cd:#3a2170"><span class="t-num">02</span><i data-lucide="heart-handshake" width="18" height="18"></i><span class="t-label">5 Temel Yetkinlik</span></button>
+            <button class="tab" type="button" data-goto="2" style="--c:#2aa7a0;--cd:#0d4a4f"><span class="t-num">03</span><i data-lucide="mic" width="18" height="18"></i><span class="t-label">İlgi Alanları</span></button>
+            <button class="tab" type="button" data-goto="3" style="--c:#e8a13c;--cd:#7a4a10"><span class="t-num">04</span><i data-lucide="flag" width="18" height="18"></i><span class="t-label">Çıkış Kartı</span></button>
+          </nav>
+          <div class="lp-timer" id="lp-timer">
+            <span class="t-label">Kalan Süre</span>
+            <div class="timer-row">
+              <span class="t-display" id="t-display">10:00</span>
+              <button class="t-adj" id="t-up" type="button" aria-label="Süreyi artır">▲</button>
+              <button class="t-adj" id="t-down" type="button" aria-label="Süreyi azalt">▼</button>
+              <button class="t-toggle" id="t-toggle" type="button">Başlat</button>
             </div>
-            <h2 class="word">👋 Sınıfımıza Hoş Geldiniz!</h2>
-            <div class="face-scroll">
-              <p>Lise hayatınıza adım atarken, bu program size okulda ve özel hayatınızda ihtiyaç duyacağınız sosyal, duygusal ve liderlik becerilerini kazandırmayı hedefliyor. İlk adımımız: Sen kimsin?</p>
+          </div>
+          <div class="lp-note" aria-hidden="true">her ses duyulur,<br>her isim önemli</div>
+          <div class="lp-page">· 1 ·</div>
+        </aside>
 
+        <div class="page-right" id="page-right">
+
+          <!-- 01 KEŞFETME -->
+          <section class="page active" aria-label="Bölüm 1: Keşfetme">
+            <div class="pg-head"><span class="pg-num">01</span><span class="pg-rule"></span><span class="pg-ek">Ek 1.1.1</span></div>
+            <h2 class="pg-title">KEŞFETME</h2>
+            <div class="pg-scroll">
+              <h3 class="hello">👋 Sınıfımıza Hoş Geldiniz!</h3>
+              <p>Lise hayatınıza adım atarken, bu program size okulda ve özel hayatınızda ihtiyaç duyacağınız sosyal, duygusal ve liderlik becerilerini kazandırmayı hedefliyor. İlk adımımız: Sen kimsin?</p>
               <a class="ek-link" href="https://drive.google.com/file/d/1mKoEYNHHgxDTD_z_6DS1EIugclx52oFh/view?usp=sharing" target="_blank" rel="noopener">
                 <span class="ek-paper" aria-hidden="true">
-                  <span class="ph">1.1.1 · Keşfetme</span>
-                  <span class="pt">Siz Kimsiniz?</span>
+                  <span class="ph">1.1.1 · Keşfetme</span><span class="pt">Siz Kimsiniz?</span>
                   <span class="pl">Ben ...</span><span class="pl">Ben ...</span><span class="pl">Ben ...</span><span class="pl">Ben ...</span><span class="pl">Ben ...</span>
                   <span class="pf">Amaç: 30 sn'de çok yanıt</span>
                 </span>
                 <span class="ek-meta"><b>Ek 1.1.1 · Çalışma Kağıdı</b><i>"Ben..." satırlarınızı dolduracağınız sayfa</i><u>Drive'da aç ↗</u></span>
               </a>
-
               <div class="blk">
                 <h3><span class="em">⏱️</span>Hızlı Tanışma Turu (30 Saniye)</h3>
                 <p style="margin:0">Ek 1.1.1'i yukarıdaki bağlantıdan açın ve kaleminizi hazırlayın. Şimdi eşinizle aşağıdaki rolleri uygulayın:</p>
@@ -365,131 +380,98 @@
                 <li>Sınıfça paylaşım: Eşinizi sınıfa tanıtın! Bakalım eşinizin söylediği özelliklerden kaç tanesini hatırlayabileceksiniz?</li>
               </ol>
             </div>
-            <div class="face-foot"><button class="nav-btn primary" type="button" data-goto="1">Sonraki Adım: 5 Temel Yetkinlik →</button></div>
-          </div>
-        </article>
-
-        <!-- BÖLÜM 2 -->
-        <article class="card" data-tilt="1.2" style="--g1:#8f6ed0;--g2:#3a2170" tabindex="0" aria-label="Bölüm 2: İlişkilendirme">
-          <div class="face">
-            <div class="face-top"><span class="badge">Bölüm 2: İlişkilendirme</span><span class="ek">Ek 1.1.2</span></div>
-            <div class="face-top" style="padding-top:8px;">
-              <div class="timer" data-seconds="600">
-                <span class="t-label">Kalan Süre</span><span class="t-display">10:00</span>
-                <button class="t-adj up" type="button" aria-label="Süreyi artır">▲</button>
-                <button class="t-adj down" type="button" aria-label="Süreyi azalt">▼</button>
-                <button class="t-toggle" type="button">Başlat</button>
-              </div>
+            <div class="pg-foot">
+              <button class="nav-btn primary" type="button" data-goto="1">Sonraki Adım: 5 Temel Yetkinlik →</button>
+              <span class="pgno">s. 02</span>
             </div>
-            <h2 class="word">SDÖ Temel Yetkinlik Alanları</h2>
-            <div class="face-scroll">
-              <p>Bu program boyunca geliştireceğiniz 5 temel sosyal duygusal yetkinlik aşağıdaki kartlarda. <strong>Karta tıklayın ve çevirin;</strong> çevirdikten sonra beceri adlarının <strong>üzerine gelin</strong> ve ne anlama geldiklerini okuyun. Tanımların tamamı Ek 1.1.2'de.</p>
+          </section>
 
+          <!-- 02 5 TEMEL YETKİNLİK -->
+          <section class="page" aria-label="Bölüm 2: İlişkilendirme">
+            <div class="pg-head"><span class="pg-num">02</span><span class="pg-rule"></span><span class="pg-ek">Ek 1.1.2</span></div>
+            <h2 class="pg-title">5 TEMEL YETKİNLİK</h2>
+            <div class="pg-scroll">
+              <p>Bu program boyunca geliştireceğiniz 5 temel sosyal duygusal yetkinlik aşağıdaki kartlarda. <strong>Karta tıklayın ve çevirin;</strong> çevirdikten sonra beceri adlarının <strong>üzerine gelin</strong> ve ne anlama geldiklerini okuyun. Tanımların tamamı Ek 1.1.2'de.</p>
               <a class="ek-link" href="https://drive.google.com/file/d/1S5oKPC05BW7UC-pwW74CGEKls57TYCjY/view?usp=sharing" target="_blank" rel="noopener">
                 <span class="ek-paper" aria-hidden="true">
-                  <span class="ph">1.1.2 · İlişkilendirme</span>
-                  <span class="pt">5 Temel SDÖ Beceri</span>
+                  <span class="ph">1.1.2 · İlişkilendirme</span><span class="pt">5 Temel SDÖ Beceri</span>
                   <span><span class="pp">Öz-Farkındalık</span><span class="pp">Öz-Yönetim</span><span class="pp">Sosyal Sorumluluk</span><span class="pp">İlişki Becerileri</span><span class="pp">Sorumlu Karar</span></span>
                   <span class="pf">Tanımlar + beceri şeması</span>
                 </span>
                 <span class="ek-meta"><b>Ek 1.1.2 · Çalışma Kağıdı</b><i>5 becerinin resmi tanımları ve şeması</i><u>Drive'da aç ↗</u></span>
               </a>
-
               <div class="mf-grid">
-                <div class="mf" role="button" tabindex="0" aria-label="Öz Farkındalık kartını çevir">
-                  <span class="mf-in">
-                    <span class="mf-f"><span class="em">🔍</span><span class="nm" data-tip="Ek 1.1.2: Duygu ve düşüncelerinizi tanımanız ve onların davranışlarınızı nasıl etkilediğini fark etmeniz.">Öz Farkındalık</span><span class="hint">Tıkla ve Çevir</span></span>
-                    <span class="mf-b"><h4>Beceriler · üzerine gel</h4><ul>
-                      <li data-tip="O an hissettiğiniz duyguya ad koymak: 'kaygılıyım', 'heyecanlıyım'.">Duyguları Tanıma</li>
-                      <li data-tip="Kendinizi olduğunuz gibi görmek: güçlü yanlar + gelişecek alanlar.">Doğru Öz Algı</li>
-                      <li data-tip="Başardıklarınızı ve yeteneklerinizi fark edip söyleyebilmek.">Güçlü Yönleri Bilme</li>
-                      <li data-tip="Kendi değerinize ve 'yapabilirim' duygunuza inanmak.">Öz Güven</li>
-                    </ul></span>
-                  </span>
+                <div class="mf" role="button" tabindex="0" aria-label="Öz Farkındalık kartını çevir"><span class="mf-in">
+                  <span class="mf-f"><span class="em">🔍</span><span class="nm" data-tip="Ek 1.1.2: Duygu ve düşüncelerinizi tanımanız ve onların davranışlarınızı nasıl etkilediğini fark etmeniz.">Öz Farkındalık</span><span class="hint">Tıkla ve Çevir</span></span>
+                  <span class="mf-b"><h4>Beceriler · üzerine gel</h4><ul>
+                    <li data-tip="O an hissettiğiniz duyguya ad koymak: 'kaygılıyım', 'heyecanlıyım'.">Duyguları Tanıma</li>
+                    <li data-tip="Kendinizi olduğunuz gibi görmek: güçlü yanlar + gelişecek alanlar.">Doğru Öz Algı</li>
+                    <li data-tip="Başardıklarınızı ve yeteneklerinizi fark edip söyleyebilmek.">Güçlü Yönleri Bilme</li>
+                    <li data-tip="Kendi değerinize ve 'yapabilirim' duygunuza inanmak.">Öz Güven</li>
+                  </ul></span></span>
                 </div>
-                <div class="mf" role="button" tabindex="0" aria-label="Öz Yönetim kartını çevir">
-                  <span class="mf-in">
-                    <span class="mf-f"><span class="em">🧘</span><span class="nm" data-tip="Ek 1.1.2: Duygu, düşünce ve davranışlarınızla etkin ve size yardımcı olacak şekilde başa çıkabilmeniz.">Öz Yönetim</span><span class="hint">Tıkla ve Çevir</span></span>
-                    <span class="mf-b"><h4>Beceriler · üzerine gel</h4><ul>
-                      <li data-tip="Anlık isteği durdurup düşünerek hareket etmek.">Dürtü Kontrolü</li>
-                      <li data-tip="Baskı altında nefes, mola ve planlamayla dengeyi korumak.">Stres Yönetimi</li>
-                      <li data-tip="Motivasyon düşse bile başladığınız işi sürdürmek.">Öz Disiplin</li>
-                      <li data-tip="Ulaşılabilir ve ölçülebilir adımlar belirlemek.">Hedef Koyma</li>
-                    </ul></span>
-                  </span>
+                <div class="mf" role="button" tabindex="0" aria-label="Öz Yönetim kartını çevir"><span class="mf-in">
+                  <span class="mf-f"><span class="em">🧘</span><span class="nm" data-tip="Ek 1.1.2: Duygu, düşünce ve davranışlarınızla etkin ve size yardımcı olacak şekilde başa çıkabilmeniz.">Öz Yönetim</span><span class="hint">Tıkla ve Çevir</span></span>
+                  <span class="mf-b"><h4>Beceriler · üzerine gel</h4><ul>
+                    <li data-tip="Anlık isteği durdurup düşünerek hareket etmek.">Dürtü Kontrolü</li>
+                    <li data-tip="Baskı altında nefes, mola ve planlamayla dengeyi korumak.">Stres Yönetimi</li>
+                    <li data-tip="Motivasyon düşse bile başladığınız işi sürdürmek.">Öz Disiplin</li>
+                    <li data-tip="Ulaşılabilir ve ölçülebilir adımlar belirlemek.">Hedef Koyma</li>
+                  </ul></span></span>
                 </div>
-                <div class="mf" role="button" tabindex="0" aria-label="Sosyal Farkındalık kartını çevir">
-                  <span class="mf-in">
-                    <span class="mf-f"><span class="em">🌍</span><span class="nm" data-tip="Ek 1.1.2'de 'Sosyal Sorumluluk' başlığıyla tanımlanır: farklı aile, toplum ve kültürlerin normlarını bilip saygı göstermek.">Sosyal Farkındalık</span><span class="hint">Tıkla ve Çevir</span></span>
-                    <span class="mf-b"><h4>Beceriler · üzerine gel</h4><ul>
-                      <li data-tip="Olayı karşınızdakinin penceresinden görmek.">Bakış Açısı Edinme</li>
-                      <li data-tip="Karşınızdakinin duygusunu onunla birlikte hissetmek (duygudaşlık).">Empati</li>
-                      <li data-tip="Başka aile, toplum ve kültürlerin normlarına saygı göstermek.">Farklılıklara Saygı</li>
-                    </ul></span>
-                  </span>
+                <div class="mf" role="button" tabindex="0" aria-label="Sosyal Farkındalık kartını çevir"><span class="mf-in">
+                  <span class="mf-f"><span class="em">🌍</span><span class="nm" data-tip="Ek 1.1.2'de 'Sosyal Sorumluluk' başlığıyla tanımlanır: farklı aile, toplum ve kültürlerin normlarını bilip saygı göstermek.">Sosyal Farkındalık</span><span class="hint">Tıkla ve Çevir</span></span>
+                  <span class="mf-b"><h4>Beceriler · üzerine gel</h4><ul>
+                    <li data-tip="Olayı karşınızdakinin penceresinden görmek.">Bakış Açısı Edinme</li>
+                    <li data-tip="Karşınızdakinin duygusunu onunla birlikte hissetmek (duygudaşlık).">Empati</li>
+                    <li data-tip="Başka aile, toplum ve kültürlerin normlarına saygı göstermek.">Farklılıklara Saygı</li>
+                  </ul></span></span>
                 </div>
-                <div class="mf" role="button" tabindex="0" aria-label="İlişki Becerileri kartını çevir">
-                  <span class="mf-in">
-                    <span class="mf-f"><span class="em">🤝</span><span class="nm" data-tip="Ek 1.1.2: Değişik insanlarla, değişik ortamlarda saygılı ve sağlıklı ilişkiler kuracak şekilde iletişim kurmak.">İlişki Becerileri</span><span class="hint">Tıkla ve Çevir</span></span>
-                    <span class="mf-b"><h4>Beceriler · üzerine gel</h4><ul>
-                      <li data-tip="Dinlemek, net mesaj vermek, beden dilini uyumlamak.">İletişim</li>
-                      <li data-tip="Topluluğun iyiliği için sorumluluk üstlenmek.">Sosyal Sorumluluk</li>
-                      <li data-tip="Anlaşmazlığı kazan-kazan adımlarıyla çözmek (ÇÖZÜMLENDİ).">Çatışma Çözme</li>
-                      <li data-tip="Ortak hedef için rol almak ve birbirine güvenmek.">Takım Çalışması</li>
-                    </ul></span>
-                  </span>
+                <div class="mf" role="button" tabindex="0" aria-label="İlişki Becerileri kartını çevir"><span class="mf-in">
+                  <span class="mf-f"><span class="em">🤝</span><span class="nm" data-tip="Ek 1.1.2: Değişik insanlarla, değişik ortamlarda saygılı ve sağlıklı ilişkiler kuracak şekilde iletişim kurmak.">İlişki Becerileri</span><span class="hint">Tıkla ve Çevir</span></span>
+                  <span class="mf-b"><h4>Beceriler · üzerine gel</h4><ul>
+                    <li data-tip="Dinlemek, net mesaj vermek, beden dilini uyumlamak.">İletişim</li>
+                    <li data-tip="Topluluğun iyiliği için sorumluluk üstlenmek.">Sosyal Sorumluluk</li>
+                    <li data-tip="Anlaşmazlığı kazan-kazan adımlarıyla çözmek (ÇÖZÜMLENDİ).">Çatışma Çözme</li>
+                    <li data-tip="Ortak hedef için rol almak ve birbirine güvenmek.">Takım Çalışması</li>
+                  </ul></span></span>
                 </div>
-                <div class="mf" role="button" tabindex="0" aria-label="Sorumluluk Alarak Karar Verme kartını çevir">
-                  <span class="mf-in">
-                    <span class="mf-f"><span class="em">🧠</span><span class="nm" data-tip="Ek 1.1.2: Güvenli ve etkin kararlar verirken farklı etkenleri ve olası sonuçları düşünerek karar verme becerisi.">Sorumluluk Alarak Karar Verme</span><span class="hint">Tıkla ve Çevir</span></span>
-                    <span class="mf-b"><h4>Beceriler · üzerine gel</h4><ul>
-                      <li data-tip="Sorunu net ve kimseyi suçlamadan adlandırmak.">Problem Tanımlama</li>
-                      <li data-tip="Etkenleri ve olası sonuçları tek tek tartmak.">Durum Analizi</li>
-                      <li data-tip="Seçeneklerin sonuçlarını gözden geçirip en iyisini uygulamak.">Değerlendirme</li>
-                    </ul></span>
-                  </span>
+                <div class="mf" role="button" tabindex="0" aria-label="Sorumluluk Alarak Karar Verme kartını çevir"><span class="mf-in">
+                  <span class="mf-f"><span class="em">🧠</span><span class="nm" data-tip="Ek 1.1.2: Güvenli ve etkin kararlar verirken farklı etkenleri ve olası sonuçları düşünerek karar verme becerisi.">Sorumluluk Alarak Karar Verme</span><span class="hint">Tıkla ve Çevir</span></span>
+                  <span class="mf-b"><h4>Beceriler · üzerine gel</h4><ul>
+                    <li data-tip="Sorunu net ve kimseyi suçlamadan adlandırmak.">Problem Tanımlama</li>
+                    <li data-tip="Etkenleri ve olası sonuçları tek tek tartmak.">Durum Analizi</li>
+                    <li data-tip="Seçeneklerin sonuçlarını gözden geçirip en iyisini uygulamak.">Değerlendirme</li>
+                  </ul></span></span>
                 </div>
               </div>
-
               <div class="blk">
                 <h3><span class="em">🏫</span>İlişki Temelli Öğrenim Topluluğu</h3>
                 <p style="margin:0">4-5 kişilik gruplar olun ve tartışın: Bu 5 yetkinliği sınıfımızın huzuru için günlük hayatta nasıl kullanırız? (Örn. sınıf kurallarını belirlerken nasıl karar almalıyız?) Grubunuzdan bir sözcü seçin ve 1 dakikada sınıfa özetleyin.</p>
-                <p style="margin:6px 0 0; font-size:11px; opacity:.85;">📌 Not: Ek 1.1.2'de üçüncü alanın tanımı "Sosyal Sorumluluk" başlığıyla, şemada ise "Sosyal Farkındalık" olarak yer alır; ikisi aynı beceri ailesidir.</p>
+                <p style="margin:6px 0 0; font-size:11px; color:var(--mute);">📌 Not: Ek 1.1.2'de üçüncü alanın tanımı "Sosyal Sorumluluk" başlığıyla, şemada ise "Sosyal Farkındalık" olarak yer alır; ikisi aynı beceri ailesidir.</p>
               </div>
             </div>
-            <div class="face-foot">
+            <div class="pg-foot">
               <button class="nav-btn" type="button" data-goto="0">← Keşfetme'ye Dön</button>
               <button class="nav-btn primary" type="button" data-goto="2">Alıştırmaya Geç →</button>
+              <span class="pgno">s. 03</span>
             </div>
-          </div>
-        </article>
+          </section>
 
-        <!-- BÖLÜM 3 -->
-        <article class="card" data-tilt="-1" style="--g1:#2aa7a0;--g2:#0d4a4f" tabindex="0" aria-label="Bölüm 3: Alıştırma">
-          <div class="face">
-            <div class="face-top"><span class="badge">Bölüm 3: Alıştırma</span><span class="ek">Ek 1.1.3</span></div>
-            <div class="face-top" style="padding-top:8px;">
-              <div class="timer" data-seconds="900">
-                <span class="t-label">Kalan Süre</span><span class="t-display">15:00</span>
-                <button class="t-adj up" type="button" aria-label="Süreyi artır">▲</button>
-                <button class="t-adj down" type="button" aria-label="Süreyi azalt">▼</button>
-                <button class="t-toggle" type="button">Başlat</button>
-              </div>
-            </div>
-            <h2 class="word">İlgi Alanlarınız Nedir?</h2>
-            <div class="face-scroll">
+          <!-- 03 İLGİ ALANLARI -->
+          <section class="page" aria-label="Bölüm 3: Alıştırma">
+            <div class="pg-head"><span class="pg-num">03</span><span class="pg-rule"></span><span class="pg-ek">Ek 1.1.3</span></div>
+            <h2 class="pg-title">İLGİ ALANLARI</h2>
+            <div class="pg-scroll">
               <p>Kendimiz hakkında sorular sormak, inançlarımızın ve kültürümüzün daha fazla farkına varmamızın en önemli yoludur.</p>
-
               <a class="ek-link" href="https://drive.google.com/open?id=1xJEkw_bNkpCv4k1dLHvX7nJI8QrY48Vn&usp=drive_fs" target="_blank" rel="noopener">
                 <span class="ek-paper" aria-hidden="true">
-                  <span class="ph">1.1.3 · Alıştırma</span>
-                  <span class="pt">İlgileriniz neler?</span>
+                  <span class="ph">1.1.3 · Alıştırma</span><span class="pt">İlgileriniz neler?</span>
                   <span class="pl">...... severim</span><span class="pl">...... severim</span><span class="pl">...... severim</span><span class="pl">...... severim</span><span class="pl">...... severim</span>
                   <span class="pf">Amaç: 30 sn'de çok yanıt</span>
                 </span>
                 <span class="ek-meta"><b>Ek 1.1.3 · Çalışma Kağıdı</b><i>"... severim" satırlarınızın olduğu sayfa</i><u>Drive'da aç ↗</u></span>
               </a>
-
               <div class="blk">
                 <h3><span class="em">🎤</span>Röportaj Zamanı!</h3>
                 <ol class="olist" style="margin-top:8px;">
@@ -500,75 +482,77 @@
                 </ol>
               </div>
             </div>
-            <div class="face-foot">
+            <div class="pg-foot">
               <button class="nav-btn" type="button" data-goto="1">← İlişkilendirmeye Dön</button>
               <button class="nav-btn primary" type="button" data-goto="3">Kapanış &amp; Çıkış Kartı →</button>
+              <span class="pgno">s. 04</span>
             </div>
-          </div>
-        </article>
+          </section>
 
-        <!-- BÖLÜM 4 -->
-        <article class="card" data-tilt="1.4" style="--g1:#e8a13c;--g2:#7a4a10" tabindex="0" aria-label="Bölüm 4: Yansıma">
-          <div class="face">
-            <div class="face-top"><span class="badge">Bölüm 4: Yansıma · Değerlendirme</span><span class="ek">Ek 1.1.4</span></div>
-            <div class="face-top" style="padding-top:8px;">
-              <div class="timer" data-seconds="300">
-                <span class="t-label">Kalan Süre</span><span class="t-display">05:00</span>
-                <button class="t-adj up" type="button" aria-label="Süreyi artır">▲</button>
-                <button class="t-adj down" type="button" aria-label="Süreyi azalt">▼</button>
-                <button class="t-toggle" type="button">Başlat</button>
-              </div>
-            </div>
-            <h2 class="word">Çıkış Kartı</h2>
-            <div class="face-scroll">
+          <!-- 04 ÇIKIŞ KARTI -->
+          <section class="page" aria-label="Bölüm 4: Yansıma">
+            <div class="pg-head"><span class="pg-num">04</span><span class="pg-rule"></span><span class="pg-ek">Ek 1.1.4</span></div>
+            <h2 class="pg-title">ÇIKIŞ KARTI</h2>
+            <div class="pg-scroll">
               <p>Bugünkü dersi özetlemek için aşağıdaki üç soruyu önce kendi kendinize düşünün, sonra cevaplarınızı sınıfla tartışın.</p>
               <div class="qcard"><span class="n">1</span><div><b>NE?</b>Kim olduğunuzu iyi anladığınızı düşünüyor musunuz?</div></div>
               <div class="qcard"><span class="n">2</span><div><b>NE OLDU?</b>İyi tanımadığınız bir sınıf arkadaşınızın sizinle aynı şeylerden hoşlandığını fark ettiniz mi?</div></div>
               <div class="qcard"><span class="n">3</span><div><b>ŞİMDİ NE OLACAK?</b>Bu benzerlikleri, iyi tanımadığınız bu arkadaşlarınızla iletişim kurabilmek için nasıl kullanacaksınız?</div></div>
-
               <a class="ek-link" href="https://drive.google.com/file/d/1gBRS0KfCR_KJm8jHhlxR81pYP4auSaxJ/view?usp=sharing" target="_blank" rel="noopener">
                 <span class="ek-paper" aria-hidden="true">
-                  <span class="ph">1.1.4 · Uygulama</span>
-                  <span class="pt">Gözlem Ödevi</span>
+                  <span class="ph">1.1.4 · Uygulama</span><span class="pt">Gözlem Ödevi</span>
                   <span class="pl">1 ... İzledim → özelliği:</span><span class="pl">2 ... İzledim → özelliği:</span><span class="pl">3 ... İzledim → özelliği:</span>
                   <span class="pf">3 arkadaş · olumlu özellik</span>
                 </span>
                 <span class="ek-meta"><b>Ek 1.1.4 · Çalışma Kağıdı</b><i>3 günlük gözlem çizelgeniz</i><u>Drive'da aç ↗</u></span>
               </a>
-
               <div class="blk">
                 <h3><span class="em">📝</span>Ev / Uygulama Ödevi</h3>
                 <p style="margin:0">Ek 1.1.4'ü açın: Önümüzdeki birkaç gün boyunca iyi tanımadığınız <strong>üç sınıf arkadaşınızı</strong> izleyin ve her biri için en az bir olumlu özelliği "... izledim, olumlu özelliği: ..." satırlarına not edin. Gözlemlerinizi bir sonraki derste sınıfla paylaşın.</p>
               </div>
               <p class="credit">© 2024 Yaşam Becerileri Ders Modülü | Olumlu Öğrenme Ortamı</p>
             </div>
-            <div class="face-foot"><button class="nav-btn primary" type="button" data-goto="0">↺ Sunumu Başa Sar</button></div>
-          </div>
-        </article>
+            <div class="pg-foot">
+              <button class="nav-btn primary" type="button" data-goto="0">↺ Sunumu Başa Sar</button>
+              <span class="pgno">s. 05</span>
+            </div>
+          </section>
 
+          <div class="curl" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <div class="board" aria-hidden="true">
+        <span class="b-em"><i data-lucide="graduation-cap" width="26" height="26"></i></span>
+        <h2>SEN KIMSIN?</h2>
+        <p>Olumlu Öğrenme Ortamı · Yaşam Becerileri</p>
       </div>
     </div>
 
     <button class="arrow left" id="prev" type="button" aria-label="Önceki bölüm">‹</button>
     <button class="arrow right" id="next" type="button" aria-label="Sonraki bölüm">›</button>
+  </div>
+
+  <div class="bottombar">
+    <button class="bb-btn" id="bb-back" type="button">← ÖNCEKİ</button>
     <div class="dots" id="dots" role="tablist" aria-label="Bölüm seç"></div>
-    <p class="counter" id="counter">Bölüm 1 / 4</p>
+    <button class="bb-btn" id="bb-next" type="button">SONRAKİ →</button>
   </div>
 
   <div class="desk" aria-hidden="true"></div>
-  <svg class="prop notebook" viewBox="0 0 170 90" aria-hidden="true">
-    <path d="M85 18C60 4 25 6 8 14v62c17-8 52-10 77 4 25-14 60-12 77-4V14c-17-8-52-10-77 4Z" fill="#f3e6cf"/>
-    <path d="M85 18v62" stroke="#c9b48f" stroke-width="3"/>
-    <g stroke="#8a6f4d" stroke-width="2.4" fill="none" stroke-linecap="round">
-      <path d="M22 32c14-5 34-5 48 0M22 44c14-5 34-5 48 0M22 56c14-5 34-5 48 0M100 32c14-5 34-5 48 0M100 44c14-5 34-5 48 0"/>
-    </g>
-    <path d="M100 58c8 6 20 6 30 2" stroke="#ef7d6d" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <svg class="prop bookstack" viewBox="0 0 150 90" aria-hidden="true">
+    <rect x="6" y="58" width="140" height="26" rx="5" fill="#17335f"/><rect x="120" y="62" width="8" height="18" rx="3" fill="#e8d9b0"/>
+    <text x="18" y="76" font-family="Playfair Display, serif" font-size="13" fill="#e8d9b0">Duygu Günlüğü</text>
+    <rect x="0" y="30" width="132" height="26" rx="5" fill="#1d3f74"/><rect x="112" y="34" width="8" height="18" rx="3" fill="#e8d9b0"/>
+    <text x="12" y="48" font-family="Playfair Display, serif" font-size="13" fill="#e8d9b0">Sınıf Kitabı</text>
+    <rect x="14" y="6" width="112" height="22" rx="5" fill="#0f4c5c"/><rect x="108" y="10" width="7" height="14" rx="3" fill="#e8d9b0"/>
+    <text x="24" y="22" font-family="Playfair Display, serif" font-size="12" fill="#e8d9b0">Gözlem Defteri</text>
   </svg>
   <svg class="prop pencils" viewBox="0 0 64 80" aria-hidden="true">
     <rect x="10" y="34" width="44" height="44" rx="8" fill="#241540"/>
-    <rect x="18" y="6" width="7" height="34" rx="3" fill="#f5b352"/><path d="M18 6l3.5-6L25 6Z" fill="#e6d7f7"/>
-    <rect x="29" y="12" width="7" height="28" rx="3" fill="#ef7d6d"/><path d="M29 12l3.5-6L36 12Z" fill="#e6d7f7"/>
-    <rect x="40" y="2" width="7" height="38" rx="3" fill="#2aa7a0"/><path d="M40 2l3.5-6L47 2Z" fill="#e6d7f7"/>
+    <rect x="18" y="6" width="7" height="34" rx="3" fill="#e8a13c"/><path d="M18 6l3.5-6L25 6Z" fill="#f6ecd9"/>
+    <rect x="29" y="12" width="7" height="28" rx="3" fill="#ef7d6d"/><path d="M29 12l3.5-6L36 12Z" fill="#f6ecd9"/>
+    <rect x="40" y="2" width="7" height="38" rx="3" fill="#2aa7a0"/><path d="M40 2l3.5-6L47 2Z" fill="#f6ecd9"/>
   </svg>
   <svg class="prop plane" viewBox="0 0 90 60" aria-hidden="true">
     <path d="M4 30L86 6 40 54 32 36Z" fill="#f6ecd9"/><path d="M86 6L32 36l8 18-4-20Z" fill="#d9c6f2"/>
@@ -584,126 +568,112 @@
 </div>
 
 <script>
-  const cards = Array.from(document.querySelectorAll(".card"));
-  const stage = document.getElementById("stage");
+  const pages = Array.from(document.querySelectorAll(".page"));
+  const tabs = Array.from(document.querySelectorAll(".tab"));
+  const pageRight = document.getElementById("page-right");
   const prev = document.getElementById("prev");
   const next = document.getElementById("next");
+  const bbBack = document.getElementById("bb-back");
+  const bbNext = document.getElementById("bb-next");
   const dotsWrap = document.getElementById("dots");
-  const counter = document.getElementById("counter");
-  const jumpBtns = Array.from(document.querySelectorAll("#jump button"));
+  const prog = document.getElementById("prog");
   const startBtn = document.getElementById("start-tour");
   const homePill = document.getElementById("home-pill");
+  const spread = document.getElementById("spread");
   let cur = 0;
 
-  cards.forEach((_, i) => {
+  pages.forEach((_, i) => {
     const d = document.createElement("button");
     d.className = "dot"; d.type = "button"; d.setAttribute("role", "tab");
     d.setAttribute("aria-label", "Bölüm " + (i + 1));
-    d.addEventListener("click", () => setSlide(i));
+    d.addEventListener("click", () => goto(i));
     dotsWrap.appendChild(d);
   });
   const dots = Array.from(dotsWrap.children);
 
   const entered = () => document.body.classList.contains("entered");
-  const enterTour = () => { document.body.classList.add("entered"); setTimeout(layout, 60); };
-  const exitTour = () => document.body.classList.remove("entered");
+  const enterBook = () => document.body.classList.add("entered");
+  const exitBook = () => document.body.classList.remove("entered");
 
-  function setSlide(i){ cur = Math.max(0, Math.min(i, cards.length - 1)); layout(); }
-
-  function layout(){
-    const w = cards[0].offsetWidth;
-    const spacing = w * 0.66, depth = w * 0.42;
-    cards.forEach((c, i) => {
-      const o = i - cur, a = Math.abs(o), sign = Math.sign(o);
-      const angle = sign === 0 ? 0 : sign * Math.min(46, 34 + a * 6);
-      const x = o * spacing * (1 - Math.min(a, 4) * 0.06);
-      const z = -a * depth;
-      const s = 1 - Math.min(a, 4) * 0.07;
-      const tilt = parseFloat(c.dataset.tilt || 0);
-      c.style.transform = "translateY(-50%) translateX(" + x + "px) translateZ(" + z + "px) rotateY(" + angle + "deg) rotateZ(" + tilt + "deg) scale(" + s + ")";
-      c.style.zIndex = 100 - a;
-      c.style.opacity = a > 3 ? 0.4 : 1 - a * 0.08;
-      c.classList.toggle("active", o === 0);
-      c.setAttribute("aria-hidden", String(o !== 0));
-    });
+  function goto(i){
+    const t = Math.max(0, Math.min(i, pages.length - 1));
+    if (t === cur && pages[cur].classList.contains("active")) { sync(); return; }
+    cur = t;
+    pages.forEach((p, idx) => p.classList.toggle("active", idx === cur));
+    pageRight.classList.remove("turn"); void pageRight.offsetWidth; pageRight.classList.add("turn");
+    sync();
+    renderTimer();
+  }
+  function sync(){
+    tabs.forEach((b, i) => b.classList.toggle("active", i === cur));
     dots.forEach((d, i) => { d.classList.toggle("active", i === cur); d.setAttribute("aria-selected", String(i === cur)); });
-    jumpBtns.forEach((b, i) => b.classList.toggle("active", i === cur));
-    prev.disabled = cur === 0;
-    next.disabled = cur === cards.length - 1;
-    counter.textContent = "Bölüm " + (cur + 1) + " / " + cards.length;
+    prev.disabled = bbBack.disabled = cur === 0;
+    next.disabled = bbNext.disabled = cur === pages.length - 1;
+    prog.textContent = "BÖLÜM " + (cur + 1) + " / " + pages.length;
   }
 
-  startBtn.addEventListener("click", enterTour);
-  homePill.addEventListener("click", (e) => { e.preventDefault(); exitTour(); });
-  prev.addEventListener("click", () => setSlide(cur - 1));
-  next.addEventListener("click", () => setSlide(cur + 1));
-  jumpBtns.forEach((b) => b.addEventListener("click", () => setSlide(parseInt(b.dataset.goto, 10))));
+  startBtn.addEventListener("click", enterBook);
+  homePill.addEventListener("click", (e) => { e.preventDefault(); exitBook(); });
+  prev.addEventListener("click", () => goto(cur - 1));
+  next.addEventListener("click", () => goto(cur + 1));
+  bbBack.addEventListener("click", () => goto(cur - 1));
+  bbNext.addEventListener("click", () => goto(cur + 1));
+  tabs.forEach((b) => b.addEventListener("click", () => goto(parseInt(b.dataset.goto, 10))));
   document.querySelectorAll(".nav-btn[data-goto]").forEach(b => {
-    b.addEventListener("click", (e) => { e.stopPropagation(); setSlide(parseInt(b.dataset.goto, 10)); });
-  });
-  cards.forEach((c, i) => {
-    c.addEventListener("click", (e) => {
-      if (e.target.closest("button, a, .mf")) return;
-      if (i !== cur) setSlide(i);
-    });
+    b.addEventListener("click", (e) => { e.stopPropagation(); goto(parseInt(b.dataset.goto, 10)); });
   });
 
-  /* mini flip cards (div role=button) */
+  /* mini flip cards */
   document.querySelectorAll(".mf").forEach(mf => {
-    const flip = (e) => {
-      e.stopPropagation();
-      const flipped = mf.classList.toggle("flipped");
-      mf.setAttribute("aria-pressed", String(flipped));
-    };
+    const flip = (e) => { e.stopPropagation(); const f = mf.classList.toggle("flipped"); mf.setAttribute("aria-pressed", String(f)); };
     mf.addEventListener("click", flip);
-    mf.addEventListener("keydown", (e) => {
-      if ((e.key === "Enter" || e.key === " ") && e.target === mf) { e.preventDefault(); flip(e); }
-    });
+    mf.addEventListener("keydown", (e) => { if ((e.key === "Enter" || e.key === " ") && e.target === mf) { e.preventDefault(); flip(e); } });
   });
 
-  /* timers */
-  document.querySelectorAll(".timer").forEach(root => {
-    let remaining = parseInt(root.dataset.seconds, 10), id = null;
-    const display = root.querySelector(".t-display");
-    const toggle = root.querySelector(".t-toggle");
-    const fmt = s => String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
-    const render = () => { display.textContent = fmt(remaining); root.classList.toggle("zero", remaining === 0); };
-    const stop = () => { if (id) clearInterval(id); id = null; toggle.textContent = "Başlat"; };
-    toggle.addEventListener("click", (e) => {
-      e.stopPropagation();
-      if (id) { stop(); return; }
-      if (remaining === 0) return;
-      toggle.textContent = "Duraklat";
-      id = setInterval(() => { remaining--; render(); if (remaining <= 0) stop(); }, 1000);
-    });
-    root.querySelector(".up").addEventListener("click", (e) => { e.stopPropagation(); remaining = Math.min(5940, remaining + 60); render(); });
-    root.querySelector(".down").addEventListener("click", (e) => { e.stopPropagation(); remaining = Math.max(0, remaining - 60); render(); if (remaining === 0) stop(); });
-    render();
+  /* per-section timers, single widget */
+  const SECONDS = [600, 600, 900, 300];
+  const timers = SECONDS.map(s => ({ remaining: s, id: null }));
+  const tDisp = document.getElementById("t-display");
+  const tTog = document.getElementById("t-toggle");
+  const tWrap = document.getElementById("lp-timer");
+  const fmt = s => String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
+  function renderTimer(){
+    const t = timers[cur];
+    tDisp.textContent = fmt(t.remaining);
+    tTog.textContent = t.id ? "Duraklat" : "Başlat";
+    tWrap.classList.toggle("zero", t.remaining === 0);
+  }
+  function stopTimer(i){ if (timers[i].id) clearInterval(timers[i].id); timers[i].id = null; if (i === cur) renderTimer(); }
+  tTog.addEventListener("click", () => {
+    const t = timers[cur];
+    if (t.id) { stopTimer(cur); return; }
+    if (t.remaining === 0) return;
+    t.id = setInterval(() => { t.remaining--; if (t.remaining <= 0) { t.remaining = 0; stopTimer(cur); } else if (cur === pages.indexOf(pages[cur])) renderTimer(); if (cur >= 0) renderTimer(); }, 1000);
+    renderTimer();
   });
+  document.getElementById("t-up").addEventListener("click", () => { timers[cur].remaining = Math.min(5940, timers[cur].remaining + 60); renderTimer(); });
+  document.getElementById("t-down").addEventListener("click", () => { timers[cur].remaining = Math.max(0, timers[cur].remaining - 60); if (timers[cur].remaining === 0) stopTimer(cur); renderTimer(); });
 
   /* keyboard */
   document.addEventListener("keydown", (e) => {
-    if (!entered()) {
-      if (e.key === "ArrowRight" || e.key === "Enter") { e.preventDefault(); enterTour(); }
-      return;
-    }
-    if (e.key === "ArrowRight") { e.preventDefault(); setSlide(cur + 1); }
-    else if (e.key === "ArrowLeft") { e.preventDefault(); setSlide(cur - 1); }
-    else if (e.key === "Home") { e.preventDefault(); setSlide(0); }
-    else if (e.key === "End") { e.preventDefault(); setSlide(cards.length - 1); }
-    else if (e.key === "Escape") { exitTour(); }
+    if (!entered()) { if (e.key === "ArrowRight" || e.key === "Enter") { e.preventDefault(); enterBook(); } return; }
+    if (e.key === "ArrowRight") { e.preventDefault(); goto(cur + 1); }
+    else if (e.key === "ArrowLeft") { e.preventDefault(); goto(cur - 1); }
+    else if (e.key === "Home") { e.preventDefault(); goto(0); }
+    else if (e.key === "End") { e.preventDefault(); goto(pages.length - 1); }
+    else if (e.key === "Escape") { exitBook(); }
   });
 
-  /* swipe */
+  /* swipe on the spread */
   let tx = 0, ty = 0;
-  stage.addEventListener("touchstart", e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
-  stage.addEventListener("touchend", e => {
+  spread.addEventListener("touchstart", e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+  spread.addEventListener("touchend", e => {
     const dx = tx - e.changedTouches[0].clientX, dy = ty - e.changedTouches[0].clientY;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) setSlide(dx > 0 ? cur + 1 : cur - 1);
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) goto(dx > 0 ? cur + 1 : cur - 1);
   }, { passive: true });
 
-  window.addEventListener("resize", layout);
-  layout();
+  sync(); renderTimer();
+  lucide.createIcons();
 </script>
 </body>
 </html>
