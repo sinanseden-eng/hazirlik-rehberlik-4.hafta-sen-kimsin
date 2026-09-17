@@ -26,12 +26,12 @@
     background:radial-gradient(circle, rgba(255,214,150,.28), transparent 65%); filter:blur(10px);}
   .wall-glow{position:absolute; z-index:0; right:-160px; top:20%; width:520px; height:420px;
     background:radial-gradient(circle, rgba(90,140,220,.18), transparent 70%); filter:blur(12px);}
-  .script-tr{position:absolute; z-index:2; right:56px; top:30px; transform:rotate(-5deg);
-    font-family:"Caveat",cursive; font-size:26px; line-height:1.05; color:#cfe0f4;}
+  .script-tr{position:absolute; z-index:2; right:44px; top:86px; transform:rotate(-5deg);
+    font-family:"Caveat",cursive; font-size:25px; line-height:1.05; color:#cfe0f4;}
   .note-left{position:absolute; z-index:2; left:3vw; top:26%; color:#7f9bc4;
     font-weight:700; font-size:15px; line-height:1.45; letter-spacing:.14em;}
   .note-left::after{content:""; display:block; width:42px; height:3px; background:#7f9bc4; margin-top:10px; border-radius:2px;}
-  .banner-right{position:absolute; z-index:2; right:3vw; top:24%; transform:rotate(3deg);
+  .banner-right{position:absolute; z-index:2; right:3vw; top:26%; transform:rotate(3deg);
     background:#e8eef7; color:#29497c; border-radius:4px; padding:16px 14px;
     font-weight:700; font-size:13px; letter-spacing:.08em; line-height:1.45;
     box-shadow:0 16px 34px rgba(3,8,20,.5);}
@@ -72,25 +72,26 @@
   .cover-hint{margin:0; color:#7f9bc4; font-size:12.5px;}
   .cover-hint kbd{background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); border-radius:5px; padding:1px 7px; font-family:inherit;}
 
-  /* ---------- book stage ---------- */
-  .book-stage{position:absolute; left:0; right:0; top:76px; bottom:150px; display:flex; align-items:center; justify-content:center;
+  /* ---------- book ---------- */
+  .book-stage{position:absolute; left:0; right:0; top:70px; bottom:140px; display:flex; align-items:center; justify-content:center;
     opacity:0; transition:opacity .5s ease .25s;}
   body.entered .book-stage{opacity:1;}
-  .book{position:relative; width:min(1180px,94vw); height:clamp(420px, calc(100vh - 290px), 640px);
-    padding:12px; border-radius:18px; perspective:2200px;
+  .book{position:relative; padding:12px; border-radius:18px; perspective:2200px;
+    height:min(700px, calc(100vh - 235px));
+    width:min(1060px, 94vw, calc((100vh - 235px) * 1.5));
     background:linear-gradient(160deg,#17335f,#0d1e3a 70%);
     box-shadow:0 40px 80px -24px rgba(2,6,18,.85), inset 0 2px 0 rgba(255,255,255,.12);}
-  .spread{position:relative; height:100%; display:grid; grid-template-columns:clamp(225px,31%,330px) 1fr;
+  .spread{position:relative; height:100%; display:grid; grid-template-columns:clamp(225px,33%,335px) 1fr;
     border-radius:10px; overflow:hidden; background:var(--cream);}
   .spread::before,.spread::after{content:""; position:absolute; top:0; bottom:0; width:6px; z-index:6; pointer-events:none;
     background:repeating-linear-gradient(180deg,#e6dcc6 0 2px,#c9bb9e 2px 3px);}
   .spread::before{left:0;} .spread::after{right:0;}
 
   /* left page */
-  .page-left{position:relative; background:
-      repeating-linear-gradient(0deg, rgba(120,90,40,.03) 0 2px, transparent 2px 7px), var(--cream);
+  .page-left{position:relative; display:flex; flex-direction:column; gap:10px; overflow:hidden;
+    background:repeating-linear-gradient(0deg, rgba(120,90,40,.03) 0 2px, transparent 2px 7px), var(--cream);
     box-shadow:inset -24px 0 28px -22px rgba(30,15,0,.45);
-    padding:20px 18px 14px; display:flex; flex-direction:column; gap:12px;}
+    padding:18px 16px 12px;}
   .lp-head{font-size:11px; font-weight:800; letter-spacing:.32em; color:var(--marigold-d);
     padding-bottom:8px; border-bottom:2px solid rgba(29,53,87,.25);}
   .tabs{display:flex; flex-direction:column; gap:8px;}
@@ -106,10 +107,12 @@
     box-shadow:0 10px 22px -8px rgba(20,10,0,.45);}
   .tab.active .t-num{background:rgba(255,255,255,.28);}
   .tab.active i, .tab.active svg, .tab.active .t-label{color:#fff;}
-  .lp-timer{margin-top:auto; background:var(--paper); border:1px solid rgba(29,53,87,.2); border-radius:12px; padding:10px 12px;
+  .lp-spacer{flex:1 1 auto; min-height:6px;}
+  .lp-timer{background:var(--paper); border:1px solid rgba(29,53,87,.2); border-radius:12px; padding:10px 12px;
     display:flex; flex-direction:column; gap:8px;}
   .timer-row{display:flex; align-items:center; gap:7px; flex-wrap:wrap;}
   .t-label{font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--mute); font-weight:700;}
+  .t-label b{color:var(--marigold-d);}
   .t-display{font-weight:800; font-size:20px; font-variant-numeric:tabular-nums; color:var(--navy-2); min-width:58px; text-align:center;}
   .t-adj{width:24px; height:24px; border-radius:50%; border:1px solid rgba(29,53,87,.3); background:rgba(29,53,87,.06);
     color:var(--navy-2); font-size:9px; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;}
@@ -118,20 +121,16 @@
     background:linear-gradient(95deg,var(--marigold),var(--rose)); color:#241a05; cursor:pointer; margin-left:auto;}
   .lp-timer.zero .t-display{color:#c0392b; animation:pulse 1s infinite;}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-  .lp-note{font-family:"Caveat",cursive; font-size:20px; color:var(--marigold-d); transform:rotate(-3deg); line-height:1.15;}
+  .lp-note{font-family:"Caveat",cursive; font-size:19px; color:var(--marigold-d); transform:rotate(-3deg); line-height:1.15;}
   .lp-page{align-self:center; font-family:"Playfair Display",serif; font-size:12px; color:var(--marigold-d);}
 
   /* right page */
-  .page-right{position:relative; transform-origin:left center;
+  .page-right{position:relative;
     background:repeating-linear-gradient(0deg, rgba(120,90,40,.03) 0 2px, transparent 2px 7px), var(--cream);
     box-shadow:inset 24px 0 28px -22px rgba(30,15,0,.45);}
   .page-right.turn{animation:pageTurn .5s ease;}
   @keyframes pageTurn{0%{transform:rotateY(15deg); opacity:.35; filter:brightness(.92);}100%{transform:rotateY(0); opacity:1;}}
-  .curl{position:absolute; right:4px; bottom:4px; width:64px; height:64px; z-index:5; pointer-events:none;
-    background:linear-gradient(315deg, transparent 44%, #c9bb9e 46%, var(--paper-2) 60%, #fffef8 100%);
-    clip-path:polygon(100% 0, 100% 100%, 0 100%);
-    filter:drop-shadow(-8px -8px 10px rgba(60,40,10,.25));}
-  .page{display:none; height:100%; flex-direction:column; padding:18px 26px 12px 24px;}
+  .page{position:absolute; inset:0; display:none; flex-direction:column; padding:18px 26px 12px 24px;}
   .page.active{display:flex;}
   .pg-head{display:flex; align-items:center; gap:12px;}
   .pg-num{font-family:"Playfair Display",serif; font-weight:800; font-size:15px; color:var(--marigold-d);}
@@ -140,7 +139,7 @@
     border:1px dashed rgba(164,85,30,.55); border-radius:6px; padding:3px 8px;}
   .pg-title{margin:6px 0 8px; font-family:"Playfair Display",serif; font-weight:800; color:var(--navy);
     font-size:clamp(24px,2.9vw,38px); letter-spacing:.01em; line-height:1.1;}
-  .pg-scroll{flex:1; overflow-y:auto; padding-right:8px; font-size:13px; line-height:1.6; color:var(--ink);
+  .pg-scroll{flex:1 1 auto; min-height:0; overflow-y:auto; padding-right:8px; font-size:13px; line-height:1.6; color:var(--ink);
     scrollbar-width:thin; scrollbar-color:rgba(29,53,87,.35) transparent;}
   .pg-scroll::-webkit-scrollbar{width:6px}
   .pg-scroll::-webkit-scrollbar-thumb{background:rgba(29,53,87,.3); border-radius:3px}
@@ -165,7 +164,7 @@
   .qcard .n{font-family:"Playfair Display",serif; font-weight:800; font-size:21px; color:var(--marigold-d); line-height:1;}
   .qcard b{display:block; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--marigold-d); margin-bottom:3px;}
 
-  /* ek link + paper preview */
+  /* ek link */
   .ek-link{display:flex; gap:12px; align-items:center; text-decoration:none; color:inherit;
     background:var(--paper); border:1px solid rgba(164,85,30,.35); border-radius:14px;
     padding:10px 12px; margin:0 0 10px; box-shadow:0 6px 16px -8px rgba(30,15,0,.3);
@@ -179,7 +178,7 @@
   .ek-paper .pl{border-bottom:1px dashed #b99b6d; padding-bottom:2px; color:#6b4a2a; white-space:nowrap; overflow:hidden;}
   .ek-paper .pp{display:inline-block; background:#e8dcc4; border:1px solid #c9ab7c; border-radius:3px; padding:0 3px; margin:0 2px 2px 0; font-size:5.6px;}
   .ek-paper .pf{margin-top:auto; font-size:5.6px; color:#8a5a2c; font-style:italic;}
-  .ek-meta{display:flex; flex-direction:column; gap:2px; min-width:0;}
+  .ek-meta{display:flex; flex-direction:column; gap:2px; min-width:0; flex:1;}
   .ek-meta b{font-size:12.5px; color:var(--marigold-d);}
   .ek-meta i{font-size:11px; color:var(--mute); font-style:normal;}
   .ek-meta u{font-size:11px; color:var(--marigold-d); font-weight:800; text-decoration:none;}
@@ -198,17 +197,20 @@
     content:""; position:absolute; left:50%; top:calc(100% + 1px); transform:translateX(-50%);
     border:6px solid transparent; border-bottom-color:rgba(232,161,60,.6); z-index:80; pointer-events:none;}
 
-  /* mini flip cards */
+  /* mini flip cards — FIXED: block-level layers */
   .mf-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:10px 0;}
   .mf-grid .mf:last-child{grid-column:1 / -1;}
-  .mf{perspective:900px; height:150px; cursor:pointer;}
-  .mf-in{position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .6s cubic-bezier(.35,.1,.25,1);}
+  .mf{display:block; perspective:900px; height:152px; cursor:pointer;}
+  .mf-in{display:block; position:relative; width:100%; height:100%; transform-style:preserve-3d;
+    transition:transform .6s cubic-bezier(.35,.1,.25,1);}
   .mf.flipped .mf-in{transform:rotateY(180deg);}
   .mf-f,.mf-b{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:14px;
-    padding:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; text-align:center;}
+    padding:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; text-align:center;
+    overflow:hidden;}
   .mf-f{background:rgba(29,53,87,.07); border:1px solid rgba(29,53,87,.25);}
   .mf-b{transform:rotateY(180deg); background:linear-gradient(160deg,#24406b,#16324f); border:1px solid rgba(232,161,60,.6);}
-  .mf-f .em{font-size:26px;} .mf-f .nm{font-weight:800; font-size:12.5px; color:var(--navy-2); line-height:1.25;}
+  .mf-f .em{font-size:26px; line-height:1;}
+  .mf-f .nm{font-weight:800; font-size:12.5px; color:var(--navy-2); line-height:1.25;}
   .mf-f .hint{font-size:9.5px; color:rgba(29,53,87,.55); letter-spacing:.1em; text-transform:uppercase; font-weight:700;}
   .mf-b h4{margin:0; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--marigold);}
   .mf-b ul{margin:0; padding:0; list-style:none; font-size:11px; line-height:1.5; color:rgba(255,255,255,.94);}
@@ -224,16 +226,20 @@
   .nav-btn.primary{background:linear-gradient(95deg,var(--marigold),var(--rose)); border-color:transparent; color:#241a05;}
   .pgno{font-family:"Playfair Display",serif; font-size:11px; color:var(--marigold-d); padding:0 4px;}
   .credit{margin:4px 0 2px; font-size:10.5px; color:var(--mute); text-align:center;}
+  .curl{position:absolute; right:4px; bottom:4px; width:60px; height:60px; z-index:5; pointer-events:none;
+    background:linear-gradient(315deg, transparent 44%, #c9bb9e 46%, var(--paper-2) 60%, #fffef8 100%);
+    clip-path:polygon(100% 0, 100% 100%, 0 100%);
+    filter:drop-shadow(-8px -8px 10px rgba(60,40,10,.25));}
 
-  /* book cover board */
+  /* board */
   .board{position:absolute; inset:12px; z-index:8; transform-origin:left center; border-radius:8px 14px 14px 8px;
     background:linear-gradient(160deg,#1b3a6b,#0e2246 65%);
     box-shadow:inset 5px 0 14px rgba(0,0,0,.45), 0 26px 60px -18px rgba(0,0,0,.7);
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; text-align:center; padding:20px;}
   .board .b-em{width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center;
     background:rgba(242,160,107,.2); color:#f2a06b; border:1px solid rgba(242,160,107,.5);}
-  .board h2{margin:0; font-family:"Playfair Display",serif; font-weight:800; color:#f4f8ff; font-size:clamp(28px,4.4vw,54px);}
-  .board p{margin:0; color:#bcd0ea; font-size:13px; letter-spacing:.14em; text-transform:uppercase; font-weight:600;}
+  .board h2{margin:0; font-family:"Playfair Display",serif; font-weight:800; color:#f4f8ff; font-size:clamp(26px,4vw,50px);}
+  .board p{margin:0; color:#bcd0ea; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; font-weight:600;}
   body.entered .board{animation:openBoard 1.05s cubic-bezier(.6,.05,.3,1) forwards; pointer-events:none;}
   @keyframes openBoard{0%{transform:rotateY(0); opacity:1;} 72%{opacity:1;} 100%{transform:rotateY(-160deg); opacity:0;}}
 
@@ -245,7 +251,7 @@
   .arrow:hover:not(:disabled){transform:scale(1.07); background:rgba(20,38,74,.92);}
   .arrow:disabled{opacity:.35; cursor:not-allowed;}
   .arrow.left{left:2.4vw;} .arrow.right{right:2.4vw;}
-  .bottombar{position:absolute; z-index:30; left:50%; transform:translateX(-50%); bottom:34px;
+  .bottombar{position:absolute; z-index:30; left:50%; transform:translateX(-50%); bottom:30px;
     display:flex; align-items:center; gap:18px;}
   .bb-btn{border:0; background:none; color:#f6ecd9; font-family:inherit; font-weight:700; font-size:11.5px;
     letter-spacing:.18em; cursor:pointer; display:flex; align-items:center; gap:8px; opacity:.9;}
@@ -257,39 +263,39 @@
   .dot:hover{transform:scale(1.25);}
   .dot.active{background:var(--marigold); transform:scale(1.25);}
 
-  /* desk & props */
-  .desk{position:absolute; z-index:10; left:0; right:0; bottom:0; height:120px;
+  /* desk */
+  .desk{position:absolute; z-index:10; left:0; right:0; bottom:0; height:112px;
     background:linear-gradient(180deg,var(--desk-1) 0%,#5d3620 34%,var(--desk-2) 100%);}
   .desk::before{content:""; position:absolute; inset:0;
     background:repeating-linear-gradient(98deg, rgba(255,255,255,.05) 0 3px, transparent 3px 26px),
                linear-gradient(180deg, rgba(255,226,170,.3), transparent 24%);}
   .prop{position:absolute; z-index:12; filter:drop-shadow(0 8px 16px rgba(0,0,0,.45));}
-  .bookstack{left:3vw; bottom:96px; width:150px;}
-  .pencils{left:calc(3vw + 170px); bottom:92px; width:58px;}
-  .mug{position:absolute; z-index:12; right:5vw; bottom:60px; width:118px; height:92px;
+  .bookstack{left:3vw; bottom:92px; width:150px;}
+  .pencils{left:calc(3vw + 168px); bottom:88px; width:56px;}
+  .mug{position:absolute; z-index:12; right:5vw; bottom:56px; width:116px; height:90px;
     background:#171214; border-radius:14px 14px 20px 20px; box-shadow:0 12px 26px rgba(0,0,0,.5);}
   .mug::after{content:""; position:absolute; right:-30px; top:22px; width:40px; height:44px; border:10px solid #171214; border-radius:50%;}
   .mug span{position:absolute; inset:0; padding:26px 10px; font-family:"Caveat",cursive; font-size:17px; text-align:center; color:#d8cfc6;}
-  .plane{right:calc(5vw + 150px); bottom:104px; width:80px; transform:rotate(-10deg);}
+  .plane{right:calc(5vw + 150px); bottom:98px; width:78px; transform:rotate(-10deg);}
   .plant{position:absolute; z-index:14; filter:drop-shadow(0 6px 10px rgba(0,0,0,.4)); pointer-events:none;}
-  .plant.pl-left{left:-14px; bottom:64px; width:130px;}
-  .plant.pl-right{right:-8px; bottom:100px; width:110px; transform:scaleX(-1) rotate(6deg);}
+  .plant.pl-left{left:-14px; bottom:60px; width:126px;}
+  .plant.pl-right{right:-8px; bottom:94px; width:106px; transform:scaleX(-1) rotate(6deg);}
 
-  .sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
   button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--marigold); outline-offset:3px;}
 
   @media (max-width:900px){
     .note-left,.banner-right,.pencils,.plane,.bookstack{display:none;}
-    .script-tr{right:16px; top:16px; font-size:20px;}
-    .spread{grid-template-columns:clamp(180px,34%,240px) 1fr;}
+    .script-tr{right:16px; top:64px; font-size:20px;}
+    .book{width:min(980px,96vw); height:calc(100vh - 220px);}
+    .spread{grid-template-columns:clamp(170px,32%,230px) 1fr;}
     .page{padding:14px 16px 10px 14px;}
     .steps{grid-template-columns:1fr;}
     .arrow{width:44px;height:44px;} .arrow.left{left:8px;} .arrow.right{right:8px;}
     .mug{right:16px; width:100px; height:80px;}
-    .book-stage{top:64px; bottom:140px;}
+    .book-stage{top:60px; bottom:126px;}
   }
   @media (max-height:700px){
-    .book-stage{top:60px; bottom:132px;}
+    .book-stage{top:56px; bottom:120px;}
     .cover-title{font-size:clamp(34px,7vw,68px);}
   }
   @media (prefers-reduced-motion:reduce){
@@ -335,8 +341,9 @@
             <button class="tab" type="button" data-goto="2" style="--c:#2aa7a0;--cd:#0d4a4f"><span class="t-num">03</span><i data-lucide="mic" width="18" height="18"></i><span class="t-label">İlgi Alanları</span></button>
             <button class="tab" type="button" data-goto="3" style="--c:#e8a13c;--cd:#7a4a10"><span class="t-num">04</span><i data-lucide="flag" width="18" height="18"></i><span class="t-label">Çıkış Kartı</span></button>
           </nav>
+          <div class="lp-spacer"></div>
           <div class="lp-timer" id="lp-timer">
-            <span class="t-label">Kalan Süre</span>
+            <span class="t-label">Kalan Süre · Bölüm <b id="t-sec">1</b></span>
             <div class="timer-row">
               <span class="t-display" id="t-display">10:00</span>
               <button class="t-adj" id="t-up" type="button" aria-label="Süreyi artır">▲</button>
@@ -350,7 +357,7 @@
 
         <div class="page-right" id="page-right">
 
-          <!-- 01 KEŞFETME -->
+          <!-- 01 -->
           <section class="page active" aria-label="Bölüm 1: Keşfetme">
             <div class="pg-head"><span class="pg-num">01</span><span class="pg-rule"></span><span class="pg-ek">Ek 1.1.1</span></div>
             <h2 class="pg-title">KEŞFETME</h2>
@@ -386,7 +393,7 @@
             </div>
           </section>
 
-          <!-- 02 5 TEMEL YETKİNLİK -->
+          <!-- 02 -->
           <section class="page" aria-label="Bölüm 2: İlişkilendirme">
             <div class="pg-head"><span class="pg-num">02</span><span class="pg-rule"></span><span class="pg-ek">Ek 1.1.2</span></div>
             <h2 class="pg-title">5 TEMEL YETKİNLİK</h2>
@@ -458,7 +465,7 @@
             </div>
           </section>
 
-          <!-- 03 İLGİ ALANLARI -->
+          <!-- 03 -->
           <section class="page" aria-label="Bölüm 3: Alıştırma">
             <div class="pg-head"><span class="pg-num">03</span><span class="pg-rule"></span><span class="pg-ek">Ek 1.1.3</span></div>
             <h2 class="pg-title">İLGİ ALANLARI</h2>
@@ -489,7 +496,7 @@
             </div>
           </section>
 
-          <!-- 04 ÇIKIŞ KARTI -->
+          <!-- 04 -->
           <section class="page" aria-label="Bölüm 4: Yansıma">
             <div class="pg-head"><span class="pg-num">04</span><span class="pg-rule"></span><span class="pg-ek">Ek 1.1.4</span></div>
             <h2 class="pg-title">ÇIKIŞ KARTI</h2>
@@ -597,12 +604,11 @@
 
   function goto(i){
     const t = Math.max(0, Math.min(i, pages.length - 1));
-    if (t === cur && pages[cur].classList.contains("active")) { sync(); return; }
+    if (t === cur) { sync(); return; }
     cur = t;
     pages.forEach((p, idx) => p.classList.toggle("active", idx === cur));
     pageRight.classList.remove("turn"); void pageRight.offsetWidth; pageRight.classList.add("turn");
-    sync();
-    renderTimer();
+    sync(); renderTimer();
   }
   function sync(){
     tabs.forEach((b, i) => b.classList.toggle("active", i === cur));
@@ -630,27 +636,36 @@
     mf.addEventListener("keydown", (e) => { if ((e.key === "Enter" || e.key === " ") && e.target === mf) { e.preventDefault(); flip(e); } });
   });
 
-  /* per-section timers, single widget */
+  /* timers: one independent state per section, single widget */
   const SECONDS = [600, 600, 900, 300];
   const timers = SECONDS.map(s => ({ remaining: s, id: null }));
   const tDisp = document.getElementById("t-display");
   const tTog = document.getElementById("t-toggle");
+  const tSec = document.getElementById("t-sec");
   const tWrap = document.getElementById("lp-timer");
   const fmt = s => String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
   function renderTimer(){
     const t = timers[cur];
     tDisp.textContent = fmt(t.remaining);
+    tSec.textContent = cur + 1;
     tTog.textContent = t.id ? "Duraklat" : "Başlat";
     tWrap.classList.toggle("zero", t.remaining === 0);
   }
-  function stopTimer(i){ if (timers[i].id) clearInterval(timers[i].id); timers[i].id = null; if (i === cur) renderTimer(); }
-  tTog.addEventListener("click", () => {
-    const t = timers[cur];
-    if (t.id) { stopTimer(cur); return; }
-    if (t.remaining === 0) return;
-    t.id = setInterval(() => { t.remaining--; if (t.remaining <= 0) { t.remaining = 0; stopTimer(cur); } else if (cur === pages.indexOf(pages[cur])) renderTimer(); if (cur >= 0) renderTimer(); }, 1000);
-    renderTimer();
-  });
+  function stopTimer(i){
+    if (timers[i].id) { clearInterval(timers[i].id); timers[i].id = null; }
+    if (i === cur) renderTimer();
+  }
+  function startTimer(i){
+    const t = timers[i];
+    if (t.id || t.remaining === 0) return;
+    t.id = setInterval(() => {
+      t.remaining--;
+      if (t.remaining <= 0) { t.remaining = 0; stopTimer(i); }
+      else if (i === cur) renderTimer();
+    }, 1000);
+    if (i === cur) renderTimer();
+  }
+  tTog.addEventListener("click", () => { timers[cur].id ? stopTimer(cur) : startTimer(cur); });
   document.getElementById("t-up").addEventListener("click", () => { timers[cur].remaining = Math.min(5940, timers[cur].remaining + 60); renderTimer(); });
   document.getElementById("t-down").addEventListener("click", () => { timers[cur].remaining = Math.max(0, timers[cur].remaining - 60); if (timers[cur].remaining === 0) stopTimer(cur); renderTimer(); });
 
@@ -664,7 +679,7 @@
     else if (e.key === "Escape") { exitBook(); }
   });
 
-  /* swipe on the spread */
+  /* swipe */
   let tx = 0, ty = 0;
   spread.addEventListener("touchstart", e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
   spread.addEventListener("touchend", e => {
