@@ -72,19 +72,19 @@
   .cover-hint{margin:0; color:#7f9bc4; font-size:12.5px;}
   .cover-hint kbd{background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); border-radius:5px; padding:1px 7px; font-family:inherit;}
 
-  /* ---------- book ---------- */
-  .book-stage{position:absolute; left:0; right:0; top:50px; bottom:70px; z-index:3;
+  /* ---------- BIGGER book ---------- */
+  .book-stage{position:absolute; left:0; right:0; top:48px; bottom:68px; z-index:3;
     display:flex; align-items:center; justify-content:center;
     opacity:0; visibility:hidden;
     transition:opacity .5s ease .25s, visibility 0s linear .8s;}
   body.entered .book-stage{opacity:1; visibility:visible;
     transition:opacity .5s ease .25s, visibility 0s linear 0s;}
   .book{position:relative; padding:12px; border-radius:18px; perspective:2600px;
-    height:min(1000px, calc(100vh - 130px));
-    width:min(98vw, calc(min(1000px, 100vh - 130px) * 1.5));
+    height:min(1150px, calc(100vh - 118px));
+    width:min(98vw, calc(min(1150px, 100vh - 118px) * 1.55));
     background:linear-gradient(160deg,#17335f,#0d1e3a 70%);
     box-shadow:0 44px 90px -26px rgba(2,6,18,.88), inset 0 2px 0 rgba(255,255,255,.12);}
-  .spread{position:relative; height:100%; display:grid; grid-template-columns:clamp(240px,28%,380px) 1fr;
+  .spread{position:relative; height:100%; display:grid; grid-template-columns:clamp(240px,27%,400px) 1fr;
     border-radius:10px; overflow:hidden; background:var(--cream);}
   .spread::before,.spread::after{content:""; position:absolute; top:0; bottom:0; width:6px; z-index:6; pointer-events:none;
     background:repeating-linear-gradient(180deg,#e6dcc6 0 2px,#c9bb9e 2px 3px);}
@@ -141,7 +141,7 @@
   .pg-ek{font-size:11px; font-weight:800; letter-spacing:.1em; color:var(--marigold-d);
     border:1px dashed rgba(164,85,30,.55); border-radius:6px; padding:3px 9px;}
   .pg-title{margin:6px 0 10px; font-family:"Playfair Display",serif; font-weight:800; color:var(--navy);
-    font-size:clamp(28px,3vw,48px); letter-spacing:.01em; line-height:1.1;}
+    font-size:clamp(28px,3vw,50px); letter-spacing:.01em; line-height:1.1;}
   .pg-scroll{flex:1 1 auto; min-height:0; overflow-y:auto; padding-right:10px; font-size:14px; line-height:1.62; color:var(--ink);
     scrollbar-width:thin; scrollbar-color:rgba(29,53,87,.35) transparent;}
   .pg-scroll::-webkit-scrollbar{width:7px}
@@ -187,29 +187,34 @@
   .ek-meta u{font-size:12px; color:var(--marigold-d); font-weight:800; text-decoration:none;}
   .ek-link:hover .ek-meta u{text-decoration:underline;}
 
-  /* flip cards */
-  .mf-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:12px 0 6px;}
-  .mf{display:block; perspective:1000px; height:212px; cursor:pointer;}
+  /* flip cards — WIDE 2-col, full text visible */
+  .mf-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:14px 0 8px;}
+  .mf-grid .mf:nth-child(5){grid-column:1 / -1;}
+  .mf{display:block; perspective:1200px; height:280px; cursor:pointer;}
   .mf-in{display:block; position:relative; width:100%; height:100%; transform-style:preserve-3d;
     transition:transform .6s cubic-bezier(.35,.1,.25,1);}
   .mf.flipped .mf-in{transform:rotateY(180deg);}
   .mf-f,.mf-b{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:16px;
-    padding:14px 12px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; text-align:center;
-    overflow:hidden;}
-  .mf-f{background:rgba(29,53,87,.07); border:1px solid rgba(29,53,87,.25);}
+    padding:16px 14px; display:flex; flex-direction:column; align-items:center; text-align:center;}
+  .mf-f{background:rgba(29,53,87,.07); border:1px solid rgba(29,53,87,.25); justify-content:flex-start; gap:8px; padding-top:20px;}
   .mf-b{transform:rotateY(180deg); background:linear-gradient(160deg,#24406b,#16324f); border:1px solid rgba(232,161,60,.6);
-    justify-content:flex-start; padding-top:16px; gap:8px;}
-  .mf-f .em{font-size:36px; line-height:1;}
-  .mf-f .nm{font-weight:800; font-size:14.5px; color:var(--navy-2); line-height:1.3;}
-  .mf-f .hint{font-size:10px; color:rgba(29,53,87,.6); letter-spacing:.12em; text-transform:uppercase; font-weight:800;}
-  .mf-b h4{margin:0; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--marigold);}
-  .def-cloud{position:relative; border-radius:18px; padding:10px 12px 9px; background:var(--cb); color:var(--ct);
-    font-size:11.5px; line-height:1.45; font-weight:600;}
-  .def-cloud::before{content:""; position:absolute; top:-9px; left:14px; width:18px; height:18px; border-radius:50%; background:inherit;}
-  .def-cloud::after{content:""; position:absolute; top:-14px; left:30px; width:26px; height:26px; border-radius:50%; background:inherit;}
-  .chip-row{display:flex; flex-wrap:wrap; gap:5px; justify-content:center; margin-top:auto;}
+    justify-content:flex-start; gap:6px; padding-top:16px; overflow-y:auto; scrollbar-width:thin;}
+  .mf-b::-webkit-scrollbar{width:5px}
+  .mf-b::-webkit-scrollbar-thumb{background:rgba(255,255,255,.3); border-radius:3px}
+  .mf-f .em{font-size:38px; line-height:1;}
+  .mf-f .nm{font-weight:800; font-size:15px; color:var(--navy-2); line-height:1.3;}
+  .mf-f .chip-row{margin-top:4px;}
+  .mf-f .hint{margin-top:auto; font-size:10px; color:rgba(29,53,87,.6); letter-spacing:.12em; text-transform:uppercase; font-weight:800;}
+  .mf-b h4{margin:0; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--marigold); flex:0 0 auto;}
+  .def-cloud{position:relative; border-radius:20px; padding:14px 16px 13px; margin-top:12px; width:100%;
+    background:var(--cb); color:var(--ct);
+    font-size:12px; line-height:1.5; font-weight:600; text-align:center;}
+  .def-cloud::before{content:""; position:absolute; top:-10px; left:16px; width:20px; height:20px; border-radius:50%; background:inherit;}
+  .def-cloud::after{content:""; position:absolute; top:-16px; left:34px; width:28px; height:28px; border-radius:50%; background:inherit;}
+  .chip-row{display:flex; flex-wrap:wrap; gap:5px; justify-content:center;}
   .chip-row i{font-style:normal; font-size:10px; font-weight:700; padding:3px 9px; border-radius:999px;
     background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.32); color:#fff;}
+  .mf-f .chip-row i{background:rgba(29,53,87,.08); border-color:rgba(29,53,87,.25); color:var(--navy-2);}
 
   /* clouds */
   .cloud-head{display:flex; align-items:center; gap:10px; margin:14px 0 6px;}
@@ -232,7 +237,7 @@
   .c-teal{--cb:#bfe6e2; --ct:#0d4a4f;}
   .c-blue{--cb:#bcd7f0; --ct:#16324f;}
   .c-gold{--cb:#f7d9a4; --ct:#7a4a10;}
-  @media (min-width:1400px){ .clouds{grid-template-columns:repeat(3,1fr);} }
+  @media (min-width:1500px){ .clouds{grid-template-columns:repeat(3,1fr);} }
 
   .pg-foot{padding:10px 2px 6px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;}
   .nav-btn{flex:1; display:inline-flex; align-items:center; justify-content:center; gap:7px;
@@ -255,7 +260,7 @@
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; text-align:center; padding:20px;}
   .board .b-em{width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center;
     background:rgba(242,160,107,.2); color:#f2a06b; border:1px solid rgba(242,160,107,.5);}
-  .board h2{margin:0; font-family:"Playfair Display",serif; font-weight:800; color:#f4f8ff; font-size:clamp(28px,4vw,56px);}
+  .board h2{margin:0; font-family:"Playfair Display",serif; font-weight:800; color:#f4f8ff; font-size:clamp(28px,4vw,58px);}
   .board p{margin:0; color:#bcd0ea; font-size:13px; letter-spacing:.14em; text-transform:uppercase; font-weight:600;}
   body.entered .board{animation:openBoard 1.05s cubic-bezier(.6,.05,.3,1) forwards; pointer-events:none;}
   @keyframes openBoard{0%{transform:rotateY(0); opacity:1;} 72%{opacity:1;} 100%{transform:rotateY(-160deg); opacity:0;}}
@@ -281,45 +286,42 @@
   .dot.active{background:var(--marigold); transform:scale(1.25);}
 
   /* desk */
-  .desk{position:absolute; z-index:10; left:0; right:0; bottom:0; height:90px;
+  .desk{position:absolute; z-index:10; left:0; right:0; bottom:0; height:88px;
     background:linear-gradient(180deg,var(--desk-1) 0%,#5d3620 34%,var(--desk-2) 100%);}
   .desk::before{content:""; position:absolute; inset:0;
     background:repeating-linear-gradient(98deg, rgba(255,255,255,.05) 0 3px, transparent 3px 26px),
                linear-gradient(180deg, rgba(255,226,170,.3), transparent 24%);}
   .prop{position:absolute; z-index:12; filter:drop-shadow(0 8px 16px rgba(0,0,0,.45));}
-  .bookstack{left:2vw; bottom:68px; width:140px;}
-  .pencils{left:calc(2vw + 156px); bottom:64px; width:52px;}
-  .mug{position:absolute; z-index:12; right:4vw; bottom:36px; width:108px; height:84px;
+  .bookstack{left:2vw; bottom:66px; width:140px;}
+  .pencils{left:calc(2vw + 156px); bottom:62px; width:52px;}
+  .mug{position:absolute; z-index:12; right:4vw; bottom:34px; width:108px; height:84px;
     background:#171214; border-radius:14px 14px 20px 20px; box-shadow:0 12px 26px rgba(0,0,0,.5);}
   .mug::after{content:""; position:absolute; right:-28px; top:20px; width:38px; height:42px; border:9px solid #171214; border-radius:50%;}
   .mug span{position:absolute; inset:0; padding:24px 10px; font-family:"Caveat",cursive; font-size:16px; text-align:center; color:#d8cfc6;}
-  .plane{right:calc(4vw + 140px); bottom:74px; width:72px; transform:rotate(-10deg);}
+  .plane{right:calc(4vw + 140px); bottom:72px; width:72px; transform:rotate(-10deg);}
   .plant{position:absolute; z-index:14; filter:drop-shadow(0 6px 10px rgba(0,0,0,.4)); pointer-events:none;}
-  .plant.pl-left{left:-14px; bottom:42px; width:120px;}
-  .plant.pl-right{right:-8px; bottom:68px; width:100px; transform:scaleX(-1) rotate(6deg);}
+  .plant.pl-left{left:-14px; bottom:40px; width:120px;}
+  .plant.pl-right{right:-8px; bottom:66px; width:100px; transform:scaleX(-1) rotate(6deg);}
 
   button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--marigold); outline-offset:3px;}
 
   @media (max-width:1100px){
-    .mf-grid{grid-template-columns:repeat(2,1fr);}
+    .mf{height:300px;}
   }
   @media (max-width:900px){
     .note-left,.banner-right,.pencils,.plane,.bookstack{display:none;}
     .script-tr{display:none;}
-    .book{width:96vw; height:calc(100vh - 140px);}
+    .book{width:96vw; height:calc(100vh - 138px);}
     .spread{grid-template-columns:clamp(170px,32%,230px) 1fr;}
     .page{padding:14px 16px 10px 14px;}
     .steps,.clouds{grid-template-columns:1fr;}
-    .mf-grid{grid-template-columns:1fr 1fr;}
-    .mf{height:190px;}
+    .mf-grid{grid-template-columns:1fr;}
+    .mf,.mf-grid .mf:nth-child(5){height:300px; grid-column:auto;}
     .arrow{width:44px;height:44px;} .arrow.left{left:6px;} .arrow.right{right:6px;}
     .mug{right:14px; width:96px; height:76px;}
   }
-  @media (max-width:640px){
-    .mf-grid{grid-template-columns:1fr;}
-  }
   @media (max-height:700px){
-    .book-stage{top:46px; bottom:64px;}
+    .book-stage{top:44px; bottom:62px;}
     .cover-title{font-size:clamp(34px,7vw,68px);}
   }
   @media (prefers-reduced-motion:reduce){
@@ -351,7 +353,6 @@
     <button class="cta" id="start-tour" type="button">Kitabı Aç →</button>
     <p class="cover-hint">veya <kbd>→</kbd> / <kbd>Enter</kbd> · sayfaları oklarla çevirin · kartları çevirin, bulutları okuyun</p>
   </div>
-  <!-- yedek giriş: ana script çalışmasa bile kapak açılır -->
   <script>
     (function(){
       var b = document.getElementById("start-tour");
@@ -429,7 +430,7 @@
             <div class="pg-head"><span class="pg-num">02</span><span class="pg-rule"></span><span class="pg-ek">Ek 1.1.2</span></div>
             <h2 class="pg-title">5 TEMEL YETKİNLİK</h2>
             <div class="pg-scroll">
-              <p>Bu program boyunca geliştireceğiniz 5 temel sosyal duygusal yetkinlik aşağıdaki kartlarda. <strong>Karta tıklayın ve çevirin:</strong> arkasında alanın resmi tanımı (Ek 1.1.2) bulut biçiminde çıkar. Alt becerilerin anlamları için aşağıdaki <strong>renkli beceri bulutlarını</strong> okuyun — hepsi her zaman görünür.</p>
+              <p>Bu program boyunca geliştireceğiniz 5 temel sosyal duygusal yetkinlik aşağıdaki kartlarda. <strong>Karta tıklayın ve çevirin:</strong> arkasında alanın resmi tanımı (Ek 1.1.2) bulut biçiminde, tamamı görünür şekilde çıkar. Alt becerilerin anlamları için aşağıdaki <strong>renkli beceri bulutlarını</strong> okuyun.</p>
               <a class="ek-link" href="https://drive.google.com/file/d/1S5oKPC05BW7UC-pwW74CGEKls57TYCjY/view?usp=sharing" target="_blank" rel="noopener">
                 <span class="ek-paper" aria-hidden="true">
                   <span class="ph">1.1.2 · İlişkilendirme</span><span class="pt">5 Temel SDÖ Beceri</span>
@@ -441,38 +442,43 @@
 
               <div class="mf-grid">
                 <div class="mf" role="button" tabindex="0" aria-label="Öz Farkındalık kartını çevir"><span class="mf-in">
-                  <span class="mf-f"><span class="em">🔍</span><span class="nm">Öz Farkındalık</span><span class="hint">Tıkla ve Çevir</span></span>
-                  <span class="mf-b"><h4>Tanım · Ek 1.1.2</h4>
-                    <span class="def-cloud c-rose">Kişinin duygularını ve düşüncelerini tanıması ve bunların davranışlarını nasıl etkilediğinin farkında olması.</span>
+                  <span class="mf-f"><span class="em">🔍</span><span class="nm">Öz Farkındalık</span>
                     <span class="chip-row"><i>Duyguları Tanıma</i><i>Doğru Öz Algı</i><i>Güçlü Yönleri Bilme</i><i>Öz Güven</i></span>
+                    <span class="hint">Tıkla ve Çevir</span></span>
+                  <span class="mf-b"><h4>Tanım · Ek 1.1.2</h4>
+                    <span class="def-cloud c-rose">Kişinin duygularını ve düşüncelerini tanıması ve bu duygu ve düşüncelerin davranışlarını nasıl etkilediğinin farkında olması.</span>
                   </span></span>
                 </div>
                 <div class="mf" role="button" tabindex="0" aria-label="Öz Yönetim kartını çevir"><span class="mf-in">
-                  <span class="mf-f"><span class="em">🧘</span><span class="nm">Öz Yönetim</span><span class="hint">Tıkla ve Çevir</span></span>
-                  <span class="mf-b"><h4>Tanım · Ek 1.1.2</h4>
-                    <span class="def-cloud c-violet">Kişinin duyguları, düşünceleri ve davranışlarıyla etkin ve kendisine yardımcı olacak şekilde başa çıkabilmesi.</span>
+                  <span class="mf-f"><span class="em">🧘</span><span class="nm">Öz Yönetim</span>
                     <span class="chip-row"><i>Dürtü Kontrolü</i><i>Stres Yönetimi</i><i>Öz Disiplin</i><i>Hedef Koyma</i></span>
+                    <span class="hint">Tıkla ve Çevir</span></span>
+                  <span class="mf-b"><h4>Tanım · Ek 1.1.2</h4>
+                    <span class="def-cloud c-violet">Kişinin duyguları, düşünceleri ve davranışları ile etkin ve kendisine yardımcı olacak bir şekilde başa çıkabilmesi.</span>
                   </span></span>
                 </div>
                 <div class="mf" role="button" tabindex="0" aria-label="Sosyal Farkındalık kartını çevir"><span class="mf-in">
-                  <span class="mf-f"><span class="em">🌍</span><span class="nm">Sosyal Farkındalık</span><span class="hint">Tıkla ve Çevir</span></span>
+                  <span class="mf-f"><span class="em">🌍</span><span class="nm">Sosyal Farkındalık</span>
+                    <span class="chip-row"><i>Bakış Açısı Edinme</i><i>Empati</i><i>Farklılıklara Saygı</i></span>
+                    <span class="hint">Tıkla ve Çevir</span></span>
                   <span class="mf-b"><h4>Tanım · Ek 1.1.2</h4>
-                    <span class="def-cloud c-teal">Kendi toplumunun normlarını bilmesi; farklı aile, toplum ve kültürlerin normlarına saygı göstermesi.</span>
-                    <span class="chip-row"><i>Bakış Açısı</i><i>Empati</i><i>Farklılıklara Saygı</i></span>
+                    <span class="def-cloud c-teal">Kişinin sadece aile ve kendi toplumunun davranış normlarını bilmesi; farklı aile, toplum ve kültürlerin normlarına saygı göstermesi.</span>
                   </span></span>
                 </div>
                 <div class="mf" role="button" tabindex="0" aria-label="İlişki Becerileri kartını çevir"><span class="mf-in">
-                  <span class="mf-f"><span class="em">🤝</span><span class="nm">İlişki Becerileri</span><span class="hint">Tıkla ve Çevir</span></span>
+                  <span class="mf-f"><span class="em">🤝</span><span class="nm">İlişki Becerileri</span>
+                    <span class="chip-row"><i>İletişim</i><i>Sosyal Sorumluluk</i><i>Çatışma Çözme</i><i>Takım Çalışması</i></span>
+                    <span class="hint">Tıkla ve Çevir</span></span>
                   <span class="mf-b"><h4>Tanım · Ek 1.1.2</h4>
                     <span class="def-cloud c-blue">Değişik insanlarla, değişik ortamlarda saygılı ve sağlıklı ilişkiler oluşturacak şekilde iletişim kurmak ve birlikte olmak.</span>
-                    <span class="chip-row"><i>İletişim</i><i>Sosyal Sorumluluk</i><i>Çatışma Çözme</i><i>Takım Çalışması</i></span>
                   </span></span>
                 </div>
                 <div class="mf" role="button" tabindex="0" aria-label="Sorumluluk Alarak Karar Verme kartını çevir"><span class="mf-in">
-                  <span class="mf-f"><span class="em">🧠</span><span class="nm">Sorumluluk Alarak Karar Verme</span><span class="hint">Tıkla ve Çevir</span></span>
-                  <span class="mf-b"><h4>Tanım · Ek 1.1.2</h4>
-                    <span class="def-cloud c-gold">Güvenli ve etkin kararlar verirken farklı etkenleri ve olası sonuçları düşünerek karar verme becerisi.</span>
+                  <span class="mf-f"><span class="em">🧠</span><span class="nm">Sorumluluk Alarak Karar Verme</span>
                     <span class="chip-row"><i>Problem Tanımlama</i><i>Durum Analizi</i><i>Değerlendirme</i></span>
+                    <span class="hint">Tıkla ve Çevir</span></span>
+                  <span class="mf-b"><h4>Tanım · Ek 1.1.2</h4>
+                    <span class="def-cloud c-gold">Güvenli ve etkin kararlar verirken farklı etkenleri, olası sonuçları düşünerek karar verme becerisi.</span>
                   </span></span>
                 </div>
               </div>
@@ -639,13 +645,11 @@
   var enterBook = function(){ body.classList.add("entered"); };
   var exitBook  = function(){ body.classList.remove("entered"); };
 
-  /* 1) GİRİŞ ÖNCE BAĞLANIR — başka hiçbir şey çalışmasa bile kapak açılır */
   var startBtn = $("#start-tour");
   if (startBtn) startBtn.addEventListener("click", enterBook);
   var homePill = $("#home-pill");
   if (homePill) homePill.addEventListener("click", function(e){ e.preventDefault(); exitBook(); });
 
-  /* 2) GEZİNME */
   var pages = $$(".page");
   var tabs = $$(".tab");
   var pageRight = $("#page-right");
@@ -694,7 +698,6 @@
     b.addEventListener("click", function(e){ e.stopPropagation(); goTo(parseInt(b.dataset.goto, 10)); });
   });
 
-  /* 3) KLAVYE */
   document.addEventListener("keydown", function(e){
     if (!entered()){
       if (e.key === "ArrowRight" || e.key === "Enter"){ e.preventDefault(); enterBook(); }
@@ -707,7 +710,6 @@
     else if (e.key === "Escape"){ exitBook(); }
   });
 
-  /* 4) ÇEVİRMELİ KARTLAR */
   try {
     $$(".mf").forEach(function(mf){
       var flip = function(e){ e.stopPropagation(); var f = mf.classList.toggle("flipped"); mf.setAttribute("aria-pressed", String(f)); };
@@ -718,7 +720,6 @@
     });
   } catch(err){ console.error("mf:", err); }
 
-  /* 5) SÜRE SAYAÇLARI */
   var SECONDS = [600, 600, 900, 300];
   var timers = SECONDS.map(function(s){ return { remaining: s, id: null }; });
   var tDisp = $("#t-display"), tTog = $("#t-toggle"), tSec = $("#t-sec"), tWrap = $("#lp-timer");
@@ -752,7 +753,6 @@
     if (down) down.addEventListener("click", function(){ timers[cur].remaining = Math.max(0, timers[cur].remaining - 60); if (timers[cur].remaining === 0) stopTimer(cur); renderTimer(); });
   } catch(err){ console.error("timer:", err); }
 
-  /* 6) SWIPE */
   try {
     var spread = $("#spread"), tx = 0, ty = 0;
     if (spread){
