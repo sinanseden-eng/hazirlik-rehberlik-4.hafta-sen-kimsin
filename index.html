@@ -72,11 +72,13 @@
   .cover-hint{margin:0; color:#7f9bc4; font-size:12.5px;}
   .cover-hint kbd{background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); border-radius:5px; padding:1px 7px; font-family:inherit;}
 
-  /* ---------- BIGGER book (1.5x) ---------- */
+  /* ---------- book ---------- */
   .book-stage{position:absolute; left:0; right:0; top:50px; bottom:70px; z-index:3;
     display:flex; align-items:center; justify-content:center;
-    opacity:0; transition:opacity .5s ease .25s;}
-  body.entered .book-stage{opacity:1;}
+    opacity:0; visibility:hidden;
+    transition:opacity .5s ease .25s, visibility 0s linear .8s;}
+  body.entered .book-stage{opacity:1; visibility:visible;
+    transition:opacity .5s ease .25s, visibility 0s linear 0s;}
   .book{position:relative; padding:12px; border-radius:18px; perspective:2600px;
     height:min(1000px, calc(100vh - 130px));
     width:min(98vw, calc(min(1000px, 100vh - 130px) * 1.5));
@@ -185,7 +187,7 @@
   .ek-meta u{font-size:12px; color:var(--marigold-d); font-weight:800; text-decoration:none;}
   .ek-link:hover .ek-meta u{text-decoration:underline;}
 
-  /* flip cards — WIDE 3-col layout, readable type */
+  /* flip cards */
   .mf-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:12px 0 6px;}
   .mf{display:block; perspective:1000px; height:212px; cursor:pointer;}
   .mf-in{display:block; position:relative; width:100%; height:100%; transform-style:preserve-3d;
@@ -349,6 +351,13 @@
     <button class="cta" id="start-tour" type="button">Kitabı Aç →</button>
     <p class="cover-hint">veya <kbd>→</kbd> / <kbd>Enter</kbd> · sayfaları oklarla çevirin · kartları çevirin, bulutları okuyun</p>
   </div>
+  <!-- yedek giriş: ana script çalışmasa bile kapak açılır -->
+  <script>
+    (function(){
+      var b = document.getElementById("start-tour");
+      if (b) b.addEventListener("click", function(){ document.body.classList.add("entered"); });
+    })();
+  </script>
 
   <!-- BOOK -->
   <div class="book-stage">
@@ -620,66 +629,144 @@
 </div>
 
 <script>
-  const pages = Array.from(document.querySelectorAll(".page"));
-  const tabs = Array.from(document.querySelectorAll(".tab"));
-  const pageRight = document.getElementById("page-right");
-  const prev = document.getElementById("prev");
-  const next = document.getElementById("next");
-  const bbBack = document.getElementById("bb-back");
-  const bbNext = document.getElementById("bb-next");
-  const dotsWrap = document.getElementById("dots");
-  const prog = document.getElementById("prog");
-  const startBtn = document.getElementById("start-tour");
-  const homePill = document.getElementById("home-pill");
-  const spread = document.getElementById("spread");
-  let cur = 0;
+(function(){
+  "use strict";
+  var $  = function(s){ return document.querySelector(s); };
+  var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
+  var body = document.body;
 
-  pages.forEach((_, i) => {
-    const d = document.createElement("button");
+  var entered   = function(){ return body.classList.contains("entered"); };
+  var enterBook = function(){ body.classList.add("entered"); };
+  var exitBook  = function(){ body.classList.remove("entered"); };
+
+  /* 1) GİRİŞ ÖNCE BAĞLANIR — başka hiçbir şey çalışmasa bile kapak açılır */
+  var startBtn = $("#start-tour");
+  if (startBtn) startBtn.addEventListener("click", enterBook);
+  var homePill = $("#home-pill");
+  if (homePill) homePill.addEventListener("click", function(e){ e.preventDefault(); exitBook(); });
+
+  /* 2) GEZİNME */
+  var pages = $$(".page");
+  var tabs = $$(".tab");
+  var pageRight = $("#page-right");
+  var prev = $("#prev"), next = $("#next");
+  var bbBack = $("#bb-back"), bbNext = $("#bb-next");
+  var dotsWrap = $("#dots");
+  var prog = $("#prog");
+  var cur = 0;
+
+  pages.forEach(function(_, i){
+    var d = document.createElement("button");
     d.className = "dot"; d.type = "button"; d.setAttribute("role", "tab");
     d.setAttribute("aria-label", "Bölüm " + (i + 1));
-    d.addEventListener("click", () => goto(i));
+    d.addEventListener("click", function(){ goTo(i); });
     dotsWrap.appendChild(d);
   });
-  const dots = Array.from(dotsWrap.children);
+  var dots = $$(".dot");
 
-  const entered = () => document.body.classList.contains("entered");
-  const enterBook = () => document.body.classList.add("entered");
-  const exitBook = () => document.body.classList.remove("entered");
-
-  function goto(i){
-    const t = Math.max(0, Math.min(i, pages.length - 1));
+  function sync(){
+    tabs.forEach(function(b, i){ b.classList.toggle("active", i === cur); });
+    dots.forEach(function(d, i){
+      d.classList.toggle("active", i === cur);
+      d.setAttribute("aria-selected", String(i === cur));
+    });
+    if (prev) prev.disabled = cur === 0;
+    if (bbBack) bbBack.disabled = cur === 0;
+    if (next) next.disabled = cur === pages.length - 1;
+    if (bbNext) bbNext.disabled = cur === pages.length - 1;
+    if (prog) prog.textContent = "BÖLÜM " + (cur + 1) + " / " + pages.length;
+  }
+  function goTo(i){
+    var t = Math.max(0, Math.min(i, pages.length - 1));
     if (t === cur) { sync(); return; }
     cur = t;
-    pages.forEach((p, idx) => p.classList.toggle("active", idx === cur));
-    pageRight.classList.remove("turn"); void pageRight.offsetWidth; pageRight.classList.add("turn");
+    pages.forEach(function(p, idx){ p.classList.toggle("active", idx === cur); });
+    if (pageRight){ pageRight.classList.remove("turn"); void pageRight.offsetWidth; pageRight.classList.add("turn"); }
     sync(); renderTimer();
   }
-  function sync(){
-    tabs.forEach((b, i) => b.classList.toggle("active", i === cur));
-    dots.forEach((d, i) => { d.classList.toggle("active", i === cur); d.setAttribute("aria-selected", String(i === cur)); });
-    prev.disabled = bbBack.disabled = cur === 0;
-    next.disabled = bbNext.disabled = cur === pages.length - 1;
-    prog.textContent = "BÖLÜM " + (cur + 1) + " / " + pages.length;
+
+  if (prev) prev.addEventListener("click", function(){ goTo(cur - 1); });
+  if (next) next.addEventListener("click", function(){ goTo(cur + 1); });
+  if (bbBack) bbBack.addEventListener("click", function(){ goTo(cur - 1); });
+  if (bbNext) bbNext.addEventListener("click", function(){ goTo(cur + 1); });
+  tabs.forEach(function(b){ b.addEventListener("click", function(){ goTo(parseInt(b.dataset.goto, 10)); }); });
+  $$(".nav-btn[data-goto]").forEach(function(b){
+    b.addEventListener("click", function(e){ e.stopPropagation(); goTo(parseInt(b.dataset.goto, 10)); });
+  });
+
+  /* 3) KLAVYE */
+  document.addEventListener("keydown", function(e){
+    if (!entered()){
+      if (e.key === "ArrowRight" || e.key === "Enter"){ e.preventDefault(); enterBook(); }
+      return;
+    }
+    if (e.key === "ArrowRight"){ e.preventDefault(); goTo(cur + 1); }
+    else if (e.key === "ArrowLeft"){ e.preventDefault(); goTo(cur - 1); }
+    else if (e.key === "Home"){ e.preventDefault(); goTo(0); }
+    else if (e.key === "End"){ e.preventDefault(); goTo(pages.length - 1); }
+    else if (e.key === "Escape"){ exitBook(); }
+  });
+
+  /* 4) ÇEVİRMELİ KARTLAR */
+  try {
+    $$(".mf").forEach(function(mf){
+      var flip = function(e){ e.stopPropagation(); var f = mf.classList.toggle("flipped"); mf.setAttribute("aria-pressed", String(f)); };
+      mf.addEventListener("click", flip);
+      mf.addEventListener("keydown", function(e){
+        if ((e.key === "Enter" || e.key === " ") && e.target === mf){ e.preventDefault(); flip(e); }
+      });
+    });
+  } catch(err){ console.error("mf:", err); }
+
+  /* 5) SÜRE SAYAÇLARI */
+  var SECONDS = [600, 600, 900, 300];
+  var timers = SECONDS.map(function(s){ return { remaining: s, id: null }; });
+  var tDisp = $("#t-display"), tTog = $("#t-toggle"), tSec = $("#t-sec"), tWrap = $("#lp-timer");
+  function fmt(s){ return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"); }
+  function renderTimer(){
+    if (!tDisp) return;
+    var t = timers[cur];
+    tDisp.textContent = fmt(t.remaining);
+    if (tSec) tSec.textContent = cur + 1;
+    if (tTog) tTog.textContent = t.id ? "Duraklat" : "Başlat";
+    if (tWrap) tWrap.classList.toggle("zero", t.remaining === 0);
   }
+  function stopTimer(i){
+    if (timers[i].id){ clearInterval(timers[i].id); timers[i].id = null; }
+    if (i === cur) renderTimer();
+  }
+  function startTimer(i){
+    var t = timers[i];
+    if (t.id || t.remaining === 0) return;
+    t.id = setInterval(function(){
+      t.remaining--;
+      if (t.remaining <= 0){ t.remaining = 0; stopTimer(i); }
+      else if (i === cur){ renderTimer(); }
+    }, 1000);
+    if (i === cur) renderTimer();
+  }
+  try {
+    if (tTog) tTog.addEventListener("click", function(){ timers[cur].id ? stopTimer(cur) : startTimer(cur); });
+    var up = $("#t-up"), down = $("#t-down");
+    if (up) up.addEventListener("click", function(){ timers[cur].remaining = Math.min(5940, timers[cur].remaining + 60); renderTimer(); });
+    if (down) down.addEventListener("click", function(){ timers[cur].remaining = Math.max(0, timers[cur].remaining - 60); if (timers[cur].remaining === 0) stopTimer(cur); renderTimer(); });
+  } catch(err){ console.error("timer:", err); }
 
-  startBtn.addEventListener("click", enterBook);
-  homePill.addEventListener("click", (e) => { e.preventDefault(); exitBook(); });
-  prev.addEventListener("click", () => goto(cur - 1));
-  next.addEventListener("click", () => goto(cur + 1));
-  bbBack.addEventListener("click", () => goto(cur - 1));
-  bbNext.addEventListener("click", () => goto(cur + 1));
-  tabs.forEach((b) => b.addEventListener("click", () => goto(parseInt(b.dataset.goto, 10))));
-  document.querySelectorAll(".nav-btn[data-goto]").forEach(b => {
-    b.addEventListener("click", (e) => { e.stopPropagation(); goto(parseInt(b.dataset.goto, 10)); });
-  });
+  /* 6) SWIPE */
+  try {
+    var spread = $("#spread"), tx = 0, ty = 0;
+    if (spread){
+      spread.addEventListener("touchstart", function(e){ tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+      spread.addEventListener("touchend", function(e){
+        var dx = tx - e.changedTouches[0].clientX, dy = ty - e.changedTouches[0].clientY;
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) goTo(dx > 0 ? cur + 1 : cur - 1);
+      }, { passive: true });
+    }
+  } catch(err){ console.error("swipe:", err); }
 
-  /* mini flip cards */
-  document.querySelectorAll(".mf").forEach(mf => {
-    const flip = (e) => { e.stopPropagation(); const f = mf.classList.toggle("flipped"); mf.setAttribute("aria-pressed", String(f)); };
-    mf.addEventListener("click", flip);
-    mf.addEventListener("keydown", (e) => { if ((e.key === "Enter" || e.key === " ") && e.target === mf) { e.preventDefault(); flip(e); } });
-  });
-
-  /* timers */
-  const SECONDS = [600, 600, 900, 30
+  sync(); renderTimer();
+  if (window.lucide && window.lucide.createIcons) window.lucide.createIcons();
+})();
+</script>
+</body>
+</html>
